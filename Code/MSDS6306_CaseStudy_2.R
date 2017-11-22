@@ -21,3 +21,7 @@ DataDir <- paste(BaseDir,"Data", sep = "/")
 CodeDir <- paste(BaseDir,"Code", sep = "/")
 PresenatationDir <- paste(BaseDir,"Presentation", sep = "/")
 
+ProcrastinationDataFile <- paste(DataDir, "Procrastination.csv", sep = "/")
+
+# Read the Data File
+ProcrastinationData <- read.csv(ProcrastinationDataFile, sep = ",", header = T)
