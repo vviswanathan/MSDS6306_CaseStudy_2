@@ -16,7 +16,11 @@ BaseDir <- "C:/Vivek/Data_Science/MSDS6306-DoingDataScience/Case_Study_2/MSDS630
 # Executing from Megan's System:
 #BaseDir <- ""
 
+<<<<<<< HEAD
 # Set Other Working Directories and File Path
+=======
+# Set Other Working Directories
+>>>>>>> ea288a0b4574ac2f4699531589517b0f0c60e03b
 DataDir <- paste(BaseDir,"Data", sep = "/")
 CodeDir <- paste(BaseDir,"Code", sep = "/")
 PresenatationDir <- paste(BaseDir,"Presentation", sep = "/")
