@@ -14,7 +14,7 @@ sessionInfo()
 BaseDir <- "C:/Vivek/Data_Science/MSDS6306-DoingDataScience/Case_Study_2/MSDS6306_CaseStudy_2/"
 
 # Executing from Megan's System:
-BaseDir <- "/Users/megandiane/Desktop/DDS_Class/Case_Study_2"
+BaseDir <- "/Users/megandiane/Desktop/DDS_Class/Case_Study_2/MSDS6306_CaseStudy_2"
 
 # Set Other Working Directories and File Path
 DataDir <- paste(BaseDir,"Data", sep = "/")
