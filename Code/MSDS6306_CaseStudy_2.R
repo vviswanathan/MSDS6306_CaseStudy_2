@@ -31,8 +31,15 @@ ProcrastinationData <- read.csv(ProcrastinationDataFile, sep = ",", header = T, 
 # Assign Column Names
 names(ProcrastinationData) <- c("Age",	"Gender",	"Kids",	"Education",	"WorkStatus",	"AnnualIncome",	"CurrOccption",	"PostHeldYrs",	"PostHeldMths",	"CmmuntySize",	"CntryResdnc",	"MaritlStatus",	"SonsCnt",	"DaughtersCnt",	"D1DsnTmeWst",	"D2DelayActn",	"D3HesitatDsn",	"D4DelayDsn",	"D5PutoffDsn",	"A1BillsOnTm",	"A2OnTm4Appt",	"A3Rdy4NxtDy",	"A4RuningLate",	"A5ActvtDlyd",	"A6TmeMgmtTrg",	"A7FrndsOpn",	"A8ImpTskOnTm",	"A9MissDedlns",	"A10RnOutOfTm",	"A11DrAptOnTm",	"A12MorPnctul",	"A13RtneMntnc",	"A14SchdulLte",	"A15DldActCst",	"G1LteToTsk",	"G2LteTktPrch",	"G3PlnPrtyAhd",	"G4GetUpOnTme",	"G5PstLtrOnTm",	"G6RtrnCalls",	"G7DlyEsyTsks",	"G8PrmptDscsn",	"G9DlyTskStrt",	"G10TrvlRsh",	"G11RdyOnTme",	"G12StayOnTsk",	"G13SmlBlOnTm",	"G14PrmptRSVP",	"G15TskCmpErl",	"G16LstMntGft",	"G17DlyEsntPr",	"G18DyTskCmpl",	"G19PshTskTmr",	"G20CmpTskRlx",	"S1LfClsI2dl",	"S2LfCndExlnt",	"S3StsfdWtLf",	"S4GtImThgsLf",	"S5LvAgChgNth",	"CnsdrSlfProc",	"OthCsndrProc")
 
+levels(ProcrastinationData$SonsCnt) <- c(levels(ProcrastinationData$SonsCnt), "1", "2")
+ProcrastinationData$SonsCnt[ProcrastinationData$SonsCnt=='Male'] <- '1'
+ProcrastinationData$SonsCnt[ProcrastinationData$SonsCnt=='Feale'] <- '2'
+
+ProcrastinationData[,"SonsCnt"] <- as.integer(as.character(ProcrastinationData[,"SonsCnt"]))
+
 ProcTrans <- ProcrastinationData %>% 
   mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .))) %>% 
   mutate_if(is.character, funs(ifelse(is.na(.), "Missing", .))) %>% 
   mutate_if(is.factor, funs(ifelse(is.na(.), "Missing", as.character(.))))
 
+unique(ProcTrans$SonsCnt)
