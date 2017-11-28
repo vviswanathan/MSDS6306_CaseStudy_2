@@ -33,13 +33,15 @@ names(ProcrastinationData) <- c("Age",	"Gender",	"Kids",	"Education",	"WorkStatu
 
 levels(ProcrastinationData$SonsCnt) <- c(levels(ProcrastinationData$SonsCnt), "1", "2")
 ProcrastinationData$SonsCnt[ProcrastinationData$SonsCnt=='Male'] <- '1'
-ProcrastinationData$SonsCnt[ProcrastinationData$SonsCnt=='Feale'] <- '2'
+ProcrastinationData$SonsCnt[ProcrastinationData$SonsCnt=='Female'] <- '2'
 
 ProcrastinationData[,"SonsCnt"] <- as.integer(as.character(ProcrastinationData[,"SonsCnt"]))
 
 ProcTrans <- ProcrastinationData %>% 
+  mutate(AnnualIncome=replace(AnnualIncome, is.na(AnnualIncome), -0.01)) %>%
   mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .))) %>% 
   mutate_if(is.character, funs(ifelse(is.na(.), "Missing", .))) %>% 
-  mutate_if(is.factor, funs(ifelse(is.na(.), "Missing", as.character(.))))
+  mutate_if(is.factor, funs(ifelse(is.na(.), "Missing", as.character(.)))) %>%
+  mutate(CntryResdnc=replace(CntryResdnc, CntryResdnc=="0", "Missing")) %>%
+  mutate(CurrOccption=replace(CurrOccption, (CurrOccption=="0" | CurrOccption=="please specify"), "Missing"))
 
-unique(ProcTrans$SonsCnt)
