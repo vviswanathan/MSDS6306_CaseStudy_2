@@ -1,3 +1,15 @@
+#install packages required
+if (!require(tidyverse)) install.packages("tidyverse")
+if (!require(repmis)) install.packages("repmis")
+if (!require(dplyr)) install.packages("dplyr")
+if (!require(tidyr)) install.packages("tidyr")
+if (!require(ggplot2)) install.packages("ggplot2")
+if (!require(sqldf)) install.packages("sqldf")
+if (!require(kimisc)) install.packages("kimisc")
+if (!require(XML)) install.packages("XML")
+if (!require(RCurl)) install.packages("RCurl")
+if (!require(rvest)) install.packages("rvest")
+
 # Load Libraries
 library(repmis)
 library(dplyr)
@@ -6,6 +18,9 @@ library(tidyr)
 library(ggplot2)
 library(sqldf)
 library(kimisc)
+library(XML)
+library(RCurl)
+library(rVest)
 
 # R - environment
 sessionInfo()
@@ -43,5 +58,41 @@ ProcTrans <- ProcrastinationData %>%
   mutate_if(is.character, funs(ifelse(is.na(.), "Missing", .))) %>% 
   mutate_if(is.factor, funs(ifelse(is.na(.), "Missing", as.character(.)))) %>%
   mutate(CntryResdnc=replace(CntryResdnc, CntryResdnc=="0", "Missing")) %>%
-  mutate(CurrOccption=replace(CurrOccption, (CurrOccption=="0" | CurrOccption=="please specify"), "Missing"))
+  mutate(CurrOccption=replace(CurrOccption, (CurrOccption=="0" | CurrOccption=="please specify"), "Missing")) %>%
+  mutate(DPMean=rowMeans(ProcrastinationData[c('D1DsnTmeWst', 'D2DelayActn', 'D3HesitatDsn', 'D4DelayDsn', 'D5PutoffDsn')], na.rm=TRUE)) %>%
+  mutate(AIPMean=rowMeans(ProcrastinationData[c('A1BillsOnTm', 'A2OnTm4Appt', 'A3Rdy4NxtDy', 'A4RuningLate', 'A5ActvtDlyd', 'A6TmeMgmtTrg', 'A7FrndsOpn', 'A8ImpTskOnTm', 'A9MissDedlns', 'A10RnOutOfTm', 'A11DrAptOnTm', 'A12MorPnctul', 'A13RtneMntnc', 'A14SchdulLte', 'A15DldActCst')], na.rm=TRUE)) %>%
+  mutate(GPMean=rowMeans(ProcrastinationData[c('G1LteToTsk', 'G2LteTktPrch', 'G3PlnPrtyAhd', 'G4GetUpOnTme', 'G5PstLtrOnTm', 'G6RtrnCalls', 'G7DlyEsyTsks', 'G8PrmptDscsn', 'G9DlyTskStrt', 'G10TrvlRsh', 'G11RdyOnTme', 'G12StayOnTsk', 'G13SmlBlOnTm', 'G14PrmptRSVP', 'G15TskCmpErl', 'G16LstMntGft', 'G17DlyEsntPr', 'G18DyTskCmpl', 'G19PshTskTmr', 'G20CmpTskRlx')], na.rm=TRUE)) %>% 
+  mutate(SWLSMean=rowMeans(ProcrastinationData[c('S1LfClsI2dl', 'S2LfCndExlnt', 'S3StsfdWtLf', 'S4GtImThgsLf', 'S5LvAgChgNth')], na.rm=TRUE))
 
+
+sapply(ProcTrans, class)
+
+HumDevUrl <- "https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries"
+
+VHighHumDev <- HumDevUrl %>%
+  read_html() %>%
+  html_nodes(xpath='//*[@id="mw-content-text"]/div/div[5]/table') %>%
+  html_table(fill = T)
+
+VHighHumDev <- data.frame(VHighHumDev[[1]])
+
+HighHumDev <- HumDevUrl %>%
+  read_html() %>%
+  html_nodes(xpath='//*[@id="mw-content-text"]/div/div[6]/table') %>%
+  html_table(fill = T)
+
+HighHumDev <- data.frame(HighHumDev[[1]])
+
+MedHumDev <- HumDevUrl %>%
+  read_html() %>%
+  html_nodes(xpath='//*[@id="mw-content-text"]/div/div[7]/table') %>%
+  html_table(fill = T)
+
+MedHumDev <- data.frame(MedHumDev[[1]])
+
+LowHumDev <- HumDevUrl %>%
+  read_html() %>%
+  html_nodes(xpath='//*[@id="mw-content-text"]/div/div[8]/table') %>%
+  html_table(fill = T)
+
+LowHumDev <- data.frame(LowHumDev[[1]])
