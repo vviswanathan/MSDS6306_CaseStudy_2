@@ -141,8 +141,12 @@ LowHumDev_Clean <- LowHumDev_1Head[,c(1,3,4)]
 #Rename Columns
 LowHumDev <- rename(LowHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
 
-#Combine the Four Data Frames
+#Combine the Four Data Frames and Rank HDI
 Total_HumDev <- list(VHighHumDev, HighHumDev, MedHumDev, LowHumDev)
 Total_HumDev <- Reduce(function(x, y) merge(x, y, all=TRUE), Total_HumDev, accumulate = FALSE)
+Total_HumDev[order(Total_HumDev$HDI),]
 
+#Add new HumDevScore Column and Score variables
+Total_HumDev["HumDev_Score"] <- NA
+Total_HumDev$HumDev_Score <- with(Total_HumDev, ifelse(HDI >=.800, "VHigh", ifelse(HDI <=.796 & HDI >=.701, "High", ifelse(HDI <=.699 & HDI >=.550, "Med", ifelse(HDI <=.541, "Low", "na")))))
 
