@@ -9,6 +9,7 @@ if (!require(kimisc)) install.packages("kimisc")
 if (!require(XML)) install.packages("XML")
 if (!require(RCurl)) install.packages("RCurl")
 if (!require(rvest)) install.packages("rvest")
+if (!require(plyr)) install.packages("plyr")
 
 # Load Libraries
 library(repmis)
@@ -20,7 +21,8 @@ library(sqldf)
 library(kimisc)
 library(XML)
 library(RCurl)
-library(rVest)
+library(rvest)
+library(plyr)
 
 # R - environment
 sessionInfo()
@@ -28,10 +30,10 @@ sessionInfo()
 # Set Base Directory:
 
 # Executing from Vivek's System:
-BaseDir <- "C:/Vivek/Data_Science/MSDS6306-DoingDataScience/Case_Study_2/MSDS6306_CaseStudy_2/"
+# BaseDir <- "C:/Vivek/Data_Science/MSDS6306-DoingDataScience/Case_Study_2/MSDS6306_CaseStudy_2/"
 
 # Executing from Megan's System:
-#BaseDir <- "/Users/megandiane/Desktop/DDS_Class/Case_Study_2/MSDS6306_CaseStudy_2"
+BaseDir <- "/Users/megandiane/Desktop/DDS_Class/Case_Study_2/MSDS6306_CaseStudy_2"
 
 # Set Other Working Directories and File Path
 DataDir <- paste(BaseDir,"Data", sep = "/")
@@ -67,8 +69,10 @@ ProcTrans <- ProcrastinationData %>%
 
 sapply(ProcTrans, class)
 
+#Scrap Data from Wikipedia: List of Countries By Human Development Index
 HumDevUrl <- "https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries"
 
+#Very High Human Development
 VHighHumDev <- HumDevUrl %>%
   read_html() %>%
   html_nodes(xpath='//*[@id="mw-content-text"]/div/div[5]/table') %>%
@@ -76,6 +80,17 @@ VHighHumDev <- HumDevUrl %>%
 
 VHighHumDev <- data.frame(VHighHumDev[[1]])
 
+#Remove Unnecessary Rows
+VHighHumDev_1Head <- VHighHumDev[-c(1,2,3,30,31), ]
+
+#Remove Unnecessary Columns
+VHighHumDev[2] <- list(NULL)
+VHighHumDev_Clean <- VHighHumDev_1Head[,c(1,3,4)]
+
+#Rename Columns
+VHighHumDev <- rename(VHighHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
+
+#High Human Development
 HighHumDev <- HumDevUrl %>%
   read_html() %>%
   html_nodes(xpath='//*[@id="mw-content-text"]/div/div[6]/table') %>%
@@ -83,6 +98,17 @@ HighHumDev <- HumDevUrl %>%
 
 HighHumDev <- data.frame(HighHumDev[[1]])
 
+#Remove Unnecessary Rows
+HighHumDev_1Head <- HighHumDev[-c(1,2,3,32,33), ]
+
+#Remove Unnecessary Columns
+HighHumDev[2] <- list(NULL)
+HighHumDev_Clean <- HighHumDev_1Head[,c(1,3,4)]
+
+#Rename Columns
+HighHumDev <- rename(HighHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
+
+#Medium Human Development
 MedHumDev <- HumDevUrl %>%
   read_html() %>%
   html_nodes(xpath='//*[@id="mw-content-text"]/div/div[7]/table') %>%
@@ -90,9 +116,41 @@ MedHumDev <- HumDevUrl %>%
 
 MedHumDev <- data.frame(MedHumDev[[1]])
 
+#Remove Unnecessary Rows
+MedHumDev_1Head <- MedHumDev[-c(1,2,3,24,25), ]
+
+#Remove Unnecessary Columns
+MedHumDev[2] <- list(NULL)
+MedHumDev_Clean <- MedHumDev_1Head[,c(1,3,4)]
+
+#Rename Columns
+MedHumDev <- rename(MedHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
+
+#Low Human Development
 LowHumDev <- HumDevUrl %>%
   read_html() %>%
   html_nodes(xpath='//*[@id="mw-content-text"]/div/div[8]/table') %>%
   html_table(fill = T)
 
 LowHumDev <- data.frame(LowHumDev[[1]])
+
+#Remove Unnecessary Rows
+LowHumDev_1Head <- LowHumDev[-c(1,2,3,25,26), ]
+
+#Remove Unnecessary Columns
+LowHumDev[2] <- list(NULL)
+LowHumDev_Clean <- LowHumDev_1Head[,c(1,3,4)]
+
+#Rename Columns
+LowHumDev <- rename(LowHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
+
+#Combine the Four Data Frames
+Total_HumDev <- list(VHighHumDev, HighHumDev, MedHumDev, LowHumDev)
+Total_HumDev <- Reduce(function(x, y) merge(x, y, all=TRUE), Total_HumDev, accumulate = FALSE)
+
+#Add new HumDevScore Column and Score variables
+Total_HumDev["HumDev_Score"] <- NA
+Total_HumDev$HumDev_Score <- with(Total_HumDev, ifelse(HDI >=.800, "VHigh", ifelse(HDI <=.796 & HDI >=.701, "High", ifelse(HDI <=.699 & HDI >=.550, "Med", ifelse(HDI <=.541, "Low", "na")))))
+
+#Merge Procrastination with HDI data
+MergedData <- merge(ProcTrans, Total_HumDev)
