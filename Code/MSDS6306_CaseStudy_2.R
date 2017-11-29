@@ -150,3 +150,5 @@ Total_HumDev[order(Total_HumDev$HDI),]
 Total_HumDev["HumDev_Score"] <- NA
 Total_HumDev$HumDev_Score <- with(Total_HumDev, ifelse(HDI >=.800, "VHigh", ifelse(HDI <=.796 & HDI >=.701, "High", ifelse(HDI <=.699 & HDI >=.550, "Med", ifelse(HDI <=.541, "Low", "na")))))
 
+#Merge Procrastination with HDI data
+MergedData <- merge(ProcTrans, Total_HumDev)
