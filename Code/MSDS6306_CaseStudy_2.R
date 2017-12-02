@@ -202,7 +202,14 @@ ProcTransCntryDesc <- ProcTransCntry %>%
   arrange(desc(n))
 ProcTransCntryDesc
 
-#Do People 
+#Do People who consider themselves Procrastinators, do others consider them Procrastinators
+#Preliminary Analysis of Procrastination Variables, 2 other them, 4e
+ProcTransCntry_Clean3 <- ProcTransCntry[c("CnsdrSlfProc","OthCsndrProc")]
+counts <- ddply(ProcTransCntry_Clean3, .(ProcTransCntry_Clean3$CnsdrSlfProc, ProcTransCntry_Clean3$OthCsndrProc), nrow)
+names(counts) <- c("CnsdrSlfProc", "OthCsndrProc", "Freq")
+
+#Answer: 482 answered NO/NO
+# 2358 answered YES/YES
 
 
 
