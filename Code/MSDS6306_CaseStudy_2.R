@@ -172,10 +172,27 @@ Total_HumDev <- Reduce(function(x, y) merge(x, y, all=TRUE), Total_HumDev, accum
 Total_HumDev["HumDev_Score"] <- NA
 Total_HumDev$HumDev_Score <- with(Total_HumDev, ifelse(HDI >=.800, "VHigh", ifelse(HDI <=.796 & HDI >=.701, "High", ifelse(HDI <=.699 & HDI >=.550, "Med", ifelse(HDI <=.541, "Low", "na")))))
 
-#Prior to the Merge of both datasets, Remove Unnecessary Columns for Preliminary Analysis of Age, Income, HDI, and the means of DP, etc
-ProcTransCntry_Clean <- ProcTransCntry[c("Age", "AnnualIncome", "Country", "DPMean", "AIPMean", "GPMean", "SWLSMean")]
+#Prior to the Merge of both datasets, Remove Unnecessary Columns for 4B: Preliminary Analysis of Age, Income, HDI, and the means of DP, et
+ProcTransCntry_Clean1 <- ProcTransCntry[c("Age", "AnnualIncome", "Country", "DPMean", "AIPMean", "GPMean", "SWLSMean")]
 
-#Merge Procrastination with HDI data
-MergedData <- merge(ProcTransCntry_Clean, Total_HumDev, by=c("Country"))
+#Merge Cleaned Procrastination Data in 4B with HDI data
+MergedData_DescripStats <- merge(ProcTransCntry_Clean1, Total_HumDev, by=c("Country"))
 
-ProcPrelimAnalysis <- 
+#Histogram of Age and Income from 4B Prelim Analysis
+MergedData_DescripStats1 <- hist(MergedData_DescripStats$Age, main="Histogram of Age and Income", xlab="Age", border="Black", col="Green") 
+MergedData_DescripStats2 <- hist(MergedData_DescripStats$AnnualIncome, xlab="Annual Income", border="Black", col="Blue")
+
+ggplot(MergedData_DescripStats, aes(age, fill = Age, AnnualIncome)) + geom_histogram(alpha = 0.5)
+
+#Remove Unnecessary Columns for 4C:  Preliminary Analysis of Gender, Work Status, and Occupation
+ProcTransCntry_Clean2 <- ProcTransCntry[c("Gender","WorkStatus", "CurrOccption")]
+
+#Frequency of Gender: Male or Female, Work Status, and Current Occupation
+count(ProcTransCntry_Clean2, "Gender")
+count(ProcTransCntry_Clean2, "WorkStatus")
+count(ProcTransCntry_Clean2, "CurrOccption")
+
+
+
+
+
