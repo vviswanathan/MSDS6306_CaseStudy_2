@@ -184,7 +184,7 @@ MergedData_DescripStats <- merge(ProcTransCntry_Clean1, Total_HumDev, by=c("Coun
 MergedData_DescripStats1 <- hist(MergedData_DescripStats$Age, main="Histogram of Age and Income", xlab="Age", border="Black", col="Green") 
 MergedData_DescripStats2 <- hist(MergedData_DescripStats$AnnualIncome, xlab="Annual Income", border="Black", col="Blue")
 
-ggplot(MergedData_DescripStats, aes(age, fill = Age, AnnualIncome)) + geom_histogram(alpha = 0.5)
+ggplot(MergedData_DescripStats, aes(Age, fill = Age, AnnualIncome)) + geom_histogram(alpha = 0.5)
 
 #Remove Unnecessary Columns for 4C:  Preliminary Analysis of Gender, Work Status, and Occupation
 ProcTransCntry_Clean2 <- ProcTransCntry[c("Gender","WorkStatus", "CurrOccption")]
@@ -195,7 +195,6 @@ count(ProcTransCntry_Clean2, "WorkStatus")
 count(ProcTransCntry_Clean2, "CurrOccption")
 
 #Frequency of how many participants per country in descending order
-count(ProcTransCntry, "Country", decreasing=TRUE)
 
 ProcTransCntryDesc <- ProcTransCntry %>% 
   filter(!is.na(Country) & Country != "NULL") %>% 
@@ -216,17 +215,37 @@ counts_of_Proc
 # 2358 answered YES/YES
 
 #Top 15 Nations in Avg. Procrastination Scores for DP and then GP
-MergedDataTop15DP <- aggregate(DPMean ~ Country, MergedData, mean)
+MergedDataTop15DP <- aggregate(DPMean ~ Country, MergedData_DescripStats, mean)
 MergedDataTop15DP <- MergedDataTop15DP[order(MergedDataTop15DP$DPMean,decreasing=T),]
 MergedDataTop15DP <- head(MergedDataTop15DP, n=15)
-MergedDataTop15DP
-Top15DP <- ggplot(MergedDataTop15DP, aes(Country, DPMean)) + geom_bar(stat="identity") + xlab("Country") + ylab("DPMean") + ggtitle("Top 15 Countries of DP Procrastination Mean Scale") + scale_fill_brewer(palette = "Blues")
+MergedDataTop15DP_order <- MergedDataTop15DP[order(MergedDataTop15DP$DPMean,decreasing=T),]
 
-MergedDataTop15GP <- aggregate(GPMean ~ Country, MergedData, mean)
+MergedDataTop15DP
+
+ggplot(MergedDataTop15DP, aes(Country, DPMean)) + 
+  geom_bar(stat="identity") + xlab("Country") + ylab("DPMean") + 
+  ggtitle("Top 15 Countries of DP Procrastination Mean Scale") + 
+  scale_fill_brewer(palette = "Blues") + 
+  scale_x_discrete(limits=MergedDataTop15DP_order$Country) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+MergedDataTop15GP <- aggregate(GPMean ~ Country, MergedData_DescripStats, mean)
 MergedDataTop15GP <- MergedDataTop15GP[order(MergedDataTop15GP$GPMean,decreasing=T),]
 MergedDataTop15GP <- head(MergedDataTop15GP, n=15)
+MergedDataTop15GP_order <- MergedDataTop15GP[order(MergedDataTop15GP$GPMean,decreasing=T),]
+
+MyBreaks <- c(-Inf, seq(3, 5, by=0.5), Inf)
+MyBreaks
+MyColours <- c("black", "blue", "yellow", "green", "gray", "brown", "purple", "red")
+MergedDataTop15GP$GP_Interval <- cut(MergedDataTop15GP$GPMean, MyBreaks)
 MergedDataTop15GP
-Top15GP <- ggplot(MergedDataTop15GP, aes(Country, GPMean)) + geom_bar(stat="identity")+ xlab("Country") + ylab("GPMean") + ggtitle("Top 15 Countries of GP Procrastination Mean Scale") + scale_fill_brewer(palette = "Blues")
+
+ggplot(MergedDataTop15GP, aes(Country, GPMean)) + 
+  geom_bar(stat="identity") + xlab("Country") + ylab("GPMean") + 
+  ggtitle("Top 15 Countries of GP Procrastination Mean Scale") + 
+  scale_x_discrete(limits=MergedDataTop15GP_order$Country) +
+  scale_fill_brewer(palette = "Blues") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 #How many Countries are on both lists
 
