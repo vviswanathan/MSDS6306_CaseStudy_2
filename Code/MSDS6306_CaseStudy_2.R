@@ -192,6 +192,18 @@ count(ProcTransCntry_Clean2, "Gender")
 count(ProcTransCntry_Clean2, "WorkStatus")
 count(ProcTransCntry_Clean2, "CurrOccption")
 
+#Frequency of how many participants per country in descending order
+count(ProcTransCntry, "Country", decreasing=TRUE)
+
+ProcTransCntryDesc <- ProcTransCntry %>% 
+  filter(!is.na(Country) & Country != "NULL") %>% 
+  group_by(Country) %>% tally(sort=T) %>% 
+  ungroup() %>% 
+  arrange(desc(n))
+ProcTransCntryDesc
+
+#Do People 
+
 
 
 
