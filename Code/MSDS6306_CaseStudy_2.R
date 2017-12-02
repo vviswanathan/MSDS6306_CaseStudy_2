@@ -48,12 +48,21 @@ ProcrastinationData <- read.csv(ProcrastinationDataFile, sep = ",", header = T, 
 # Assign Column Names
 names(ProcrastinationData) <- c("Age",	"Gender",	"Kids",	"Education",	"WorkStatus",	"AnnualIncome",	"CurrOccption",	"PostHeldYrs",	"PostHeldMths",	"CmmuntySize",	"CntryResdnc",	"MaritlStatus",	"SonsCnt",	"DaughtersCnt",	"D1DsnTmeWst",	"D2DelayActn",	"D3HesitatDsn",	"D4DelayDsn",	"D5PutoffDsn",	"A1BillsOnTm",	"A2OnTm4Appt",	"A3Rdy4NxtDy",	"A4RuningLate",	"A5ActvtDlyd",	"A6TmeMgmtTrg",	"A7FrndsOpn",	"A8ImpTskOnTm",	"A9MissDedlns",	"A10RnOutOfTm",	"A11DrAptOnTm",	"A12MorPnctul",	"A13RtneMntnc",	"A14SchdulLte",	"A15DldActCst",	"G1LteToTsk",	"G2LteTktPrch",	"G3PlnPrtyAhd",	"G4GetUpOnTme",	"G5PstLtrOnTm",	"G6RtrnCalls",	"G7DlyEsyTsks",	"G8PrmptDscsn",	"G9DlyTskStrt",	"G10TrvlRsh",	"G11RdyOnTme",	"G12StayOnTsk",	"G13SmlBlOnTm",	"G14PrmptRSVP",	"G15TskCmpErl",	"G16LstMntGft",	"G17DlyEsntPr",	"G18DyTskCmpl",	"G19PshTskTmr",	"G20CmpTskRlx",	"S1LfClsI2dl",	"S2LfCndExlnt",	"S3StsfdWtLf",	"S4GtImThgsLf",	"S5LvAgChgNth",	"CnsdrSlfProc",	"OthCsndrProc")
 
+# To Clean up the data from Procrastination.csv we took the "Male" and "Female" that we found under the Column of "Sons" and
+# replaced it with the correct response of 1 = Male and 2 = Female.
 levels(ProcrastinationData$SonsCnt) <- c(levels(ProcrastinationData$SonsCnt), "1", "2")
 ProcrastinationData$SonsCnt[ProcrastinationData$SonsCnt=='Male'] <- '1'
 ProcrastinationData$SonsCnt[ProcrastinationData$SonsCnt=='Female'] <- '2'
 
 ProcrastinationData[,"SonsCnt"] <- as.integer(as.character(ProcrastinationData[,"SonsCnt"]))
 
+#To Clean up the data from Procrastination.csv we did the folowing:
+#1. If Annual Income was blank, we filled with a -0.01, that way we could easily differentiate from true data, and keep as a numerical data type 
+#2. If the Country of Residence was filled with a "0", we filled with "Missing", to keep as a character data type
+#3. If Current Occupation was filled with "0" or "please specify", we filled with "Missing", to keep as a character data type
+
+#4. For all of the Procrastination Scales: DP, AIP, GP, and SWLS, the means were taken and columns added to reflect those means.
+#   This Mean data is to be used later on.
 ProcTrans <- ProcrastinationData %>% 
   mutate(AnnualIncome=replace(AnnualIncome, is.na(AnnualIncome), -0.01)) %>%
   mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .))) %>% 
@@ -68,6 +77,17 @@ ProcTrans <- ProcrastinationData %>%
 
 
 sapply(ProcTrans, class)
+
+#Remove all Participants who are under 18
+ProcTrans <- ProcTrans[ProcTrans$Age !=1-18, ]
+ProcTrans <- ProcTrans[ProcTrans$Age !=7.5, ]
+ProcTrans <- ProcTrans[ProcTrans$Age !=16.5, ]
+
+#Also chose to remove all Age of Zero (0) because our client is looking for Procrastination as it relates to positions held, how long, and annual income, and all observations with Zero Age, also did not have jobs listed
+ProcTrans <- ProcTrans[ProcTrans$Age !=0, ]
+
+#Rename Column CntryResdnc to Country for later Merge
+ProcTransCntry <- rename(ProcTrans, c("CntryResdnc"="Country"))
 
 #Scrap Data from Wikipedia: List of Countries By Human Development Index
 HumDevUrl <- "https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries"
@@ -152,5 +172,10 @@ Total_HumDev <- Reduce(function(x, y) merge(x, y, all=TRUE), Total_HumDev, accum
 Total_HumDev["HumDev_Score"] <- NA
 Total_HumDev$HumDev_Score <- with(Total_HumDev, ifelse(HDI >=.800, "VHigh", ifelse(HDI <=.796 & HDI >=.701, "High", ifelse(HDI <=.699 & HDI >=.550, "Med", ifelse(HDI <=.541, "Low", "na")))))
 
+#Prior to the Merge of both datasets, Remove Unnecessary Columns for Preliminary Analysis of Age, Income, HDI, and the means of DP, etc
+ProcTransCntry_Clean <- ProcTransCntry[c("Age", "AnnualIncome", "Country", "DPMean", "AIPMean", "GPMean", "SWLSMean")]
+
 #Merge Procrastination with HDI data
-MergedData <- merge(ProcTrans, Total_HumDev)
+MergedData <- merge(ProcTransCntry_Clean, Total_HumDev, by=c("Country"))
+
+ProcPrelimAnalysis <- 
