@@ -212,10 +212,18 @@ names(counts) <- c("CnsdrSlfProc", "OthCsndrProc", "Freq")
 # 2358 answered YES/YES
 
 #Top 15 Nations in Avg. Procrastination Scores for DP and then GP
-MergedDataTop15 <- aggregate(DPMean ~ Country, MergedData, mean)
-MergedDataTop15 <- MergedDataTop15[order(MergedDataTop15$DPMean,decreasing=T),]
+MergedDataTop15DP <- aggregate(DPMean ~ Country, MergedData, mean)
+MergedDataTop15DP <- MergedDataTop15DP[order(MergedDataTop15DP$DPMean,decreasing=T),]
+MergedDataTop15DP <- head(MergedDataTop15DP, n=15)
+Top15DP <- ggplot(MergedDataTop15DP, aes(Country, DPMean)) + geom_bar(stat="identity") + xlab("Country") + ylab("DPMean") + ggtitle("Top 15 Countries of DP Procrastination Mean Scale") + scale_fill_brewer(palette = "Blues")
 
+MergedDataTop15GP <- aggregate(GPMean ~ Country, MergedData, mean)
+MergedDataTop15GP <- MergedDataTop15GP[order(MergedDataTop15GP$GPMean,decreasing=T),]
+MergedDataTop15GP <- head(MergedDataTop15GP, n=15)
+Top15GP <- ggplot(MergedDataTop15GP, aes(Country, GPMean)) + geom_bar(stat="identity")+ xlab("Country") + ylab("GPMean") + ggtitle("Top 15 Countries of GP Procrastination Mean Scale") + scale_fill_brewer(palette = "Blues")
 
+#How many Countries are on both lists
 
+#Is there a relationship between Age and Income
 
-
+#Is there a relationship between Life Satisfaction and HDI
