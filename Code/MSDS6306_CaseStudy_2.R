@@ -30,10 +30,10 @@ sessionInfo()
 # Set Base Directory:
 
 # Executing from Vivek's System:
-# BaseDir <- "C:/Vivek/Data_Science/MSDS6306-DoingDataScience/Case_Study_2/MSDS6306_CaseStudy_2/"
+BaseDir <- "C:/Vivek/Data_Science/MSDS6306-DoingDataScience/Case_Study_2/MSDS6306_CaseStudy_2/"
 
 # Executing from Megan's System:
-BaseDir <- "/Users/megandiane/Desktop/DDS_Class/Case_Study_2/MSDS6306_CaseStudy_2"
+# BaseDir <- "/Users/megandiane/Desktop/DDS_Class/Case_Study_2/MSDS6306_CaseStudy_2"
 
 # Set Other Working Directories and File Path
 DataDir <- paste(BaseDir,"Data", sep = "/")
@@ -82,6 +82,8 @@ sapply(ProcTrans, class)
 ProcTrans <- ProcTrans[ProcTrans$Age !=1-18, ]
 ProcTrans <- ProcTrans[ProcTrans$Age !=7.5, ]
 ProcTrans <- ProcTrans[ProcTrans$Age !=16.5, ]
+
+unique(ProcTrans$Age)
 
 #Also chose to remove all Age of Zero (0) because our client is looking for Procrastination as it relates to positions held, how long, and annual income, and all observations with Zero Age, also did not have jobs listed
 ProcTrans <- ProcTrans[ProcTrans$Age !=0, ]
@@ -206,7 +208,9 @@ ProcTransCntryDesc
 #Preliminary Analysis of Procrastination Variables, 2 other them, 4e
 ProcTransCntry_Clean3 <- ProcTransCntry[c("CnsdrSlfProc","OthCsndrProc")]
 counts_of_Proc <- ddply(ProcTransCntry_Clean3, .(ProcTransCntry_Clean3$CnsdrSlfProc, ProcTransCntry_Clean3$OthCsndrProc), nrow)
-names(counts) <- c("CnsdrSlfProc", "OthCsndrProc", "Freq")
+names(counts_of_Proc) <- c("CnsdrSlfProc", "OthCsndrProc", "Freq")
+
+counts_of_Proc
 
 #Answer: 482 answered NO/NO
 # 2358 answered YES/YES
@@ -215,11 +219,13 @@ names(counts) <- c("CnsdrSlfProc", "OthCsndrProc", "Freq")
 MergedDataTop15DP <- aggregate(DPMean ~ Country, MergedData, mean)
 MergedDataTop15DP <- MergedDataTop15DP[order(MergedDataTop15DP$DPMean,decreasing=T),]
 MergedDataTop15DP <- head(MergedDataTop15DP, n=15)
+MergedDataTop15DP
 Top15DP <- ggplot(MergedDataTop15DP, aes(Country, DPMean)) + geom_bar(stat="identity") + xlab("Country") + ylab("DPMean") + ggtitle("Top 15 Countries of DP Procrastination Mean Scale") + scale_fill_brewer(palette = "Blues")
 
 MergedDataTop15GP <- aggregate(GPMean ~ Country, MergedData, mean)
 MergedDataTop15GP <- MergedDataTop15GP[order(MergedDataTop15GP$GPMean,decreasing=T),]
 MergedDataTop15GP <- head(MergedDataTop15GP, n=15)
+MergedDataTop15GP
 Top15GP <- ggplot(MergedDataTop15GP, aes(Country, GPMean)) + geom_bar(stat="identity")+ xlab("Country") + ylab("GPMean") + ggtitle("Top 15 Countries of GP Procrastination Mean Scale") + scale_fill_brewer(palette = "Blues")
 
 #How many Countries are on both lists
