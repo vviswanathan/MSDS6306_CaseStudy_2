@@ -205,11 +205,15 @@ ProcTransCntryDesc
 #Do People who consider themselves Procrastinators, do others consider them Procrastinators
 #Preliminary Analysis of Procrastination Variables, 2 other them, 4e
 ProcTransCntry_Clean3 <- ProcTransCntry[c("CnsdrSlfProc","OthCsndrProc")]
-counts <- ddply(ProcTransCntry_Clean3, .(ProcTransCntry_Clean3$CnsdrSlfProc, ProcTransCntry_Clean3$OthCsndrProc), nrow)
+counts_of_Proc <- ddply(ProcTransCntry_Clean3, .(ProcTransCntry_Clean3$CnsdrSlfProc, ProcTransCntry_Clean3$OthCsndrProc), nrow)
 names(counts) <- c("CnsdrSlfProc", "OthCsndrProc", "Freq")
 
 #Answer: 482 answered NO/NO
 # 2358 answered YES/YES
+
+#Top 15 Nations in Avg. Procrastination Scores for DP and then GP
+MergedDataTop15 <- aggregate(DPMean ~ Country, MergedData, mean)
+MergedDataTop15 <- MergedDataTop15[order(MergedDataTop15$DPMean,decreasing=T),]
 
 
 
