@@ -79,14 +79,10 @@ ProcTrans <- ProcrastinationData %>%
 sapply(ProcTrans, class)
 
 #Remove all Participants who are under 18
-ProcTrans <- ProcTrans[ProcTrans$Age !=1-18, ]
-ProcTrans <- ProcTrans[ProcTrans$Age !=7.5, ]
-ProcTrans <- ProcTrans[ProcTrans$Age !=16.5, ]
+#Also chose to remove all Age of Zero (0) because our client is looking for Procrastination as it relates to positions held, how long, and annual income, and all observations with Zero Age, also did not have jobs listed
+ProcTrans <- ProcTrans[ProcTrans$Age >=18, ]
 
 unique(ProcTrans$Age)
-
-#Also chose to remove all Age of Zero (0) because our client is looking for Procrastination as it relates to positions held, how long, and annual income, and all observations with Zero Age, also did not have jobs listed
-ProcTrans <- ProcTrans[ProcTrans$Age !=0, ]
 
 #Rename Column CntryResdnc to Country for later Merge
 ProcTransCntry <- rename(ProcTrans, c("CntryResdnc"="Country"))
@@ -112,6 +108,8 @@ VHighHumDev_Clean <- VHighHumDev_1Head[,c(1,3,4)]
 #Rename Columns
 VHighHumDev <- rename(VHighHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
 
+VHighHumDev$HumDev_Score <- "VHigh"
+
 #High Human Development
 HighHumDev <- HumDevUrl %>%
   read_html() %>%
@@ -129,6 +127,8 @@ HighHumDev_Clean <- HighHumDev_1Head[,c(1,3,4)]
 
 #Rename Columns
 HighHumDev <- rename(HighHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
+
+HighHumDev$HumDev_Score <- "High"
 
 #Medium Human Development
 MedHumDev <- HumDevUrl %>%
@@ -148,6 +148,8 @@ MedHumDev_Clean <- MedHumDev_1Head[,c(1,3,4)]
 #Rename Columns
 MedHumDev <- rename(MedHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
 
+MedHumDev$HumDev_Score <- "Med"
+
 #Low Human Development
 LowHumDev <- HumDevUrl %>%
   read_html() %>%
@@ -166,25 +168,22 @@ LowHumDev_Clean <- LowHumDev_1Head[,c(1,3,4)]
 #Rename Columns
 LowHumDev <- rename(LowHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
 
+LowHumDev$HumDev_Score <- "Low"
+
 #Combine the Four Data Frames
 Total_HumDev <- list(VHighHumDev, HighHumDev, MedHumDev, LowHumDev)
+
 Total_HumDev <- Reduce(function(x, y) merge(x, y, all=TRUE), Total_HumDev, accumulate = FALSE)
 
-#Add new HumDevScore Column and Score variables
-Total_HumDev["HumDev_Score"] <- NA
-Total_HumDev$HumDev_Score <- with(Total_HumDev, ifelse(HDI >=.800, "VHigh", ifelse(HDI <=.796 & HDI >=.701, "High", ifelse(HDI <=.699 & HDI >=.550, "Med", ifelse(HDI <=.541, "Low", "na")))))
-
 #Prior to the Merge of both datasets, Remove Unnecessary Columns for 4B: Preliminary Analysis of Age, Income, HDI, and the means of DP, et
-ProcTransCntry_Clean1 <- ProcTransCntry[c("Age", "AnnualIncome", "Country", "DPMean", "AIPMean", "GPMean", "SWLSMean")]
+ProcTransCntry_Clean1 <- ProcTransCntry[c("Age", "Gender", "AnnualIncome", "Country", "DPMean", "AIPMean", "GPMean", "SWLSMean")]
 
 #Merge Cleaned Procrastination Data in 4B with HDI data
 MergedData_DescripStats <- merge(ProcTransCntry_Clean1, Total_HumDev, by=c("Country"))
 
 #Histogram of Age and Income from 4B Prelim Analysis
-MergedData_DescripStats1 <- hist(MergedData_DescripStats$Age, main="Histogram of Age and Income", xlab="Age", border="Black", col="Green") 
-MergedData_DescripStats2 <- hist(MergedData_DescripStats$AnnualIncome, xlab="Annual Income", border="Black", col="Blue")
-
-ggplot(MergedData_DescripStats, aes(Age, fill = Age, AnnualIncome)) + geom_histogram(alpha = 0.5)
+hist(MergedData_DescripStats$Age, main="Histogram of Age and Income", xlab="Age", border="Black", col="Green") 
+hist(MergedData_DescripStats$AnnualIncome, xlab="Annual Income", border="Black", col="Blue")
 
 #Remove Unnecessary Columns for 4C:  Preliminary Analysis of Gender, Work Status, and Occupation
 ProcTransCntry_Clean2 <- ProcTransCntry[c("Gender","WorkStatus", "CurrOccption")]
@@ -225,26 +224,19 @@ MergedDataTop15DP
 ggplot(MergedDataTop15DP, aes(Country, DPMean)) + 
   geom_bar(stat="identity") + xlab("Country") + ylab("DPMean") + 
   ggtitle("Top 15 Countries of DP Procrastination Mean Scale") + 
-  scale_fill_brewer(palette = "Blues") + 
   scale_x_discrete(limits=MergedDataTop15DP_order$Country) +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  scale_fill_gradient("DPMean", low = "blue", high = "red")
 
 MergedDataTop15GP <- aggregate(GPMean ~ Country, MergedData_DescripStats, mean)
 MergedDataTop15GP <- MergedDataTop15GP[order(MergedDataTop15GP$GPMean,decreasing=T),]
 MergedDataTop15GP <- head(MergedDataTop15GP, n=15)
 MergedDataTop15GP_order <- MergedDataTop15GP[order(MergedDataTop15GP$GPMean,decreasing=T),]
 
-MyBreaks <- c(-Inf, seq(3, 5, by=0.5), Inf)
-MyBreaks
-MyColours <- c("black", "blue", "yellow", "green", "gray", "brown", "purple", "red")
-MergedDataTop15GP$GP_Interval <- cut(MergedDataTop15GP$GPMean, MyBreaks)
-MergedDataTop15GP
-
-ggplot(MergedDataTop15GP, aes(Country, GPMean)) + 
-  geom_bar(stat="identity") + xlab("Country") + ylab("GPMean") + 
+ggplot(MergedDataTop15GP, aes(Country, GPMean), colour = "blue") + 
+  geom_bar(stat = "identity") + xlab("Country") + ylab("GPMean") + 
   ggtitle("Top 15 Countries of GP Procrastination Mean Scale") + 
   scale_x_discrete(limits=MergedDataTop15GP_order$Country) +
-  scale_fill_brewer(palette = "Blues") +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 #How many Countries are on both lists
