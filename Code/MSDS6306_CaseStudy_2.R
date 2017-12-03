@@ -10,6 +10,7 @@ if (!require(XML)) install.packages("XML")
 if (!require(RCurl)) install.packages("RCurl")
 if (!require(rvest)) install.packages("rvest")
 if (!require(plyr)) install.packages("plyr")
+if (!require(pastecs)) install.packages("pastecs")
 
 # Load Libraries
 library(repmis)
@@ -23,6 +24,7 @@ library(XML)
 library(RCurl)
 library(rvest)
 library(plyr)
+library(pastecs)
 
 # R - environment
 sessionInfo()
@@ -46,7 +48,21 @@ ProcrastinationDataFile <- paste(DataDir, "Procrastination.csv", sep = "/")
 ProcrastinationData <- read.csv(ProcrastinationDataFile, sep = ",", header = T, na.strings = "")
 
 # Assign Column Names
-names(ProcrastinationData) <- c("Age",	"Gender",	"Kids",	"Education",	"WorkStatus",	"AnnualIncome",	"CurrOccption",	"PostHeldYrs",	"PostHeldMths",	"CmmuntySize",	"CntryResdnc",	"MaritlStatus",	"SonsCnt",	"DaughtersCnt",	"D1DsnTmeWst",	"D2DelayActn",	"D3HesitatDsn",	"D4DelayDsn",	"D5PutoffDsn",	"A1BillsOnTm",	"A2OnTm4Appt",	"A3Rdy4NxtDy",	"A4RuningLate",	"A5ActvtDlyd",	"A6TmeMgmtTrg",	"A7FrndsOpn",	"A8ImpTskOnTm",	"A9MissDedlns",	"A10RnOutOfTm",	"A11DrAptOnTm",	"A12MorPnctul",	"A13RtneMntnc",	"A14SchdulLte",	"A15DldActCst",	"G1LteToTsk",	"G2LteTktPrch",	"G3PlnPrtyAhd",	"G4GetUpOnTme",	"G5PstLtrOnTm",	"G6RtrnCalls",	"G7DlyEsyTsks",	"G8PrmptDscsn",	"G9DlyTskStrt",	"G10TrvlRsh",	"G11RdyOnTme",	"G12StayOnTsk",	"G13SmlBlOnTm",	"G14PrmptRSVP",	"G15TskCmpErl",	"G16LstMntGft",	"G17DlyEsntPr",	"G18DyTskCmpl",	"G19PshTskTmr",	"G20CmpTskRlx",	"S1LfClsI2dl",	"S2LfCndExlnt",	"S3StsfdWtLf",	"S4GtImThgsLf",	"S5LvAgChgNth",	"CnsdrSlfProc",	"OthCsndrProc")
+names(ProcrastinationData) <- c("Age", "Gender", "Kids", "Education", "WorkStatus", 
+                                "AnnualIncome", "CurrOccption", "PostHeldYrs", "PostHeldMths", 
+                                "CmmuntySize", "CntryResdnc", "MaritlStatus", "SonsCnt", 
+                                "DaughtersCnt", "D1DsnTmeWst", "D2DelayActn", "D3HesitatDsn", 
+                                "D4DelayDsn", "D5PutoffDsn", "A1BillsOnTm", "A2OnTm4Appt", 
+                                "A3Rdy4NxtDy", "A4RuningLate", "A5ActvtDlyd", "A6TmeMgmtTrg", 
+                                "A7FrndsOpn", "A8ImpTskOnTm", "A9MissDedlns", "A10RnOutOfTm", 
+                                "A11DrAptOnTm", "A12MorPnctul", "A13RtneMntnc", "A14SchdulLte", 
+                                "A15DldActCst", "G1LteToTsk", "G2LteTktPrch", "G3PlnPrtyAhd", 
+                                "G4GetUpOnTme", "G5PstLtrOnTm", "G6RtrnCalls", "G7DlyEsyTsks", 
+                                "G8PrmptDscsn", "G9DlyTskStrt", "G10TrvlRsh", "G11RdyOnTme", 
+                                "G12StayOnTsk", "G13SmlBlOnTm", "G14PrmptRSVP", "G15TskCmpErl", 
+                                "G16LstMntGft", "G17DlyEsntPr", "G18DyTskCmpl", "G19PshTskTmr", 
+                                "G20CmpTskRlx", "S1LfClsI2dl", "S2LfCndExlnt", "S3StsfdWtLf", 
+                                "S4GtImThgsLf", "S5LvAgChgNth", "CnsdrSlfProc", "OthCsndrProc")
 
 # To Clean up the data from Procrastination.csv we took the "Male" and "Female" that we found under the Column of "Sons" and
 # replaced it with the correct response of 1 = Male and 2 = Female.
@@ -55,6 +71,7 @@ ProcrastinationData$SonsCnt[ProcrastinationData$SonsCnt=='Male'] <- '1'
 ProcrastinationData$SonsCnt[ProcrastinationData$SonsCnt=='Female'] <- '2'
 
 ProcrastinationData[,"SonsCnt"] <- as.integer(as.character(ProcrastinationData[,"SonsCnt"]))
+ProcrastinationData[,"PostHeldYrs"] <- as.integer(ProcrastinationData[,"PostHeldYrs"])
 
 #To Clean up the data from Procrastination.csv we did the folowing:
 #1. If Annual Income was blank, we filled with a -0.01, that way we could easily differentiate from true data, and keep as a numerical data type 
@@ -69,23 +86,29 @@ ProcTrans <- ProcrastinationData %>%
   mutate_if(is.character, funs(ifelse(is.na(.), "Missing", .))) %>% 
   mutate_if(is.factor, funs(ifelse(is.na(.), "Missing", as.character(.)))) %>%
   mutate(CntryResdnc=replace(CntryResdnc, CntryResdnc=="0", "Missing")) %>%
-  mutate(CurrOccption=replace(CurrOccption, (CurrOccption=="0" | CurrOccption=="please specify"), "Missing")) %>%
-  mutate(DPMean=rowMeans(ProcrastinationData[c('D1DsnTmeWst', 'D2DelayActn', 'D3HesitatDsn', 'D4DelayDsn', 'D5PutoffDsn')], na.rm=TRUE)) %>%
-  mutate(AIPMean=rowMeans(ProcrastinationData[c('A1BillsOnTm', 'A2OnTm4Appt', 'A3Rdy4NxtDy', 'A4RuningLate', 'A5ActvtDlyd', 'A6TmeMgmtTrg', 'A7FrndsOpn', 'A8ImpTskOnTm', 'A9MissDedlns', 'A10RnOutOfTm', 'A11DrAptOnTm', 'A12MorPnctul', 'A13RtneMntnc', 'A14SchdulLte', 'A15DldActCst')], na.rm=TRUE)) %>%
-  mutate(GPMean=rowMeans(ProcrastinationData[c('G1LteToTsk', 'G2LteTktPrch', 'G3PlnPrtyAhd', 'G4GetUpOnTme', 'G5PstLtrOnTm', 'G6RtrnCalls', 'G7DlyEsyTsks', 'G8PrmptDscsn', 'G9DlyTskStrt', 'G10TrvlRsh', 'G11RdyOnTme', 'G12StayOnTsk', 'G13SmlBlOnTm', 'G14PrmptRSVP', 'G15TskCmpErl', 'G16LstMntGft', 'G17DlyEsntPr', 'G18DyTskCmpl', 'G19PshTskTmr', 'G20CmpTskRlx')], na.rm=TRUE)) %>% 
-  mutate(SWLSMean=rowMeans(ProcrastinationData[c('S1LfClsI2dl', 'S2LfCndExlnt', 'S3StsfdWtLf', 'S4GtImThgsLf', 'S5LvAgChgNth')], na.rm=TRUE))
+  mutate(CurrOccption=replace(CurrOccption, 
+                              (CurrOccption=="0" | CurrOccption=="please specify"), 
+                              "Missing")) %>%
+  mutate(DPMean=rowMeans(ProcrastinationData[c('D1DsnTmeWst', 'D2DelayActn', 'D3HesitatDsn', 
+                                               'D4DelayDsn', 'D5PutoffDsn')], na.rm=TRUE)) %>%
+  mutate(AIPMean=rowMeans(ProcrastinationData[c('A1BillsOnTm', 'A2OnTm4Appt', 'A3Rdy4NxtDy', 
+                                                'A4RuningLate', 'A5ActvtDlyd', 'A6TmeMgmtTrg', 
+                                                'A7FrndsOpn', 'A8ImpTskOnTm', 'A9MissDedlns', 
+                                                'A10RnOutOfTm', 'A11DrAptOnTm', 'A12MorPnctul', 
+                                                'A13RtneMntnc', 'A14SchdulLte', 'A15DldActCst')], 
+                          na.rm=TRUE)) %>%
+  mutate(GPMean=rowMeans(ProcrastinationData[c('G1LteToTsk', 'G2LteTktPrch', 'G3PlnPrtyAhd', 
+                                               'G4GetUpOnTme', 'G5PstLtrOnTm', 'G6RtrnCalls', 
+                                               'G7DlyEsyTsks', 'G8PrmptDscsn', 'G9DlyTskStrt', 
+                                               'G10TrvlRsh', 'G11RdyOnTme', 'G12StayOnTsk', 
+                                               'G13SmlBlOnTm', 'G14PrmptRSVP', 'G15TskCmpErl', 
+                                               'G16LstMntGft', 'G17DlyEsntPr', 'G18DyTskCmpl', 
+                                               'G19PshTskTmr', 'G20CmpTskRlx')], na.rm=TRUE)) %>% 
+  mutate(SWLSMean=rowMeans(ProcrastinationData[c('S1LfClsI2dl', 'S2LfCndExlnt', 'S3StsfdWtLf', 
+                                                 'S4GtImThgsLf', 'S5LvAgChgNth')], na.rm=TRUE))
 
 
 sapply(ProcTrans, class)
-
-#Remove all Participants who are under 18
-#Also chose to remove all Age of Zero (0) because our client is looking for Procrastination as it relates to positions held, how long, and annual income, and all observations with Zero Age, also did not have jobs listed
-ProcTrans <- ProcTrans[ProcTrans$Age >=18, ]
-
-unique(ProcTrans$Age)
-
-#Rename Column CntryResdnc to Country for later Merge
-ProcTransCntry <- rename(ProcTrans, c("CntryResdnc"="Country"))
 
 #Scrap Data from Wikipedia: List of Countries By Human Development Index
 HumDevUrl <- "https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries"
@@ -108,7 +131,12 @@ VHighHumDev_Clean <- VHighHumDev_1Head[,c(1,3,4)]
 #Rename Columns
 VHighHumDev <- rename(VHighHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
 
-VHighHumDev$HumDev_Score <- "VHigh"
+VHighHumDev$HumDev_Categ <- "VHigh"
+
+VHighHumDev[,"HDI"] <- as.numeric(VHighHumDev[,"HDI"])
+
+# Remove Unused Environment Variables
+rm(VHighHumDev_1Head, VHighHumDev_Clean)
 
 #High Human Development
 HighHumDev <- HumDevUrl %>%
@@ -128,7 +156,12 @@ HighHumDev_Clean <- HighHumDev_1Head[,c(1,3,4)]
 #Rename Columns
 HighHumDev <- rename(HighHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
 
-HighHumDev$HumDev_Score <- "High"
+HighHumDev$HumDev_Categ <- "High"
+
+HighHumDev[,"HDI"] <- as.numeric(HighHumDev[,"HDI"])
+
+# Remove Unused Environment Variables
+rm(HighHumDev_1Head, HighHumDev_Clean)
 
 #Medium Human Development
 MedHumDev <- HumDevUrl %>%
@@ -148,7 +181,12 @@ MedHumDev_Clean <- MedHumDev_1Head[,c(1,3,4)]
 #Rename Columns
 MedHumDev <- rename(MedHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
 
-MedHumDev$HumDev_Score <- "Med"
+MedHumDev$HumDev_Categ <- "Med"
+
+MedHumDev[,"HDI"] <- as.numeric(MedHumDev[,"HDI"])
+
+# Remove Unused Environment Variables
+rm(MedHumDev_1Head, MedHumDev_Clean)
 
 #Low Human Development
 LowHumDev <- HumDevUrl %>%
@@ -168,79 +206,128 @@ LowHumDev_Clean <- LowHumDev_1Head[,c(1,3,4)]
 #Rename Columns
 LowHumDev <- rename(LowHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
 
-LowHumDev$HumDev_Score <- "Low"
+LowHumDev$HumDev_Categ <- "Low"
+
+LowHumDev[,"HDI"] <- as.numeric(LowHumDev[,"HDI"])
+
+# Remove Unused Environment Variables
+rm(LowHumDev_1Head, LowHumDev_Clean)
 
 #Combine the Four Data Frames
-Total_HumDev <- list(VHighHumDev, HighHumDev, MedHumDev, LowHumDev)
+Total_HumDev <- rbind(VHighHumDev, HighHumDev, MedHumDev, LowHumDev)
 
-Total_HumDev <- Reduce(function(x, y) merge(x, y, all=TRUE), Total_HumDev, accumulate = FALSE)
+Total_HumDev <- within(Total_HumDev, rm("Rank"))
 
-#Prior to the Merge of both datasets, Remove Unnecessary Columns for 4B: Preliminary Analysis of Age, Income, HDI, and the means of DP, et
-ProcTransCntry_Clean1 <- ProcTransCntry[c("Age", "Gender", "AnnualIncome", "Country", "DPMean", "AIPMean", "GPMean", "SWLSMean")]
+# Remove Unused Environment Variables
+rm(VHighHumDev, HighHumDev, MedHumDev, LowHumDev)
 
-#Merge Cleaned Procrastination Data in 4B with HDI data
-MergedData_DescripStats <- merge(ProcTransCntry_Clean1, Total_HumDev, by=c("Country"))
+#Merge this data frame to the Country of Residence column of Procrastination.csv so that your data now has an HDI column and HDI categories
+Merged_ProctransHumDev <- merge(ProcTrans, Total_HumDev, by.x=c("CntryResdnc"), by.y = c("Country"))
 
-#Histogram of Age and Income from 4B Prelim Analysis
-hist(MergedData_DescripStats$Age, main="Histogram of Age and Income", xlab="Age", border="Black", col="Green") 
-hist(MergedData_DescripStats$AnnualIncome, xlab="Annual Income", border="Black", col="Blue")
+#Remove all Participants who are under 18
+#Also chose to remove all Age of Zero (0) because our client is looking for Procrastination as it relates to positions held, how long, and annual income, and all observations with Zero Age, also did not have jobs listed
+Merged_ProctransHumDev <- Merged_ProctransHumDev[Merged_ProctransHumDev$Age >=18, ]
 
-#Remove Unnecessary Columns for 4C:  Preliminary Analysis of Gender, Work Status, and Occupation
-ProcTransCntry_Clean2 <- ProcTransCntry[c("Gender","WorkStatus", "CurrOccption")]
+unique(Merged_ProctransHumDev$Age)
 
-#Frequency of Gender: Male or Female, Work Status, and Current Occupation
-count(ProcTransCntry_Clean2, "Gender")
-count(ProcTransCntry_Clean2, "WorkStatus")
-count(ProcTransCntry_Clean2, "CurrOccption")
+Merged_ProctransHumDev_DescripStats <- Merged_ProctransHumDev[c("Age", "AnnualIncome", "HDI",
+                                                                "DPMean", "AIPMean",
+                                                                "GPMean", "SWLSMean")]
 
-#Frequency of how many participants per country in descending order
+options(scipen=100)
+options(digits=2)
+ProctransHumDev_DescripStats <- stat.desc(Merged_ProctransHumDev_DescripStats)
+ProctransHumDev_DescripStats
 
-ProcTransCntryDesc <- ProcTransCntry %>% 
-  filter(!is.na(Country) & Country != "NULL") %>% 
-  group_by(Country) %>% tally(sort=T) %>% 
-  ungroup() %>% 
-  arrange(desc(n))
-ProcTransCntryDesc
+hist(Merged_ProctransHumDev_DescripStats$DPMean)
+hist(Merged_ProctransHumDev_DescripStats$GPMean)
 
-#Do People who consider themselves Procrastinators, do others consider them Procrastinators
-#Preliminary Analysis of Procrastination Variables, 2 other them, 4e
-ProcTransCntry_Clean3 <- ProcTransCntry[c("CnsdrSlfProc","OthCsndrProc")]
-counts_of_Proc <- ddply(ProcTransCntry_Clean3, .(ProcTransCntry_Clean3$CnsdrSlfProc, ProcTransCntry_Clean3$OthCsndrProc), nrow)
-names(counts_of_Proc) <- c("CnsdrSlfProc", "OthCsndrProc", "Freq")
+# Remove Unused Environment Variables
+rm(Merged_ProctransHumDev_DescripStats, ProctransHumDev_DescripStats)
 
-counts_of_Proc
+Cnt_By_Gender <- as.data.frame(table(Merged_ProctransHumDev$Gender))
+Cnt_By_Gender
+Cnt_By_WorkStatus <- as.data.frame(table(Merged_ProctransHumDev$WorkStatus))
+Cnt_By_WorkStatus
+Cnt_By_Curr_Occupation <- as.data.frame(table(Merged_ProctransHumDev$CurrOccption))
+Cnt_By_Curr_Occupation
 
-#Answer: 482 answered NO/NO
-# 2358 answered YES/YES
+Cnt_By_CntryResdnc <- Merged_ProctransHumDev %>%
+  group_by(CntryResdnc) %>% 
+  do(data.frame(nrow=nrow(.))) %>%
+  arrange(desc(nrow))
 
-#Top 15 Nations in Avg. Procrastination Scores for DP and then GP
-MergedDataTop15DP <- aggregate(DPMean ~ Country, MergedData_DescripStats, mean)
-MergedDataTop15DP <- MergedDataTop15DP[order(MergedDataTop15DP$DPMean,decreasing=T),]
-MergedDataTop15DP <- head(MergedDataTop15DP, n=15)
-MergedDataTop15DP_order <- MergedDataTop15DP[order(MergedDataTop15DP$DPMean,decreasing=T),]
+Cnt_By_CntryResdnc
 
-MergedDataTop15DP
+Merged_ProctransHumDev %>%
+  group_by(CnsdrSlfProc, OthCsndrProc) %>% 
+  do(data.frame(nrow=nrow(.))) %>%
+  arrange(desc(nrow)) %>%
+  filter((CnsdrSlfProc == "yes" & OthCsndrProc == "yes") 
+         | (CnsdrSlfProc == "no" & OthCsndrProc == "no"))
 
-ggplot(MergedDataTop15DP, aes(Country, DPMean)) + 
-  geom_bar(stat="identity") + xlab("Country") + ylab("DPMean") + 
+DP_Top15 <- aggregate(DPMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) %>%
+  arrange(desc(DPMean)) %>%
+  head(n=15)
+
+ggplot(data = merge(Merged_ProctransHumDev, within(DP_Top15, rm("DPMean", "HDI")), by = "CntryResdnc")) +
+  geom_bar(aes(x=reorder(CntryResdnc,-DPMean,mean), DPMean, fill = HumDev_Categ),
+           stat = "summary", fun.y = "mean", show.legend = T) + 
+  xlab("Country") + ylab("DPMean") + 
   ggtitle("Top 15 Countries of DP Procrastination Mean Scale") + 
-  scale_x_discrete(limits=MergedDataTop15DP_order$Country) +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  scale_fill_gradient("DPMean", low = "blue", high = "red")
-
-MergedDataTop15GP <- aggregate(GPMean ~ Country, MergedData_DescripStats, mean)
-MergedDataTop15GP <- MergedDataTop15GP[order(MergedDataTop15GP$GPMean,decreasing=T),]
-MergedDataTop15GP <- head(MergedDataTop15GP, n=15)
-MergedDataTop15GP_order <- MergedDataTop15GP[order(MergedDataTop15GP$GPMean,decreasing=T),]
-
-ggplot(MergedDataTop15GP, aes(Country, GPMean), colour = "blue") + 
-  geom_bar(stat = "identity") + xlab("Country") + ylab("GPMean") + 
-  ggtitle("Top 15 Countries of GP Procrastination Mean Scale") + 
-  scale_x_discrete(limits=MergedDataTop15GP_order$Country) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
-#How many Countries are on both lists
 
-#Is there a relationship between Age and Income
+GP_Top15 <- aggregate(GPMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) %>%
+  arrange(desc(GPMean)) %>%
+  head(n=15)
 
-#Is there a relationship between Life Satisfaction and HDI
+ggplot(data = merge(Merged_ProctransHumDev, within(GP_Top15, rm("GPMean", "HDI")), by = "CntryResdnc")) +
+  geom_bar(aes(x=reorder(CntryResdnc,-GPMean,mean), GPMean, fill = HumDev_Categ),
+           stat = "summary", fun.y = "mean", show.legend = T) + 
+  xlab("Country") + ylab("GPMean") + 
+  ggtitle("Top 15 Countries of GP Procrastination Mean Scale") + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+
+#ggplot(Merged_ProctransHumDev, aes(x=SWLSMean,y=HDI,color=Gender)) + 
+#  geom_point()+ geom_smooth(method = lm)
+
+
+plot(Merged_ProctransHumDev$Age, Merged_ProctransHumDev$AnnualIncome, 
+     xlab="Age", ylab="Annual Income", 
+     main="Age vs Annual Income", pch=2, cex.main=1.5, 
+     frame.plot=FALSE, col=ifelse(Merged_ProctransHumDev$Gender=="Male", "red", "blue"))
+
+legend("topleft", pch=c(2,2), col=c("red", "blue"), 
+       c("Male", "Female"), bty="o",  box.col="darkgreen", cex=.8)
+
+plot(Merged_ProctransHumDev$SWLSMean, Merged_ProctransHumDev$HDI, 
+     xlab="SWLSMean", ylab="HDI", ylim = c(0,1),
+     main="SWLSMean vs HDI", pch=2, cex.main=1.5, 
+     frame.plot=FALSE)
+
+ggplot(Merged_ProctransHumDev) +
+  geom_bar(aes(x=reorder(HumDev_Categ,-SWLSMean,mean), SWLSMean, fill = HumDev_Categ),
+           stat = "summary", fun.y = "mean", show.legend = T) + 
+  xlab("HDI Category") + ylab("SWLSMean") + 
+  ggtitle("Bar Chart of Mean Life Satisfaction by Human Development Index Category") + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+#Write the Human Development Data to CSV
+HumDevDataFile <- paste(DataDir, "HumanDevelopment.csv", sep = "/")
+write.table(Total_HumDev,HumDevDataFile,row.names=F, col.names = T, sep = ",")
+
+#Write the Cleaned Input Data with HDI to CSV
+CleanInputData_w_HDI_File <- paste(DataDir, "CleanedInput_w_HDI.csv", sep = "/")
+write.table(Merged_ProctransHumDev,CleanInputData_w_HDI_File,row.names=F, col.names = T, sep = ",")
+
+#Write the Human Development Data to CSV
+Top_15_DP <- paste(DataDir, "Top_15_DP_Cntry.csv", sep = "/")
+write.table(DP_Top15, Top_15_DP,row.names=F, col.names = T, sep = ",")
+
+#Write the Cleaned Input Data with HDI to CSV
+Top_15_GP <- paste(DataDir, "Top_15_GP_Cntry.csv", sep = "/")
+write.table(GP_Top15, Top_15_GP,row.names=F, col.names = T, sep = ",")
+
+rm(Total_HumDev, Merged_ProctransHumDev, DP_Top15, GP_Top15)
