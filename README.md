@@ -76,7 +76,7 @@ The following datasets are taken from data collected by Qualtrics on Procrastina
 **Type:** Comma-separated value file  
 **Dimensions:** 4162 observations x 19 variables
 
-### Variable Information, and how each variable was cleaned up:
+### Variable Information, and how each variable was cleaned/manipulated:
 * Rule of thumb: we made Numeric type columns missing values a "0", and Character type columns blank or "NA" values labeled "Missing".
 * All columns are proper data types, whether character or numeric.
 
