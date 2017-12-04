@@ -11,7 +11,7 @@
 6. Writing Final data to CSV 
 
 ## 1. Help Functions/Constants 
-### install packages required 
+### Install Packages Required 
 if (!require(tidyverse)) install.packages("tidyverse") 
 if (!require(repmis)) install.packages("repmis") 
 if (!require(dplyr)) install.packages("dplyr") 
@@ -74,14 +74,14 @@ names(ProcrastinationData) <- c("Age", "Gender", "Kids", "Education", "WorkStatu
                                 "S4GtImThgsLf", "S5LvAgChgNth", "CnsdrSlfProc", "OthCsndrProc")
 
 ## 3. Cleaning the data
-The Procrastination Data csv had a lot of manipulation in it, and can be found in the Procrastination.csv CODEBOOK
+### The Procrastination Data csv had a lot of manipulation in it, and can be found in the Procrastination.csv CODEBOOK
 
-After scraping the data from https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries the data needed a lot of manipulation to get it into a format from 8 table to one table displaying Country, and (2016 Estimates for 2015) HDI score. We only pulled data from the section titled "Complete List of Countries".
+### After scraping the data from https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries the data needed a lot of manipulation to get it into a format from 8 table to one table displaying Country, and (2016 Estimates for 2015) HDI score. We only pulled data from the section titled "Complete List of Countries".
 
 ### Scrap Data from Wikipedia: List of Countries By Human Development Index
 HumDevUrl <- "https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries"
 
-We then needed to manipulate each section of "Very High Humand Development", "High Human Development", "Medium Human Development", and "Low Human Development". We placed each into a dataframe, removed unnecessary rows and columns. We renamed the columns to make sense for our project: "Rank", "Country", and "HDI", and lastly removed any unused enviornment variables.
+### We then needed to manipulate each section of "Very High Humand Development", "High Human Development", "Medium Human Development", and "Low Human Development". We placed each into a dataframe, removed unnecessary rows and columns. We renamed the columns to make sense for our project: "Rank", "Country", and "HDI", and lastly removed any unused enviornment variables.
 
 Very High Human Development
 VHighHumDev <- HumDevUrl %>%
