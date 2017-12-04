@@ -45,6 +45,13 @@ The purpose/objective of this project came from an engagement between the client
 2. The correlation between the counties on both top 15 lists and Age and Income
 3. And the correlation/relationship between the countries on both top 15 and Life Satisfaction and Human Development (HDI)
 
+# File Structure
+Code: contains all the R code to run to produce the below conclusions.
+Data: contains all Datasets utilized during project. Both in its raw and manipulated/clean format.
+Presentation:
+Codebook:
+Procrastination.csv Codebook:
+README.md
 ## Datasets
 The following datasets are taken from data collected by Qualtrics on Procrastination as well as data scraped from public domain on the Human Development Index.
 
