@@ -10,11 +10,11 @@
   html_document:
     keep_md: yes
     
-**Contact Information:**
+**Contact Information:**  
 Vivek, vviswanathan@mail.smu.edu  
 Megan, mdhodges@smu.edu
 
-**SessionInfo:** 
+**SessionInfo:**  
 *Megan's System:*  
 R version 3.4.1 (2017-06-30)  
 Platform: x86_64-apple-darwin13.4.0 (64-bit)  
