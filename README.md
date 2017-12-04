@@ -18,8 +18,39 @@ R version 3.4.1 (2017-06-30)
 Platform: x86_64-apple-darwin13.4.0 (64-bit)
 Running under: macOS High Sierra 10.13.1
 
-Vivek's System:
+Matrix products: default
+BLAS: /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib
+LAPACK: /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLAPACK.dylib
 
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+Vivek's System:
+R version 3.4.1 (2017-06-30)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows >= 8 x64 (build 9200)
+ 
+Matrix products: default
+ 
+locale:
+[1] LC_COLLATE=English_United States.1252  LC_CTYPE=English_United States.1252   
+[3] LC_MONETARY=English_United States.1252 LC_NUMERIC=C                          
+[5] LC_TIME=English_United States.1252    
+
+Packages Utilized:
+library(repmis)
+library(dplyr)
+library(tidyverse)
+library(tidyr)
+library(ggplot2)
+library(sqldf)
+library(kimisc)
+library(XML)
+library(RCurl)
+library(rvest)
+library(plyr)
+library(pastecs)
+ 
 ---
 
 # Introduction
