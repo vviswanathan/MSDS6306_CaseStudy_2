@@ -47,6 +47,8 @@ ProcrastinationDataFile <- paste(DataDir, "Procrastination.csv", sep = "/")
 # Read the Data File
 ProcrastinationData <- read.csv(ProcrastinationDataFile, sep = ",", header = T, na.strings = "")
 
+dim(ProcrastinationData)
+
 # Assign Column Names
 names(ProcrastinationData) <- c("Age", "Gender", "Kids", "Education", "WorkStatus", 
                                 "AnnualIncome", "CurrOccption", "PostHeldYrs", "PostHeldMths", 
@@ -86,6 +88,7 @@ ProcTrans <- ProcrastinationData %>%
   mutate_if(is.character, funs(ifelse(is.na(.), "Missing", .))) %>% 
   mutate_if(is.factor, funs(ifelse(is.na(.), "Missing", as.character(.)))) %>%
   mutate(CntryResdnc=replace(CntryResdnc, CntryResdnc=="0", "Missing")) %>%
+  mutate(PostHeldYrs=replace(PostHeldYrs, PostHeldYrs==999, NA)) %>%
   mutate(CurrOccption=replace(CurrOccption, 
                               (CurrOccption=="0" | CurrOccption=="please specify"), 
                               "Missing")) %>%
@@ -226,9 +229,9 @@ Merged_ProctransHumDev <- merge(ProcTrans, Total_HumDev, by.x=c("CntryResdnc"), 
 
 #Remove all Participants who are under 18
 #Also chose to remove all Age of Zero (0) because our client is looking for Procrastination as it relates to positions held, how long, and annual income, and all observations with Zero Age, also did not have jobs listed
-Merged_ProctransHumDev <- Merged_ProctransHumDev[Merged_ProctransHumDev$Age >=18, ]
+Merged_ProctransHumDev <- Merged_ProctransHumDev[Merged_ProctransHumDev$Age >= 18.0, ]
 
-unique(Merged_ProctransHumDev$Age)
+unique(format(Merged_ProctransHumDev$Age, digits = 10))
 
 Merged_ProctransHumDev_DescripStats <- Merged_ProctransHumDev[c("Age", "AnnualIncome", "HDI",
                                                                 "DPMean", "AIPMean",
@@ -275,7 +278,8 @@ ggplot(data = merge(Merged_ProctransHumDev, within(DP_Top15, rm("DPMean", "HDI")
            stat = "summary", fun.y = "mean", show.legend = T) + 
   xlab("Country") + ylab("DPMean") + 
   ggtitle("Top 15 Countries of DP Procrastination Mean Scale") + 
-  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  theme(plot.title = element_text(hjust = 0.5))
 
 
 GP_Top15 <- aggregate(GPMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) %>%
@@ -287,12 +291,13 @@ ggplot(data = merge(Merged_ProctransHumDev, within(GP_Top15, rm("GPMean", "HDI")
            stat = "summary", fun.y = "mean", show.legend = T) + 
   xlab("Country") + ylab("GPMean") + 
   ggtitle("Top 15 Countries of GP Procrastination Mean Scale") + 
-  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  theme(plot.title = element_text(hjust = 0.5)) + ylim(0,5)
 
-
-#ggplot(Merged_ProctransHumDev, aes(x=SWLSMean,y=HDI,color=Gender)) + 
-#  geom_point()+ geom_smooth(method = lm)
-
+GP_DP_Common_Cntry <- as.data.frame(intersect(DP_Top15$CntryResdnc, GP_Top15$CntryResdnc))
+dim(as.data.frame(GP_DP_Common_Cntry))
+names(GP_DP_Common_Cntry) <- c("CommonCntry")
+GP_DP_Common_Cntry
 
 plot(Merged_ProctransHumDev$Age, Merged_ProctransHumDev$AnnualIncome, 
      xlab="Age", ylab="Annual Income", 
@@ -302,10 +307,23 @@ plot(Merged_ProctransHumDev$Age, Merged_ProctransHumDev$AnnualIncome,
 legend("topleft", pch=c(2,2), col=c("red", "blue"), 
        c("Male", "Female"), bty="o",  box.col="darkgreen", cex=.8)
 
+ggplot(data = merge(Merged_ProctransHumDev, GP_DP_Common_Cntry, x.by = "CntryResdnc", y.by = "CommonCntry")) +
+  aes(x=Age,y=AnnualIncome,color=Gender) + 
+  geom_point()+ geom_smooth(method = lm) + 
+  xlab("Age") + ylab("Annual Income") + 
+  ggtitle("Age vs Annual Income plot for the 8 countries \ncommon between Top 15 DP and GP countries") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+ggplot(Merged_ProctransHumDev, aes(x=Age,y=AnnualIncome,color=Gender)) + 
+  geom_point()+ geom_smooth(method = lm)
+
 plot(Merged_ProctransHumDev$SWLSMean, Merged_ProctransHumDev$HDI, 
      xlab="SWLSMean", ylab="HDI", ylim = c(0,1),
      main="SWLSMean vs HDI", pch=2, cex.main=1.5, 
-     frame.plot=FALSE)
+     frame.plot=FALSE, col=ifelse(Merged_ProctransHumDev$Gender=="Male", "red", "blue"))
+
+ggplot(Merged_ProctransHumDev, aes(x=SWLSMean,y=HDI,color=Gender)) + 
+  geom_point()+ geom_smooth(method = lm)
 
 ggplot(Merged_ProctransHumDev) +
   geom_bar(aes(x=reorder(HumDev_Categ,-SWLSMean,mean), SWLSMean, fill = HumDev_Categ),
@@ -313,6 +331,18 @@ ggplot(Merged_ProctransHumDev) +
   xlab("HDI Category") + ylab("SWLSMean") + 
   ggtitle("Bar Chart of Mean Life Satisfaction by Human Development Index Category") + 
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+LS_Top15 <- aggregate(SWLSMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) %>%
+  arrange(desc(SWLSMean)) %>%
+  head(n=15)
+
+ggplot(data = merge(Merged_ProctransHumDev, within(LS_Top15, rm("SWLSMean", "HDI")), by = "CntryResdnc")) +
+  geom_bar(aes(x=reorder(CntryResdnc,-SWLSMean,mean), SWLSMean, fill = HumDev_Categ),
+           stat = "summary", fun.y = "mean", show.legend = T) + 
+  xlab("Country") + ylab("SWLSMean") + 
+  ggtitle("Top 15 Countries of LS Procrastination Mean Scale") + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  theme(plot.title = element_text(hjust = 0.5)) + ylim(0,5)
 
 #Write the Human Development Data to CSV
 HumDevDataFile <- paste(DataDir, "HumanDevelopment.csv", sep = "/")
