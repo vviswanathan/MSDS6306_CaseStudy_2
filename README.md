@@ -154,7 +154,8 @@ Qatar, Panama, Sri Lanka, Austria, Ecuador, Slovenia, Uruguay, Portugal
 Yes, there is a discernible relationship and trend between Age and Income by Gender: Male and Female. The older the Age the higher the Income for both Male and Female. Male Income was significantly higer then Female at every Age; however the younger the Age the closer the relationship in Income between Male and Female. Over their lifespan the Income gap seems to widen between Male and Female.  
   
 **3a. The correlation/relationship between the countries on both top 15 and Life Satisfaction (SWLS) and Human Development (HDI) between Male and Female:**  
-Yes, there is a significant relationship between SWLS and HDI
+No, there does not seem to be a correlation or visible trend between SWLS Score and the HDI Score as displayed by the scatterplot output between Gender: Male and Female.  
+  
 **3b. Is there a discernible relationship between SWLS and HDI?**  
 Yes, there is a discernible relationship and trend between Life Satisfaction Scale (SWLS) and Human Development Index (HDI). The greater the HDI the higher the SWLS Mean Score. Medium and High HDI resulted in approx the same SWLS Mean Score.  
   
