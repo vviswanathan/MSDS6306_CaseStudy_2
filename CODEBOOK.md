@@ -254,7 +254,7 @@ GP_Top15 <- aggregate(GPMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) %>
 arrange(desc(GPMean)) %>%
 head(n=15)
   
-### GGPlot of those the Top 15 Countries on the GP Scale:
+### "Top 15 Countries on the GP Scale":
 ggplot(data = merge(Merged_ProctransHumDev, within(GP_Top15, rm("GPMean", "HDI")), by = "CntryResdnc")) +
 geom_bar(aes(x=reorder(CntryResdnc,-GPMean,mean), GPMean, fill = HumDev_Categ),
            stat = "summary", fun.y = "mean", show.legend = T) + 
@@ -263,7 +263,8 @@ ggtitle("Top 15 Countries of GP Procrastination Mean Scale") +
 theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
 theme(plot.title = element_text(hjust = 0.5)) + ylim(0,5)
 
-### Created List of those Countries on both list, and plotted "Age versus Annual Income for All Countries:
+### Created List of those Countries on both list, and plotted:
+### "Age versus Annual Income for All Countries":
 GP_DP_Common_Cntry <- as.data.frame(intersect(DP_Top15$CntryResdnc, GP_Top15$CntryResdnc))
 dim(as.data.frame(GP_DP_Common_Cntry))
 names(GP_DP_Common_Cntry) <- c("CommonCntry")
@@ -283,7 +284,7 @@ ggplot(Merged_ProctransHumDev, aes(x=Age,y=AnnualIncome,color=Gender)) +
   ggtitle("Age vs Annual Income plot for all countries") +
   theme(plot.title = element_text(hjust = 0.5))
   
-### "Age vs Annual Income Plot for the 8 Common Countries of DP and GP"
+### "Age vs Annual Income Plot for the 8 Common Countries of DP and GP":
  ggplot(data = merge(Merged_ProctransHumDev, GP_DP_Common_Cntry, x.by = "CntryResdnc", y.by = "CommonCntry")) +
   aes(x=Age,y=AnnualIncome,color=Gender) + 
   geom_point()+ geom_smooth(method = lm) + 
@@ -291,7 +292,7 @@ ggplot(Merged_ProctransHumDev, aes(x=Age,y=AnnualIncome,color=Gender)) +
   ggtitle("Age vs Annual Income plot for the 8 countries \ncommon between Top 15 DP and GP countries") +
   theme(plot.title = element_text(hjust = 0.5)) 
   
-### Scatterplot of "Mean Life Satisfaction by Humand Development Index (HDI) by Gender":
+### "Mean Life Satisfaction by Humand Development Index (HDI) by Gender":
   plot(Merged_ProctransHumDev$SWLSMean, Merged_ProctransHumDev$HDI, 
      xlab="SWLSMean", ylab="HDI", ylim = c(0,1),
      main="SWLSMean vs HDI", pch=2, cex.main=1.5, 
@@ -304,7 +305,7 @@ ggplot(Merged_ProctransHumDev, aes(x=SWLSMean,y=HDI,color=Gender)) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   theme(plot.title = element_text(hjust = 0.5))
   
-### Bar Chart "Mean Life Satisfaction by HDI"
+### "Mean Life Satisfaction by HDI":
 ggplot(Merged_ProctransHumDev) +
   geom_bar(aes(x=reorder(HumDev_Categ,-SWLSMean,mean), SWLSMean, fill = HumDev_Categ),
            stat = "summary", fun.y = "mean", show.legend = T) + 
@@ -325,6 +326,7 @@ ggplot(data = merge(Merged_ProctransHumDev, within(LS_Top15, rm("SWLSMean", "HDI
   ggtitle("Top 15 Countries of LS Procrastination Mean Scale") + 
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   theme(plot.title = element_text(hjust = 0.5)) + ylim(0,5)
+
 ## 6. Writing Final data to CSV
 
 ### Write the Human Development Data to CSV
@@ -343,7 +345,7 @@ write.table(DP_Top15, Top_15_DP,row.names=F, col.names = T, sep = ",")
 Top_15_GP <- paste(DataDir, "Top_15_GP_Cntry.csv", sep = "/")
 write.table(GP_Top15, Top_15_GP,row.names=F, col.names = T, sep = ",")
 
-# Remove Unused Environment Variables
+Remove Unused Environment Variables
 rm(Total_HumDev, Merged_ProctransHumDev, DP_Top15, GP_Top15, LS_Top15, GP_DP_Common_Cntry, 
    Cnt_By_CntryResdnc, Cnt_By_Curr_Occupation, Cnt_By_Gender, Cnt_By_WorkStatus, ProcTrans,
    ProcrastinationData, CleanInputData_w_HDI_File, HumDevDataFile, Top_15_DP, Top_15_GP)
