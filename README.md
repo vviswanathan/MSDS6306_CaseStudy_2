@@ -43,27 +43,30 @@ Procrastination.csv	Code for 3c and 4a
 * Type: Comma-separated value file
 * Dimensions: 4162 observations x 19 variables
 
-### Variable Information: 
+### Variable Information, and how each variable was cleaned up:
+* Rule of thumb: we made Numeric type columns missing values a "0", and Character type columns blank or "NA" values labeled "Missing".
+* All columns are proper data types.
 
-*Age
-*Gender
-*Kids
-*Edu (Education)
-*Work Status
-*Annual Income
-*Current Occupation
-*How long have you held this position? Years: Number of years in this job
-*How long have you helpd this position? Months: Number of months in this job
-*Community: Size of Community
-*Country of Residence: 
-*Marital Status
-*Number of Sons / Number of Daughters
-*All variables starting DP
-*All variables starting AIP
-*All variables starting GP
-*All variables starting SWLS
-*Do you consider yourself a procrastinator?
-*Do others consider you a procrastinator?
+* Age: No issues; however client only wanted to see those 18 and over, and so all under the age of 18 were removed.
+* Gender: No issues
+* Kids: No issues
+* Edu (Education): No issues
+* Work Status: No issues
+* Annual Income: If Annual Income was "Missing" or "NA", we changed to "-0.01", so as to keep the column type Numeric.
+* Current Occupation: There were too many observations, and so these were paired down into Industry and Title categories. If the answer was "please specify" or "0" it was replaced with "Missing".
+* How long have you held this position? Years: Number of years in this job: If answer was a log number, we changed to integar. There were 224 observations to clean up with that issue. Also there were 42 that answered with "999", which is impractical, and so these observations were changed to "NA".
+* How long have you helpd this position? Months: Number of months in this job: No issues.
+* Community: Size of Community: 
+* Country of Residence: Responses of "0" that were changed to "Missing".
+* Marital Status: No issues
+* Number of Sons: Represented with a number; however 274 showed up as Female, and 613 showed up as Male. This needed to be changed from Male to "1" and Female to "2".
+* Number of Daughters: No issues.
+* All variables starting DP (scale 1-5): No issues.
+* All variables starting AIP (scale 1-5): No issues.
+* All variables starting GP (scale 1-5): No issues.
+* All variables starting SWLS (scale 1-5): No issues.
+* Do you consider yourself a procrastinator (Yes or No)?
+* Do others consider you a procrastinator (Yes or No)?
 
 ### Miscellaneous Infomation:
 * Definition of Decisional Procrastination (DP): Decisional Procrastination distinguishes between adaptive and non-adaptive patterns of coping with challenge. One of the non-adaptive patterns is defensive avoidance, which arises when any alternative available is unsatisfactory or risky and the decision-maker does not hope to find a better solution. The individual then may try to escape from making a decision by procrastinating. Decisional Procrastination Scale (DPS) was developed within this framework of decision-making research. As implied by the name, this kind of procrastination means to put off making a decision within some specific time frame. The DP is composed of items such that respondents express an opinion on a 5-point scale (1 = strongly disagree; 5 = strongly agree).
