@@ -78,7 +78,8 @@ dim(ProcrastinationData)
 ## 3. Cleaning the Data
 ##### *NOTE: The Procrastination Data csv had a lot of manipulation in it, and can be found in the Procrastination.csv CODEBOOK*
 
-### After Scraping the Data from ##### https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries:
+### After Scraping the Data from
+##### https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries:
 *Need to put in a format from 8 table to 1 table displaying Country, and HDI score (2016 Estimates for 2015). We only pulled data from the section titled "Complete List of Countries".*
 
 *Scrape Data from Wikipedia: List of Countries By Human Development Index*
