@@ -59,13 +59,13 @@ The purpose/objective of this project came from an engagement between the client
 ## Datasets  
 The following datasets are taken from data collected by Qualtrics on Procrastination as well as data scraped from public domain on the Human Development Index.  
 
-### This data folder contains the following:			
+### The Data folder contains the following:			
 
 **1. Original Procrastination.csv -** a data frame collected from 4162 participants in a study on Procrastination based on 1-5 ranking scores of the DP, AIP, GP, SWLS (all described below).
 
 **2. HumanDevelopment.csv	-** Scraped: http://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries - This is a list of all the countries by the Human Development Index as included in a United Nations Development Programme's Human Development Report. The latest report was released on 21 March 2017 and compiled on the basis of estimates for 2015.
 
-  **+2a.** CleanedInput_w_HDI.csv - The HDI data 
+  **2a.** CleanedInput_w_HDI.csv - The HDI data 
 
 **3.** Top 15 DP Countries (Top_15_DP_Cntry.csv)
 
