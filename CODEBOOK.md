@@ -86,114 +86,110 @@ PresenatationDir <- paste(BaseDir,"Presentation", sep = "/")```
 ### Manipulate each section of Very High Humand Development, High Human Development, Medium Human Development, and Low Human Development.
 *We placed each into a dataframe, removed unnecessary rows and columns. We renamed the columns to make sense for our project: "Rank", "Country", and "HDI", and lastly removed any unused enviornment variables.*
 
-```Very High Human Development
-VHighHumDev <- HumDevUrl %>%
+Very High Human Development
+```VHighHumDev <- HumDevUrl %>%
   read_html() %>%
   html_nodes(xpath='//*[@id="mw-content-text"]/div/div[5]/table') %>%
-  html_table(fill = T)
+  html_table(fill = T)```
 
-VHighHumDev <- data.frame(VHighHumDev[[1]])
+```VHighHumDev <- data.frame(VHighHumDev[[1]])```
 
 Remove Unnecessary Rows
-VHighHumDev_1Head <- VHighHumDev[-c(1,2,3,30,31), ]
+```VHighHumDev_1Head <- VHighHumDev[-c(1,2,3,30,31), ]```
 
 Remove Unnecessary Columns
-VHighHumDev[2] <- list(NULL)
-VHighHumDev_Clean <- VHighHumDev_1Head[,c(1,3,4)]
+```VHighHumDev[2] <- list(NULL)
+VHighHumDev_Clean <- VHighHumDev_1Head[,c(1,3,4)]```
 
 Rename Columns
-VHighHumDev <- rename(VHighHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
-
+```VHighHumDev <- rename(VHighHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
 VHighHumDev$HumDev_Categ <- "VHigh"
-
-VHighHumDev[,"HDI"] <- as.numeric(VHighHumDev[,"HDI"])
+VHighHumDev[,"HDI"] <- as.numeric(VHighHumDev[,"HDI"])```
 
 Remove Unused Environment Variables
-rm(VHighHumDev_1Head, VHighHumDev_Clean)
+```rm(VHighHumDev_1Head, VHighHumDev_Clean)```
 
 High Human Development
-HighHumDev <- HumDevUrl %>%
+```HighHumDev <- HumDevUrl %>%
   read_html() %>%
   html_nodes(xpath='//*[@id="mw-content-text"]/div/div[6]/table') %>%
-  html_table(fill = T)
+  html_table(fill = T)```
 
-HighHumDev <- data.frame(HighHumDev[[1]])
+```HighHumDev <- data.frame(HighHumDev[[1]])```
 
 Remove Unnecessary Rows
-HighHumDev_1Head <- HighHumDev[-c(1,2,3,32,33), ]
+```HighHumDev_1Head <- HighHumDev[-c(1,2,3,32,33), ]```
 
 Remove Unnecessary Columns
-HighHumDev[2] <- list(NULL)
-HighHumDev_Clean <- HighHumDev_1Head[,c(1,3,4)]
+```HighHumDev[2] <- list(NULL)
+HighHumDev_Clean <- HighHumDev_1Head[,c(1,3,4)]```
 
 Rename Columns
-HighHumDev <- rename(HighHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
-
+```HighHumDev <- rename(HighHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
 HighHumDev$HumDev_Categ <- "High"
-
-HighHumDev[,"HDI"] <- as.numeric(HighHumDev[,"HDI"])
+HighHumDev[,"HDI"] <- as.numeric(HighHumDev[,"HDI"])```
 
 Remove Unused Environment Variables
-rm(HighHumDev_1Head, HighHumDev_Clean)
+```rm(HighHumDev_1Head, HighHumDev_Clean)```
 
 Medium Human Development
-MedHumDev <- HumDevUrl %>%
+```MedHumDev <- HumDevUrl %>%
   read_html() %>%
   html_nodes(xpath='//*[@id="mw-content-text"]/div/div[7]/table') %>%
-  html_table(fill = T)
+  html_table(fill = T)```
 
-MedHumDev <- data.frame(MedHumDev[[1]])
+```MedHumDev <- data.frame(MedHumDev[[1]])```
 
 Remove Unnecessary Rows
-MedHumDev_1Head <- MedHumDev[-c(1,2,3,24,25), ]
+```MedHumDev_1Head <- MedHumDev[-c(1,2,3,24,25), ]```
 
 Remove Unnecessary Columns
-MedHumDev[2] <- list(NULL)
-MedHumDev_Clean <- MedHumDev_1Head[,c(1,3,4)]
+```MedHumDev[2] <- list(NULL)
+MedHumDev_Clean <- MedHumDev_1Head[,c(1,3,4)]```
 
 Rename Columns
-MedHumDev <- rename(MedHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
+```MedHumDev <- rename(MedHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))```
 
-MedHumDev$HumDev_Categ <- "Med"
+```MedHumDev$HumDev_Categ <- "Med"```
 
-MedHumDev[,"HDI"] <- as.numeric(MedHumDev[,"HDI"])
+```MedHumDev[,"HDI"] <- as.numeric(MedHumDev[,"HDI"])```
 
 Remove Unused Environment Variables
-rm(MedHumDev_1Head, MedHumDev_Clean)
+```rm(MedHumDev_1Head, MedHumDev_Clean)```
 
 Low Human Development
-LowHumDev <- HumDevUrl %>%
+```LowHumDev <- HumDevUrl %>%
   read_html() %>%
   html_nodes(xpath='//*[@id="mw-content-text"]/div/div[8]/table') %>%
-  html_table(fill = T)
+  html_table(fill = T)```
 
-LowHumDev <- data.frame(LowHumDev[[1]])
+```LowHumDev <- data.frame(LowHumDev[[1]])```
 
 Remove Unnecessary Rows
-LowHumDev_1Head <- LowHumDev[-c(1,2,3,25,26), ]
+```LowHumDev_1Head <- LowHumDev[-c(1,2,3,25,26), ]```
 
 Remove Unnecessary Columns
-LowHumDev[2] <- list(NULL)
-LowHumDev_Clean <- LowHumDev_1Head[,c(1,3,4)]
+```LowHumDev[2] <- list(NULL)
+LowHumDev_Clean <- LowHumDev_1Head[,c(1,3,4)]```
 
 Rename Columns
-LowHumDev <- rename(LowHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
+```LowHumDev <- rename(LowHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))```
 
-LowHumDev$HumDev_Categ <- "Low"
+```LowHumDev$HumDev_Categ <- "Low"```
 
-LowHumDev[,"HDI"] <- as.numeric(LowHumDev[,"HDI"])
+```LowHumDev[,"HDI"] <- as.numeric(LowHumDev[,"HDI"])```
 
 Remove Unused Environment Variables
-rm(LowHumDev_1Head, LowHumDev_Clean)
+```rm(LowHumDev_1Head, LowHumDev_Clean)```
 
 ### Combimed Four Dataframes, into One Dataframe.  
 *Combine the Four Dataframes*  
   
-Total_HumDev <- rbind(VHighHumDev, HighHumDev, MedHumDev, LowHumDev)  
-Total_HumDev <- within(Total_HumDev, rm("Rank"))  
+```Total_HumDev <- rbind(VHighHumDev, HighHumDev, MedHumDev, LowHumDev)```  
+```Total_HumDev <- within(Total_HumDev, rm("Rank"))```  
   
 Remove Unused Environment Variables  
-rm(VHighHumDev, HighHumDev, MedHumDev, LowHumDev)```  
+```rm(VHighHumDev, HighHumDev, MedHumDev, LowHumDev)```  
   
 ## 4. Merging the data  
 ### Merge Dataframe to the Country of Residence Column of Procrastination.csv  
@@ -220,13 +216,13 @@ Cnt_By_Gender
 Cnt_By_WorkStatus <- as.data.frame(table(Merged_ProctransHumDev$WorkStatus))
 Cnt_By_WorkStatus
 Cnt_By_Curr_Occupation <- as.data.frame(table(Merged_ProctransHumDev$CurrOccption))
-Cnt_By_Curr_Occupation
+Cnt_By_Curr_Occupation```
 
-Cnt_By_CntryResdnc <- Merged_ProctransHumDev %>%
+```Cnt_By_CntryResdnc <- Merged_ProctransHumDev %>%
   group_by(CntryResdnc) %>% 
   do(data.frame(nrow=nrow(.))) %>%
-  arrange(desc(nrow))
-Cnt_By_CntryResdnc```
+  arrange(desc(nrow))```
+```Cnt_By_CntryResdnc```
   
 ### List of Top 15 Countries on the DP Scale:  
 ```Merged_ProctransHumDev %>%
@@ -234,12 +230,12 @@ Cnt_By_CntryResdnc```
   do(data.frame(nrow=nrow(.))) %>%
   arrange(desc(nrow)) %>%
   filter((CnsdrSlfProc == "yes" & OthCsndrProc == "yes") 
-         | (CnsdrSlfProc == "no" & OthCsndrProc == "no"))
+         | (CnsdrSlfProc == "no" & OthCsndrProc == "no"))```
 
-DP_Top15 <- aggregate(DPMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) %>%
+```DP_Top15 <- aggregate(DPMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) %>%
   arrange(desc(DPMean)) %>%
-  head(n=15)
-DP_Top15```
+  head(n=15)```
+```DP_Top15```
   
 ### Top 15 Countries on the DP Scale, GGPlot:  
 ```ggplot(data = merge(Merged_ProctransHumDev, within(DP_Top15, rm("DPMean", "HDI")), by = "CntryResdnc")) +
@@ -270,17 +266,17 @@ theme(plot.title = element_text(hjust = 0.5)) + ylim(0,5)```
 ```GP_DP_Common_Cntry <- as.data.frame(intersect(DP_Top15$CntryResdnc, GP_Top15$CntryResdnc))
 dim(as.data.frame(GP_DP_Common_Cntry))
 names(GP_DP_Common_Cntry) <- c("CommonCntry")
-GP_DP_Common_Cntry
+GP_DP_Common_Cntry```
 
-plot(Merged_ProctransHumDev$Age, Merged_ProctransHumDev$AnnualIncome, 
+```plot(Merged_ProctransHumDev$Age, Merged_ProctransHumDev$AnnualIncome, 
      xlab="Age", ylab="Annual Income", 
      main="Age vs Annual Income", pch=2, cex.main=1.5, 
-     frame.plot=FALSE, col=ifelse(Merged_ProctransHumDev$Gender=="Male", "red", "blue"))
+     frame.plot=FALSE, col=ifelse(Merged_ProctransHumDev$Gender=="Male", "red", "blue"))```
 
-legend("topleft", pch=c(2,2), col=c("red", "blue"), 
-       c("Male", "Female"), bty="o",  box.col="darkgreen", cex=.8)
+```legend("topleft", pch=c(2,2), col=c("red", "blue"), 
+       c("Male", "Female"), bty="o",  box.col="darkgreen", cex=.8)```
 
-ggplot(Merged_ProctransHumDev, aes(x=Age,y=AnnualIncome,color=Gender)) + 
+```ggplot(Merged_ProctransHumDev, aes(x=Age,y=AnnualIncome,color=Gender)) + 
   geom_point()+ geom_smooth(method = lm) + 
   xlab("Age") + ylab("Annual Income") + 
   ggtitle("Age vs Annual Income plot for all countries") +
@@ -298,9 +294,9 @@ ggplot(Merged_ProctransHumDev, aes(x=Age,y=AnnualIncome,color=Gender)) +
   ```plot(Merged_ProctransHumDev$SWLSMean, Merged_ProctransHumDev$HDI, 
      xlab="SWLSMean", ylab="HDI", ylim = c(0,1),
      main="SWLSMean vs HDI", pch=2, cex.main=1.5, 
-     frame.plot=FALSE, col=ifelse(Merged_ProctransHumDev$Gender=="Male", "red", "blue"))
+     frame.plot=FALSE, col=ifelse(Merged_ProctransHumDev$Gender=="Male", "red", "blue"))```
   
-ggplot(Merged_ProctransHumDev, aes(x=SWLSMean,y=HDI,color=Gender)) + 
+```ggplot(Merged_ProctransHumDev, aes(x=SWLSMean,y=HDI,color=Gender)) + 
   geom_point()+ geom_smooth(method = lm) + 
   xlab("HDI Category") + ylab("SWLSMean") + 
   ggtitle("Scatterplot of Mean Life Satisfaction by \nHuman Development Index Category by Gender") + 
@@ -319,9 +315,9 @@ ggplot(Merged_ProctransHumDev, aes(x=SWLSMean,y=HDI,color=Gender)) +
 ### "Top 15 Countries of LS Procrastination Mean Scale":  
 ```LS_Top15 <- aggregate(SWLSMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) %>%
   arrange(desc(SWLSMean)) %>%
-  head(n=15)
+  head(n=15)```
 
-ggplot(data = merge(Merged_ProctransHumDev, within(LS_Top15, rm("SWLSMean", "HDI")), by = "CntryResdnc")) +
+```ggplot(data = merge(Merged_ProctransHumDev, within(LS_Top15, rm("SWLSMean", "HDI")), by = "CntryResdnc")) +
   geom_bar(aes(x=reorder(CntryResdnc,-SWLSMean,mean), SWLSMean, fill = HumDev_Categ),
            stat = "summary", fun.y = "mean", show.legend = T) + 
   xlab("Country") + ylab("SWLSMean") + 
@@ -333,27 +329,27 @@ ggplot(data = merge(Merged_ProctransHumDev, within(LS_Top15, rm("SWLSMean", "HDI
   
 ### Write the Human Development Data to CSV 
 *HDI Table*  
-```HumDevDataFile <- paste(DataDir, "HumanDevelopment.csv", sep = "/")
-write.table(Total_HumDev,HumDevDataFile,row.names=F, col.names = T, sep = ",")```
+```HumDevDataFile <- paste(DataDir, "HumanDevelopment.csv", sep = "/")```
+```write.table(Total_HumDev,HumDevDataFile,row.names=F, col.names = T, sep = ",")```
   
 ### Write the Cleaned Input Data with HDI to CSV  
 *Tidied version of theoriginal input as output in repository, with merged HDI data*  
-```CleanInputData_w_HDI_File <- paste(DataDir, "CleanedInput_w_HDI.csv", sep = "/")
-write.table(Merged_ProctransHumDev,CleanInputData_w_HDI_File,row.names=F, col.names = T, sep = ",")```
+```CleanInputData_w_HDI_File <- paste(DataDir, "CleanedInput_w_HDI.csv", sep = "/")```
+```write.table(Merged_ProctransHumDev,CleanInputData_w_HDI_File,row.names=F, col.names = T, sep = ",")```
   
 ### Write the Human Development Data to CSV  
 *Top 15 DP HDI Countries*  
-```Top_15_DP <- paste(DataDir, "Top_15_DP_Cntry.csv", sep = "/")
-write.table(DP_Top15, Top_15_DP,row.names=F, col.names = T, sep = ",")```
+```Top_15_DP <- paste(DataDir, "Top_15_DP_Cntry.csv", sep = "/")```
+```write.table(DP_Top15, Top_15_DP,row.names=F, col.names = T, sep = ",")```
   
 ### Write the Cleaned Input Data with HDI to CSV    
 *Top 15 GP HDI Countries*  
-```Top_15_GP <- paste(DataDir, "Top_15_GP_Cntry.csv", sep = "/")
-write.table(GP_Top15, Top_15_GP,row.names=F, col.names = T, sep = ",")```
+```Top_15_GP <- paste(DataDir, "Top_15_GP_Cntry.csv", sep = "/")```
+```write.table(GP_Top15, Top_15_GP,row.names=F, col.names = T, sep = ",")```
   
 Remove Unused Environment Variables  
 ```rm(Total_HumDev, Merged_ProctransHumDev, DP_Top15, GP_Top15, LS_Top15, GP_DP_Common_Cntry, 
    Cnt_By_CntryResdnc, Cnt_By_Curr_Occupation, Cnt_By_Gender, Cnt_By_WorkStatus, ProcTrans,
-   ProcrastinationData, CleanInputData_w_HDI_File, HumDevDataFile, Top_15_DP, Top_15_GP)
+   ProcrastinationData, CleanInputData_w_HDI_File, HumDevDataFile, Top_15_DP, Top_15_GP)```
 
-rm(BaseDir, CodeDir, DataDir, HumDevUrl, PresenatationDir, ProcrastinationDataFile)```
+```rm(BaseDir, CodeDir, DataDir, HumDevUrl, PresenatationDir, ProcrastinationDataFile)```
