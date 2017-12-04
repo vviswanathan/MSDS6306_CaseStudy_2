@@ -1,6 +1,6 @@
 # CodeBook
 
-## This document describes the code inside MSDS6306_CaseStudy_2.R 
+## This document describes the code inside ```MSDS6306_CaseStudy_2.R``` 
 
 ## We have split the code, by comments, into 6 sections: 
 1. Help Functions/Constants 
