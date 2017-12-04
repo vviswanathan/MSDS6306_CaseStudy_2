@@ -12,30 +12,30 @@ Output:
     
 Contact Information: Vivek, vviswanathan@mail.smu.edu and Megan, mdhodges@smu.edu
 
-SessionInfo:
-Megan's System:
-R version 3.4.1 (2017-06-30)
-Platform: x86_64-apple-darwin13.4.0 (64-bit)
-Running under: macOS High Sierra 10.13.1
-
-Vivek's System:
-R version 3.4.1 (2017-06-30)
-Platform: x86_64-w64-mingw32/x64 (64-bit)
-Running under: Windows >= 8 x64 (build 9200)  
+SessionInfo: 
+Megan's System: 
+R version 3.4.1 (2017-06-30) 
+Platform: x86_64-apple-darwin13.4.0 (64-bit) 
+Running under: macOS High Sierra 10.13.1 
+ 
+Vivek's System: 
+R version 3.4.1 (2017-06-30) 
+Platform: x86_64-w64-mingw32/x64 (64-bit) 
+Running under: Windows >= 8 x64 (build 9200)   
 
 Packages Utilized:
-library(repmis)
-library(dplyr)
-library(tidyverse)
-library(tidyr)
-library(ggplot2)
-library(sqldf)
-library(kimisc)
-library(XML)
-library(RCurl)
-library(rvest)
-library(plyr)
-library(pastecs)
+library(repmis) 
+library(dplyr) 
+library(tidyverse) 
+library(tidyr) 
+library(ggplot2) 
+library(sqldf) 
+library(kimisc) 
+library(XML) 
+library(RCurl) 
+library(rvest) 
+library(plyr) 
+library(pastecs) 
  
 ---
 
@@ -129,18 +129,18 @@ The following datasets are taken from data collected by Qualtrics on Procrastina
 
 # Conclusion
 
-1a. The Top 15 Nations in Average DP Procrastination Scores:
+1a. The Top 15 Nations in Average DP Procrastination Scores: 
+Brunei, Panama, Qatar, Lithuania, Sri Lanka, Ecuador, Bulgaria, Austria, Slovenia, Uruguay, Finland, Portugal, Dominican Republic, Kazakhstan, and Russia 
+1b. The Top 15 Nations in Average GP Procrastination Scores: 
+Qatar, Panama, Myanmar, Sri Lanka, Poland, Austria, Turkey, Ecuador, France, Malaysia, Slovenia, Uruguay, Iceland, Portugal, and Sweden 
+1c: Countries that made both Top 15 List: 
+Qatar, Panama, Sri Lanka, Austria, Ecuador, Slovenia, Uruguay, Portugal 
+2. The correlation between the counties on both top 15 lists between Age and Income: 
+Is there a relationship between Age and Income? 
 
-1b. The Top 15 Nations in Average GP Procrastination Scores:
-
-1c: Countries that made both Top 15 List:
-
-2. The correlation between the counties on both top 15 lists between Age and Income:
-Is there a relationship between Age and Income?
-
-3. And the correlation/relationship between the countries on both top 15 and Life Satisfaction and Human Development (HDI):
-Is there a discernible relationship between SWLS and HDI?
-Yes, there is a discernible relationship and trend between Life Satisfaction (SWLS) and Human Development (HDI). The greater the HDI the more life satisfaction there is. Medium and High HDI resulted in approx the same SWLS.
+3. And the correlation/relationship between the countries on both top 15 and Life Satisfaction and Human Development (HDI): 
+Is there a discernible relationship between SWLS and HDI? 
+Yes, there is a discernible relationship and trend between Life Satisfaction (SWLS) and Human Development (HDI). The greater the HDI the more life satisfaction there is. Medium and High HDI resulted in approx the same SWLS. 
 
 ## Sources
 * Human Development Index: Wikipedia: United Nations Development Programme's Human Development Report, "Human Development Report 2016 – "Human Development for Everyone"" (PDF). HDRO (Human Development Report Office) United Nations Development Programme. pp. 198–201. Retrieved 2 September 2017.
