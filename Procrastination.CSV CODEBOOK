@@ -3,14 +3,13 @@
 
 ## We have the main Codebook that contains the below 7 steps; however we have created this separate Codebook for Procrastination.csv because there was a lot of data cleaning that needed to happen with this file.
 
-### We have split the code, by comments, into 7 sections: 
+### We have split the code, by comments, into 6 sections: 
 1. Help Functions/Constants 
 2. Downloading and loading the data 
-3. Cleaning the data 
-4. Merging the data 
-5. Manipulating the data 
-6. Presenting the data graphically 
-7. Writing Final data to CSV 
+3. Cleaning/Manipulating the data 
+4. Merging the data  
+5. Presenting the data graphically 
+6. Writing Final data to CSV 
 
 ## Procrastination.csv Steps to clean:
 
