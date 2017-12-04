@@ -96,8 +96,7 @@ VHighHumDev <- data.frame(VHighHumDev[[1]])
 ```
 
 Remove Unnecessary Rows
-```VHighHumDev_1Head <- VHighHumDev[-c(1,2,3,30,31), ]
-```
+```VHighHumDev_1Head <- VHighHumDev[-c(1,2,3,30,31), ]```
 
 Remove Unnecessary Columns
 ```VHighHumDev[2] <- list(NULL)
