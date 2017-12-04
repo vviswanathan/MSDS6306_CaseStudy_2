@@ -10,21 +10,21 @@
 5. Presenting the data graphically 
 6. Writing Final data to CSV 
 
-## 1. Help Functions/Constants 
-### Install Packages Required 
-if (!require(tidyverse)) install.packages("tidyverse") 
-if (!require(repmis)) install.packages("repmis") 
-if (!require(dplyr)) install.packages("dplyr") 
-if (!require(tidyr)) install.packages("tidyr") 
-if (!require(ggplot2)) install.packages("ggplot2") 
-if (!require(sqldf)) install.packages("sqldf") 
-if (!require(kimisc)) install.packages("kimisc") 
-if (!require(XML)) install.packages("XML") 
-if (!require(RCurl)) install.packages("RCurl") 
-if (!require(rvest)) install.packages("rvest") 
-if (!require(plyr)) install.packages("plyr") 
-if (!require(pastecs)) install.packages("pastecs") 
-
+## 1. Help Functions/Constants  
+### Install Packages Required  
+if (!require(tidyverse)) install.packages("tidyverse")  
+if (!require(repmis)) install.packages("repmis")  
+if (!require(dplyr)) install.packages("dplyr")  
+if (!require(tidyr)) install.packages("tidyr")  
+if (!require(ggplot2)) install.packages("ggplot2")  
+if (!require(sqldf)) install.packages("sqldf")  
+if (!require(kimisc)) install.packages("kimisc")  
+if (!require(XML)) install.packages("XML")  
+if (!require(RCurl)) install.packages("RCurl")  
+if (!require(rvest)) install.packages("rvest")  
+if (!require(plyr)) install.packages("plyr")  
+if (!require(pastecs)) install.packages("pastecs")  
+  
 ### Load Libraries 
 library(repmis)  
 library(dplyr)  
