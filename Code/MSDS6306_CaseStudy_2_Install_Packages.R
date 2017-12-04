@@ -12,4 +12,6 @@ if (!require(RCurl)) install.packages("RCurl")
 if (!require(rvest)) install.packages("rvest")
 if (!require(plyr)) install.packages("plyr")
 if (!require(pastecs)) install.packages("pastecs")
-
+if (!require(yaml)) install.packages("yaml")
+if (!require(devtools)) install.packages("devtools")
+devtools::install_github("rstudio/rmarkdown")
