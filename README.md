@@ -1,4 +1,4 @@
-# Codebook - MSDS6306_CaseStudy_2
+# README.md - MSDS6306_CaseStudy_2
 ---
 Title: "Understanding Top Procrastination Countries based on DP and GP Scores, and how it relates to Age, Income, Life Satisfaction, and Human Development"
 
@@ -136,8 +136,11 @@ The following datasets are taken from data collected by Qualtrics on Procrastina
 1c: Countries that made both Top 15 List:
 
 2. The correlation between the counties on both top 15 lists between Age and Income:
+Is there a relationship between Age and Income?
 
 3. And the correlation/relationship between the countries on both top 15 and Life Satisfaction and Human Development (HDI):
+Is there a discernible relationship between SWLS and HDI?
+Yes, there is a discernible relationship and trend between Life Satisfaction (SWLS) and Human Development (HDI). The greater the HDI the more life satisfaction there is. Medium and High HDI resulted in approx the same SWLS.
 
 ## Sources
 * Human Development Index: Wikipedia: United Nations Development Programme's Human Development Report, "Human Development Report 2016 – "Human Development for Everyone"" (PDF). HDRO (Human Development Report Office) United Nations Development Programme. pp. 198–201. Retrieved 2 September 2017.
