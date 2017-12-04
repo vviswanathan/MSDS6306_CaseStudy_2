@@ -76,6 +76,121 @@ names(ProcrastinationData) <- c("Age", "Gender", "Kids", "Education", "WorkStatu
 ## 3. Cleaning the data
 The Procrastination Data csv had a lot of manipulation in it, and can be found in the Procrastination.csv CODEBOOK
 
+After scraping the data from https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries the data needed a lot of manipulation to get it into a format from 8 table to one table displaying Country, and (2016 Estimates for 2015) HDI score. We only pulled data from the section titled "Complete List of Countries".
+
+#Scrap Data from Wikipedia: List of Countries By Human Development Index
+HumDevUrl <- "https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries"
+
+We then needed to manipulate each section of "Very High Humand Development", "High Human Development", "Medium Human Development", and "Low Human Development". We placed each into a dataframe, removed unnecessary rows and columns. We renamed the columns to make sense for our project: "Rank", "Country", and "HDI", and lastly removed any unused enviornment variables.
+
+#Very High Human Development
+VHighHumDev <- HumDevUrl %>%
+  read_html() %>%
+  html_nodes(xpath='//*[@id="mw-content-text"]/div/div[5]/table') %>%
+  html_table(fill = T)
+
+VHighHumDev <- data.frame(VHighHumDev[[1]])
+
+#Remove Unnecessary Rows
+VHighHumDev_1Head <- VHighHumDev[-c(1,2,3,30,31), ]
+
+#Remove Unnecessary Columns
+VHighHumDev[2] <- list(NULL)
+VHighHumDev_Clean <- VHighHumDev_1Head[,c(1,3,4)]
+
+#Rename Columns
+VHighHumDev <- rename(VHighHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
+
+VHighHumDev$HumDev_Categ <- "VHigh"
+
+VHighHumDev[,"HDI"] <- as.numeric(VHighHumDev[,"HDI"])
+
+# Remove Unused Environment Variables
+rm(VHighHumDev_1Head, VHighHumDev_Clean)
+
+#High Human Development
+HighHumDev <- HumDevUrl %>%
+  read_html() %>%
+  html_nodes(xpath='//*[@id="mw-content-text"]/div/div[6]/table') %>%
+  html_table(fill = T)
+
+HighHumDev <- data.frame(HighHumDev[[1]])
+
+#Remove Unnecessary Rows
+HighHumDev_1Head <- HighHumDev[-c(1,2,3,32,33), ]
+
+#Remove Unnecessary Columns
+HighHumDev[2] <- list(NULL)
+HighHumDev_Clean <- HighHumDev_1Head[,c(1,3,4)]
+
+#Rename Columns
+HighHumDev <- rename(HighHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
+
+HighHumDev$HumDev_Categ <- "High"
+
+HighHumDev[,"HDI"] <- as.numeric(HighHumDev[,"HDI"])
+
+# Remove Unused Environment Variables
+rm(HighHumDev_1Head, HighHumDev_Clean)
+
+#Medium Human Development
+MedHumDev <- HumDevUrl %>%
+  read_html() %>%
+  html_nodes(xpath='//*[@id="mw-content-text"]/div/div[7]/table') %>%
+  html_table(fill = T)
+
+MedHumDev <- data.frame(MedHumDev[[1]])
+
+#Remove Unnecessary Rows
+MedHumDev_1Head <- MedHumDev[-c(1,2,3,24,25), ]
+
+#Remove Unnecessary Columns
+MedHumDev[2] <- list(NULL)
+MedHumDev_Clean <- MedHumDev_1Head[,c(1,3,4)]
+
+#Rename Columns
+MedHumDev <- rename(MedHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
+
+MedHumDev$HumDev_Categ <- "Med"
+
+MedHumDev[,"HDI"] <- as.numeric(MedHumDev[,"HDI"])
+
+# Remove Unused Environment Variables
+rm(MedHumDev_1Head, MedHumDev_Clean)
+
+#Low Human Development
+LowHumDev <- HumDevUrl %>%
+  read_html() %>%
+  html_nodes(xpath='//*[@id="mw-content-text"]/div/div[8]/table') %>%
+  html_table(fill = T)
+
+LowHumDev <- data.frame(LowHumDev[[1]])
+
+#Remove Unnecessary Rows
+LowHumDev_1Head <- LowHumDev[-c(1,2,3,25,26), ]
+
+#Remove Unnecessary Columns
+LowHumDev[2] <- list(NULL)
+LowHumDev_Clean <- LowHumDev_1Head[,c(1,3,4)]
+
+#Rename Columns
+LowHumDev <- rename(LowHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
+
+LowHumDev$HumDev_Categ <- "Low"
+
+LowHumDev[,"HDI"] <- as.numeric(LowHumDev[,"HDI"])
+
+#Remove Unused Environment Variables
+rm(LowHumDev_1Head, LowHumDev_Clean)
+
+We then combimed the four dataframes, into one dataframe.
+#Combine the Four Data Frames
+Total_HumDev <- rbind(VHighHumDev, HighHumDev, MedHumDev, LowHumDev)
+
+Total_HumDev <- within(Total_HumDev, rm("Rank"))
+
+#Remove Unused Environment Variables
+rm(VHighHumDev, HighHumDev, MedHumDev, LowHumDev)
 ## 4. Merging the data
 ## 5. Manipulating the data
 ## 6. Presenting the data graphically
