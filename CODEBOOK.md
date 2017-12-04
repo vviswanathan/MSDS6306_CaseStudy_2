@@ -39,12 +39,12 @@ library(rvest)
 library(plyr)  
 library(pastecs)  
 ``` 
-### Executing from Vivek's System:  
-```BaseDir <- "C:/Vivek/Data_Science/MSDS6306-DoingDataScience/Case_Study_2/MSDS6306_CaseStudy_2/"  
-```  
+### Executing from Vivek's System:
+```BaseDir <- "C:/Vivek/Data_Science/MSDS6306-DoingDataScience/Case_Study_2/MSDS6306_CaseStudy_2/"```
+
 ### Executing from Megan's System:  
-```BaseDir <- "/Users/megandiane/Desktop/DDS_Class/Case_Study_2/MSDS6306_CaseStudy_2"
-```
+```BaseDir <- "/Users/megandiane/Desktop/DDS_Class/Case_Study_2/MSDS6306_CaseStudy_2"```
+
 ### Set Other Working Directories and File Path  
 ```DataDir <- paste(BaseDir,"Data", sep = "/")  
 CodeDir <- paste(BaseDir,"Code", sep = "/")  
@@ -91,21 +91,24 @@ Very High Human Development
 ```VHighHumDev <- HumDevUrl %>%
   read_html() %>%
   html_nodes(xpath='//*[@id="mw-content-text"]/div/div[5]/table') %>%
-  html_table(fill = T)```
+  html_table(fill = T)
 
-```VHighHumDev <- data.frame(VHighHumDev[[1]])```
+VHighHumDev <- data.frame(VHighHumDev[[1]])
+```
 
 Remove Unnecessary Rows
 ```VHighHumDev_1Head <- VHighHumDev[-c(1,2,3,30,31), ]```
 
 Remove Unnecessary Columns
 ```VHighHumDev[2] <- list(NULL)
-VHighHumDev_Clean <- VHighHumDev_1Head[,c(1,3,4)]```
+VHighHumDev_Clean <- VHighHumDev_1Head[,c(1,3,4)]
+```
 
 Rename Columns
 ```VHighHumDev <- rename(VHighHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
 VHighHumDev$HumDev_Categ <- "VHigh"
-VHighHumDev[,"HDI"] <- as.numeric(VHighHumDev[,"HDI"])```
+VHighHumDev[,"HDI"] <- as.numeric(VHighHumDev[,"HDI"])
+```
 
 Remove Unused Environment Variables
 ```rm(VHighHumDev_1Head, VHighHumDev_Clean)```
@@ -114,7 +117,8 @@ High Human Development
 ```HighHumDev <- HumDevUrl %>%
   read_html() %>%
   html_nodes(xpath='//*[@id="mw-content-text"]/div/div[6]/table') %>%
-  html_table(fill = T)```
+  html_table(fill = T)
+  ```
 
 ```HighHumDev <- data.frame(HighHumDev[[1]])```
 
@@ -123,12 +127,14 @@ Remove Unnecessary Rows
 
 Remove Unnecessary Columns
 ```HighHumDev[2] <- list(NULL)
-HighHumDev_Clean <- HighHumDev_1Head[,c(1,3,4)]```
+HighHumDev_Clean <- HighHumDev_1Head[,c(1,3,4)]
+```
 
 Rename Columns
 ```HighHumDev <- rename(HighHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
 HighHumDev$HumDev_Categ <- "High"
-HighHumDev[,"HDI"] <- as.numeric(HighHumDev[,"HDI"])```
+HighHumDev[,"HDI"] <- as.numeric(HighHumDev[,"HDI"])
+```
 
 Remove Unused Environment Variables
 ```rm(HighHumDev_1Head, HighHumDev_Clean)```
@@ -137,7 +143,8 @@ Medium Human Development
 ```MedHumDev <- HumDevUrl %>%
   read_html() %>%
   html_nodes(xpath='//*[@id="mw-content-text"]/div/div[7]/table') %>%
-  html_table(fill = T)```
+  html_table(fill = T)
+  ```
 
 ```MedHumDev <- data.frame(MedHumDev[[1]])```
 
@@ -146,14 +153,14 @@ Remove Unnecessary Rows
 
 Remove Unnecessary Columns
 ```MedHumDev[2] <- list(NULL)
-MedHumDev_Clean <- MedHumDev_1Head[,c(1,3,4)]```
+MedHumDev_Clean <- MedHumDev_1Head[,c(1,3,4)]
+```
 
 Rename Columns
-```MedHumDev <- rename(MedHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))```
-
-```MedHumDev$HumDev_Categ <- "Med"```
-
-```MedHumDev[,"HDI"] <- as.numeric(MedHumDev[,"HDI"])```
+```MedHumDev <- rename(MedHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
+MedHumDev$HumDev_Categ <- "Med"
+MedHumDev[,"HDI"] <- as.numeric(MedHumDev[,"HDI"])
+```
 
 Remove Unused Environment Variables
 ```rm(MedHumDev_1Head, MedHumDev_Clean)```
@@ -162,7 +169,8 @@ Low Human Development
 ```LowHumDev <- HumDevUrl %>%
   read_html() %>%
   html_nodes(xpath='//*[@id="mw-content-text"]/div/div[8]/table') %>%
-  html_table(fill = T)```
+  html_table(fill = T)
+  ```
 
 ```LowHumDev <- data.frame(LowHumDev[[1]])```
 
@@ -171,14 +179,14 @@ Remove Unnecessary Rows
 
 Remove Unnecessary Columns
 ```LowHumDev[2] <- list(NULL)
-LowHumDev_Clean <- LowHumDev_1Head[,c(1,3,4)]```
+LowHumDev_Clean <- LowHumDev_1Head[,c(1,3,4)]
+```
 
 Rename Columns
-```LowHumDev <- rename(LowHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))```
-
-```LowHumDev$HumDev_Categ <- "Low"```
-
-```LowHumDev[,"HDI"] <- as.numeric(LowHumDev[,"HDI"])```
+```LowHumDev <- rename(LowHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
+LowHumDev$HumDev_Categ <- "Low"
+LowHumDev[,"HDI"] <- as.numeric(LowHumDev[,"HDI"])
+```
 
 Remove Unused Environment Variables
 ```rm(LowHumDev_1Head, LowHumDev_Clean)```
@@ -203,7 +211,8 @@ Merged_ProctransHumDev_DescripStats <- Merged_ProctransHumDev[c("Age", "AnnualIn
 options(scipen=100)
 options(digits=2)
 ProctransHumDev_DescripStats <- stat.desc(Merged_ProctransHumDev_DescripStats)
-ProctransHumDev_DescripStats"GPMean", "SWLSMean")]```  
+ProctransHumDev_DescripStats"GPMean", "SWLSMean")]
+```
   
 ## 5. Presenting the Data Graphically  
 ### Histogram of the DP Mean:  
@@ -217,13 +226,14 @@ Cnt_By_Gender
 Cnt_By_WorkStatus <- as.data.frame(table(Merged_ProctransHumDev$WorkStatus))
 Cnt_By_WorkStatus
 Cnt_By_Curr_Occupation <- as.data.frame(table(Merged_ProctransHumDev$CurrOccption))
-Cnt_By_Curr_Occupation```
+Cnt_By_Curr_Occupation
 
-```Cnt_By_CntryResdnc <- Merged_ProctransHumDev %>%
+Cnt_By_CntryResdnc <- Merged_ProctransHumDev %>%
   group_by(CntryResdnc) %>% 
   do(data.frame(nrow=nrow(.))) %>%
-  arrange(desc(nrow))```
-```Cnt_By_CntryResdnc```
+  arrange(desc(nrow))
+Cnt_By_CntryResdnc
+```
   
 ### List of Top 15 Countries on the DP Scale:  
 ```Merged_ProctransHumDev %>%
@@ -231,12 +241,13 @@ Cnt_By_Curr_Occupation```
   do(data.frame(nrow=nrow(.))) %>%
   arrange(desc(nrow)) %>%
   filter((CnsdrSlfProc == "yes" & OthCsndrProc == "yes") 
-         | (CnsdrSlfProc == "no" & OthCsndrProc == "no"))```
+         | (CnsdrSlfProc == "no" & OthCsndrProc == "no"))
 
-```DP_Top15 <- aggregate(DPMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) %>%
+DP_Top15 <- aggregate(DPMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) %>%
   arrange(desc(DPMean)) %>%
-  head(n=15)```
-```DP_Top15```
+  head(n=15)
+DP_Top15
+```
   
 ### Top 15 Countries on the DP Scale, GGPlot:  
 ```ggplot(data = merge(Merged_ProctransHumDev, within(DP_Top15, rm("DPMean", "HDI")), by = "CntryResdnc")) +
@@ -245,12 +256,14 @@ Cnt_By_Curr_Occupation```
   xlab("Country") + ylab("DPMean") + 
   ggtitle("Top 15 Countries of DP Procrastination Mean Scale") + 
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  theme(plot.title = element_text(hjust = 0.5))```
+  theme(plot.title = element_text(hjust = 0.5))
+  ```
   
 ### List of Top 15 Countries on the GP Scale:  
 ```GP_Top15 <- aggregate(GPMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) %>%
 arrange(desc(GPMean)) %>%
-head(n=15)```
+head(n=15)
+```
   
 ### Top 15 Countries on the GP Scale, GGPlot:  
 ```ggplot(data = merge(Merged_ProctransHumDev, within(GP_Top15, rm("GPMean", "HDI")), by = "CntryResdnc")) +
@@ -259,7 +272,8 @@ geom_bar(aes(x=reorder(CntryResdnc,-GPMean,mean), GPMean, fill = HumDev_Categ),
 xlab("Country") + ylab("GPMean") + 
 ggtitle("Top 15 Countries of GP Procrastination Mean Scale") + 
 theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-theme(plot.title = element_text(hjust = 0.5)) + ylim(0,5)```
+theme(plot.title = element_text(hjust = 0.5)) + ylim(0,5)
+```
   
 ### Created List of those Countries on both list, and plotted:  
   
@@ -267,21 +281,23 @@ theme(plot.title = element_text(hjust = 0.5)) + ylim(0,5)```
 ```GP_DP_Common_Cntry <- as.data.frame(intersect(DP_Top15$CntryResdnc, GP_Top15$CntryResdnc))
 dim(as.data.frame(GP_DP_Common_Cntry))
 names(GP_DP_Common_Cntry) <- c("CommonCntry")
-GP_DP_Common_Cntry```
+GP_DP_Common_Cntry
+```
 
 ```plot(Merged_ProctransHumDev$Age, Merged_ProctransHumDev$AnnualIncome, 
      xlab="Age", ylab="Annual Income", 
      main="Age vs Annual Income", pch=2, cex.main=1.5, 
-     frame.plot=FALSE, col=ifelse(Merged_ProctransHumDev$Gender=="Male", "red", "blue"))```
+     frame.plot=FALSE, col=ifelse(Merged_ProctransHumDev$Gender=="Male", "red", "blue"))
 
-```legend("topleft", pch=c(2,2), col=c("red", "blue"), 
-       c("Male", "Female"), bty="o",  box.col="darkgreen", cex=.8)```
+legend("topleft", pch=c(2,2), col=c("red", "blue"), 
+       c("Male", "Female"), bty="o",  box.col="darkgreen", cex=.8)
 
-```ggplot(Merged_ProctransHumDev, aes(x=Age,y=AnnualIncome,color=Gender)) + 
+ggplot(Merged_ProctransHumDev, aes(x=Age,y=AnnualIncome,color=Gender)) + 
   geom_point()+ geom_smooth(method = lm) + 
   xlab("Age") + ylab("Annual Income") + 
   ggtitle("Age vs Annual Income plot for all countries") +
-  theme(plot.title = element_text(hjust = 0.5))```
+  theme(plot.title = element_text(hjust = 0.5))
+  ```
   
 ### "Age vs Annual Income Plot for the 8 Common Countries of DP and GP":  
 ```ggplot(data = merge(Merged_ProctransHumDev, GP_DP_Common_Cntry, x.by = "CntryResdnc", y.by = "CommonCntry")) +
@@ -289,20 +305,22 @@ GP_DP_Common_Cntry```
   geom_point()+ geom_smooth(method = lm) + 
   xlab("Age") + ylab("Annual Income") + 
   ggtitle("Age vs Annual Income plot for the 8 countries \ncommon between Top 15 DP and GP countries") +
-  theme(plot.title = element_text(hjust = 0.5))```
+  theme(plot.title = element_text(hjust = 0.5))
+  ```
   
 ### "Mean Life Satisfaction by Humand Development Index (HDI) by Gender":  
   ```plot(Merged_ProctransHumDev$SWLSMean, Merged_ProctransHumDev$HDI, 
      xlab="SWLSMean", ylab="HDI", ylim = c(0,1),
      main="SWLSMean vs HDI", pch=2, cex.main=1.5, 
-     frame.plot=FALSE, col=ifelse(Merged_ProctransHumDev$Gender=="Male", "red", "blue"))```
+     frame.plot=FALSE, col=ifelse(Merged_ProctransHumDev$Gender=="Male", "red", "blue"))
   
-```ggplot(Merged_ProctransHumDev, aes(x=SWLSMean,y=HDI,color=Gender)) + 
+ggplot(Merged_ProctransHumDev, aes(x=SWLSMean,y=HDI,color=Gender)) + 
   geom_point()+ geom_smooth(method = lm) + 
   xlab("HDI Category") + ylab("SWLSMean") + 
   ggtitle("Scatterplot of Mean Life Satisfaction by \nHuman Development Index Category by Gender") + 
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  theme(plot.title = element_text(hjust = 0.5))```
+  theme(plot.title = element_text(hjust = 0.5))
+  ```
   
 ### "Mean Life Satisfaction by HDI":  
 ```ggplot(Merged_ProctransHumDev) +
@@ -311,20 +329,22 @@ GP_DP_Common_Cntry```
   xlab("HDI Category") + ylab("SWLSMean") + 
   ggtitle("Bar Chart of Mean Life Satisfaction by \nHuman Development Index Category") + 
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  theme(plot.title = element_text(hjust = 0.5))```
+  theme(plot.title = element_text(hjust = 0.5))
+  ```
   
 ### "Top 15 Countries of LS Procrastination Mean Scale":  
 ```LS_Top15 <- aggregate(SWLSMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) %>%
   arrange(desc(SWLSMean)) %>%
-  head(n=15)```
+  head(n=15)
 
-```ggplot(data = merge(Merged_ProctransHumDev, within(LS_Top15, rm("SWLSMean", "HDI")), by = "CntryResdnc")) +
+ggplot(data = merge(Merged_ProctransHumDev, within(LS_Top15, rm("SWLSMean", "HDI")), by = "CntryResdnc")) +
   geom_bar(aes(x=reorder(CntryResdnc,-SWLSMean,mean), SWLSMean, fill = HumDev_Categ),
            stat = "summary", fun.y = "mean", show.legend = T) + 
   xlab("Country") + ylab("SWLSMean") + 
   ggtitle("Top 15 Countries of LS Procrastination Mean Scale") + 
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  theme(plot.title = element_text(hjust = 0.5)) + ylim(0,5)```
+  theme(plot.title = element_text(hjust = 0.5)) + ylim(0,5)
+  ```
 
 ## 6. Writing Final data to CSV  
   
@@ -351,6 +371,7 @@ GP_DP_Common_Cntry```
 Remove Unused Environment Variables  
 ```rm(Total_HumDev, Merged_ProctransHumDev, DP_Top15, GP_Top15, LS_Top15, GP_DP_Common_Cntry, 
    Cnt_By_CntryResdnc, Cnt_By_Curr_Occupation, Cnt_By_Gender, Cnt_By_WorkStatus, ProcTrans,
-   ProcrastinationData, CleanInputData_w_HDI_File, HumDevDataFile, Top_15_DP, Top_15_GP)```
+   ProcrastinationData, CleanInputData_w_HDI_File, HumDevDataFile, Top_15_DP, Top_15_GP)
+  ```
 
 ```rm(BaseDir, CodeDir, DataDir, HumDevUrl, PresenatationDir, ProcrastinationDataFile)```
