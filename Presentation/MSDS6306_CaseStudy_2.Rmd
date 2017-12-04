@@ -4,7 +4,7 @@ author: "Megan Hodges and Vivek Viswanathan"
 date: "December 4, 2017"
 output: 
   html_document:
-#    keep_md: true
+    keep_md: true
 ---
 
 ```{r setup, include=FALSE}
@@ -56,8 +56,8 @@ dim(ProcrastinationData)
 
 #### The data file has 4264 rows and 61 columns
 
-# Assign Column Names
-```{r assign_col_names}
+## 2_b Assign Column Names
+```{r 2_b_assign_col_names}
 names(ProcrastinationData) <- c("Age", "Gender", "Kids", "Education", "WorkStatus", 
                                 "AnnualIncome", "CurrOccption", "PostHeldYrs", "PostHeldMths", 
                                 "CmmuntySize", "CntryResdnc", "MaritlStatus", "SonsCnt", 
@@ -80,36 +80,33 @@ names(ProcrastinationData) <- c("Age", "Gender", "Kids", "Education", "WorkStatu
 #### The Column name mapping between the source csv file and the data frame can be found at the below path:
 #### https://github.com/vviswanathan/MSDS6306_CaseStudy_2/blob/master/Presentation/Procrastination_Column_Name_Mapping.csv
 
-```{r}
-
-```
-
-# To Clean up the data from Procrastination.csv we took the "Male" and "Female" that we found under the Column of "Sons" and
-# replaced it with the correct response of 1 = Male and 2 = Female.
-```{r}
+## 2_c_2_e To Clean up the data from Procrastination.csv: 
+####      a. we converted the "Male" and "Female" that we found under the Column of "SonsCnt" and replaced it with the correct response of 1 = Male and 2 = Female. 
+####      b. we rounded the PostHeldYrs to the nearest integer 
+####      c. If the Annual Income was missing, we have converted it to -0.01 instead of 0. This will enable us to separate the true 0 from the missing values. 
+####      d. Converted missing values in all the remaining Numeric fields to 0 
+####      e. Converted missing values in all the Character fields to "Missing" 
+####      f. Converted missing values in all the Factor fields to "Missing" 
+####      g. If Country of Residence had values of 0, translated it to "Missing"
+####      h. If the individual has held a position for more than 100 years, then convert it to 0 
+####      i. If the current occupation is "0" or "Please Specify", then the data is treated as "Missing"
+####      i. Standardized the Current Occupation for the Top 30 Key words.
+####      k. Added columns for the individual’s average decisional procrastination (DP), procrastination behavior (AIP), generalized procrastination (GP), and life satisfaction (SWLS)
+```{r 2_c_d_e_Data_Cleansing}
 levels(ProcrastinationData$SonsCnt) <- c(levels(ProcrastinationData$SonsCnt), "1", "2")
 ProcrastinationData$SonsCnt[ProcrastinationData$SonsCnt=='Male'] <- '1'
 ProcrastinationData$SonsCnt[ProcrastinationData$SonsCnt=='Female'] <- '2'
 
 ProcrastinationData[,"SonsCnt"] <- as.integer(as.character(ProcrastinationData[,"SonsCnt"]))
-ProcrastinationData[,"PostHeldYrs"] <- as.integer(ProcrastinationData[,"PostHeldYrs"])
-```
+ProcrastinationData[,"PostHeldYrs"] <- round(ProcrastinationData[,"PostHeldYrs"])
 
-#To Clean up the data from Procrastination.csv we did the folowing:
-#1. If Annual Income was blank, we filled with a -0.01, that way we could easily differentiate from true data, and keep as a numerical data type 
-#2. If the Country of Residence was filled with a "0", we filled with "Missing", to keep as a character data type
-#3. If Current Occupation was filled with "0" or "please specify", we filled with "Missing", to keep as a character data type
-
-#4. For all of the Procrastination Scales: DP, AIP, GP, and SWLS, the means were taken and columns added to reflect those means.
-#   This Mean data is to be used later on.
-```{r}
 ProcTrans <- ProcrastinationData %>% 
   mutate(AnnualIncome=replace(AnnualIncome, is.na(AnnualIncome), -0.01)) %>%
   mutate_if(is.numeric, funs(ifelse(is.na(.), 0, .))) %>% 
   mutate_if(is.character, funs(ifelse(is.na(.), "Missing", .))) %>% 
   mutate_if(is.factor, funs(ifelse(is.na(.), "Missing", as.character(.)))) %>%
   mutate(CntryResdnc=replace(CntryResdnc, CntryResdnc=="0", "Missing")) %>%
-  mutate(PostHeldYrs=replace(PostHeldYrs, PostHeldYrs==999, NA)) %>%
+  mutate(PostHeldYrs=replace(PostHeldYrs, PostHeldYrs>100, NA)) %>%
   mutate(CurrOccption=replace(CurrOccption, 
                               (CurrOccption=="0" | CurrOccption=="please specify"), 
                               "Missing")) %>%
@@ -130,7 +127,6 @@ ProcTrans <- ProcrastinationData %>%
                                                'G19PshTskTmr', 'G20CmpTskRlx')], na.rm=TRUE)) %>% 
   mutate(SWLSMean=rowMeans(ProcrastinationData[c('S1LfClsI2dl', 'S2LfCndExlnt', 'S3StsfdWtLf', 
                                                  'S4GtImThgsLf', 'S5LvAgChgNth')], na.rm=TRUE))
-
 
 ProcTrans[grep("(teacher)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Teacher"
 ProcTrans[grep("(accountant)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Accountant"
@@ -164,121 +160,38 @@ ProcTrans[grep("(train)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccptio
 ProcTrans[grep("(technician)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Technician"
 ProcTrans[grep("(CTO))", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "CTO"
 ProcTrans[grep("(technici)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Technician"
+```
 
+### 2_d Verify Data Types for the Variables
+```{r 2d_Verify_Data_Types}
 sapply(ProcTrans, class)
 ```
 
-#Scrap Data from Wikipedia: List of Countries By Human Development Index
-```{r}
+### 3_a Extract Human Development Index Tables
+```{r 3a_WebScrapping}
 HumDevUrl <- "https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries"
-```
 
-#Very High Human Development
-```{r}
 VHighHumDev <- HumDevUrl %>%
   read_html() %>%
   html_nodes(xpath='//*[@id="mw-content-text"]/div/div[5]/table') %>%
   html_table(fill = T)
 
 VHighHumDev <- data.frame(VHighHumDev[[1]])
-```
 
-#Remove Unnecessary Rows
-```{r}
-VHighHumDev_1Head <- VHighHumDev[-c(1,2,3,30,31), ]
-
-#Remove Unnecessary Columns
-```{r}
-VHighHumDev[2] <- list(NULL)
-VHighHumDev_Clean <- VHighHumDev_1Head[,c(1,3,4)]
-```
-
-#Rename Columns
-```{r}
-VHighHumDev <- rename(VHighHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
-
-VHighHumDev$HumDev_Categ <- "VHigh"
-
-VHighHumDev[,"HDI"] <- as.numeric(VHighHumDev[,"HDI"])
-```
-
-# Remove Unused Environment Variables
-```{r}
-rm(VHighHumDev_1Head, VHighHumDev_Clean)
-```
-
-#High Human Development
-```{r}
 HighHumDev <- HumDevUrl %>%
   read_html() %>%
   html_nodes(xpath='//*[@id="mw-content-text"]/div/div[6]/table') %>%
   html_table(fill = T)
 
 HighHumDev <- data.frame(HighHumDev[[1]])
-```
 
-#Remove Unnecessary Rows
-```{r}
-HighHumDev_1Head <- HighHumDev[-c(1,2,3,32,33), ]
-```
-
-#Remove Unnecessary Columns
-```{r}
-HighHumDev[2] <- list(NULL)
-HighHumDev_Clean <- HighHumDev_1Head[,c(1,3,4)]
-```
-
-#Rename Columns
-```{r}
-HighHumDev <- rename(HighHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
-
-HighHumDev$HumDev_Categ <- "High"
-
-HighHumDev[,"HDI"] <- as.numeric(HighHumDev[,"HDI"])
-```
-
-# Remove Unused Environment Variables
-```{r}
-rm(HighHumDev_1Head, HighHumDev_Clean)
-```
-
-#Medium Human Development
-```{r}
 MedHumDev <- HumDevUrl %>%
   read_html() %>%
   html_nodes(xpath='//*[@id="mw-content-text"]/div/div[7]/table') %>%
   html_table(fill = T)
 
 MedHumDev <- data.frame(MedHumDev[[1]])
-```
 
-#Remove Unnecessary Rows
-```{r}
-MedHumDev_1Head <- MedHumDev[-c(1,2,3,24,25), ]
-```
-
-#Remove Unnecessary Columns
-```{r}
-MedHumDev[2] <- list(NULL)
-MedHumDev_Clean <- MedHumDev_1Head[,c(1,3,4)]
-```
-
-#Rename Columns
-```{r}
-MedHumDev <- rename(MedHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
-
-MedHumDev$HumDev_Categ <- "Med"
-
-MedHumDev[,"HDI"] <- as.numeric(MedHumDev[,"HDI"])
-```
-
-# Remove Unused Environment Variables
-```{r}
-rm(MedHumDev_1Head, MedHumDev_Clean)
-```
-
-#Low Human Development
-```{r}
 LowHumDev <- HumDevUrl %>%
   read_html() %>%
   html_nodes(xpath='//*[@id="mw-content-text"]/div/div[8]/table') %>%
@@ -287,55 +200,70 @@ LowHumDev <- HumDevUrl %>%
 LowHumDev <- data.frame(LowHumDev[[1]])
 ```
 
-#Remove Unnecessary Rows
-```{r}
-LowHumDev_1Head <- LowHumDev[-c(1,2,3,25,26), ]
-```
+### 3_a Contd... Remove Unnecessary Rows & Columns
+```{r 3a_WebScrapping_Contd_1}
+VHighHumDev_1Head <- VHighHumDev[-c(1,2,3,30,31), ]
+VHighHumDev[2] <- list(NULL)
+VHighHumDev_Clean <- VHighHumDev_1Head[,c(1,3,4)]
 
-#Remove Unnecessary Columns
-```{r}
+HighHumDev_1Head <- HighHumDev[-c(1,2,3,32,33), ]
+HighHumDev[2] <- list(NULL)
+HighHumDev_Clean <- HighHumDev_1Head[,c(1,3,4)]
+
+MedHumDev_1Head <- MedHumDev[-c(1,2,3,24,25), ]
+MedHumDev[2] <- list(NULL)
+MedHumDev_Clean <- MedHumDev_1Head[,c(1,3,4)]
+
+LowHumDev_1Head <- LowHumDev[-c(1,2,3,25,26), ]
 LowHumDev[2] <- list(NULL)
 LowHumDev_Clean <- LowHumDev_1Head[,c(1,3,4)]
 ```
 
-#Rename Columns
-```{r}
+### 3_a Contd... 3_b Rename Columns, Add Human Development Category column and cast HDI as Numeric field
+```{r 3a_WebScrapping_Contd_2}
+VHighHumDev <- rename(VHighHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
+VHighHumDev$HumDev_Categ <- "VHigh"
+VHighHumDev[,"HDI"] <- as.numeric(VHighHumDev[,"HDI"])
+
+HighHumDev <- rename(HighHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
+HighHumDev$HumDev_Categ <- "High"
+HighHumDev[,"HDI"] <- as.numeric(HighHumDev[,"HDI"])
+
+MedHumDev <- rename(MedHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
+MedHumDev$HumDev_Categ <- "Med"
+MedHumDev[,"HDI"] <- as.numeric(MedHumDev[,"HDI"])
+
 LowHumDev <- rename(LowHumDev_Clean, c("X1"="Rank", "X3"="Country", "X4"="HDI"))
-
 LowHumDev$HumDev_Categ <- "Low"
-
 LowHumDev[,"HDI"] <- as.numeric(LowHumDev[,"HDI"])
 ```
 
-# Remove Unused Environment Variables
-```{r}
-rm(LowHumDev_1Head, LowHumDev_Clean)
-```
-
-#Combine the Four Data Frames
-```{r}
+### 3_a Contd... Combine the Four Data Frames to create consolidated Human Development Data Frame.
+```{r 3a_Combine_Human_Dev_df}
 Total_HumDev <- rbind(VHighHumDev, HighHumDev, MedHumDev, LowHumDev)
-
 Total_HumDev <- within(Total_HumDev, rm("Rank"))
 ```
 
-# Remove Unused Environment Variables
-```{r}
-rm(VHighHumDev, HighHumDev, MedHumDev, LowHumDev)
+### 3 Clenup: Remove Unused Environment Variables
+```{r 3a_Remove_Unwanted_Env_Var}
+rm(VHighHumDev_1Head, VHighHumDev_Clean, HighHumDev_1Head, HighHumDev_Clean,
+   MedHumDev_1Head, MedHumDev_Clean, LowHumDev_1Head, LowHumDev_Clean,
+   VHighHumDev, HighHumDev, MedHumDev, LowHumDev)
 ```
 
-#Merge this data frame to the Country of Residence column of Procrastination.csv so that your data now has an HDI column and HDI categories
-```{r}
+### 3_c: The Procrastination Data has been merged with the HDI data so that the Procrastination Data now has information on HDI and Category.
+```{r 3c_Merge_Clean_Procrastination_Data_w_HDI_Data}
 Merged_ProctransHumDev <- merge(ProcTrans, Total_HumDev, by.x=c("CntryResdnc"), by.y = c("Country"))
 ```
 
-#Remove all Participants who are under 18
-#Also chose to remove all Age of Zero (0) because our client is looking for Procrastination as it relates to positions held, how long, and annual income, and all observations with Zero Age, also did not have jobs listed
-```{r}
+### 4_a: Since the analysis of underaged participants is not permitted, we removed all the records pertaining to underaged participants from all further analysis.
+```{r 4a_Remove_underage_participants}
 Merged_ProctransHumDev <- Merged_ProctransHumDev[Merged_ProctransHumDev$Age >= 18.0, ]
-
 unique(format(Merged_ProctransHumDev$Age, digits = 10))
+```
 
+### 4_b: The below table provides the descriptive statistics for Age, Income, HDI, and the 4 Mean columns and create a histogram of any 2.
+```{r 4b_Descriptive_Stats}
 Merged_ProctransHumDev_DescripStats <- Merged_ProctransHumDev[c("Age", "AnnualIncome", "HDI",
                                                                 "DPMean", "AIPMean",
                                                                 "GPMean", "SWLSMean")]
@@ -348,15 +276,22 @@ ProctransHumDev_DescripStats
 hist(Merged_ProctransHumDev_DescripStats$DPMean, 
      xlab = "DPMean", ylab = "Occurence", 
      main = "Distribution of Occurence of DPMean")
+
 hist(Merged_ProctransHumDev_DescripStats$GPMean, 
      xlab = "DPMean", ylab = "Occurence", 
      main = "Distribution of Occurence of GPMean")
+
 ```
 
-# Remove Unused Environment Variables
-```{r}
-rm(Merged_ProctransHumDev_DescripStats, ProctransHumDev_DescripStats)
+##### The Distribution of Decisional Procrastination (DP) seems to be bimodal and Generalized Procrastination (GP) seems to be slightly left skewed.
 
+### Removed unused variables
+```{r 4b_Remove_unused_variables}
+rm(Merged_ProctransHumDev_DescripStats, ProctransHumDev_DescripStats)
+```
+
+### 4_c: Below are Frequencies for Gender, Work Status, and Occupation
+```{r 4c_Freq_Gender_WorkStats_Occupation}
 Cnt_By_Gender <- as.data.frame(table(Merged_ProctransHumDev$Gender))
 Cnt_By_Gender
 Cnt_By_WorkStatus <- as.data.frame(table(Merged_ProctransHumDev$WorkStatus))
@@ -366,20 +301,42 @@ Cnt_By_Curr_Occupation %>%
   arrange(desc(Freq)) %>%
   head(30)
 
+```
+
+### Due to the the volume of distinct values in Current Occupation, we have listed the top 30.
+
+### 4_d: Below is the counts of participants by Country. 
+
+```{r 4d_Count_of_Participants_By_Cntry}
 Cnt_By_CntryResdnc <- Merged_ProctransHumDev %>%
   group_by(CntryResdnc) %>% 
   do(data.frame(nrow=nrow(.))) %>%
-  arrange(desc(nrow))
+  arrange(desc(nrow)) %>%
+  as.data.frame()
 
-Cnt_By_CntryResdnc
+Cnt_By_CntryResdnc %>%
+  filter(nrow >= 10)
+```
 
+#####In order to restrict the output, we have listed only the countries that have at least 10 participants. The Full List can be obtained from the Cnt_By_CntryResdnc data frame.
+
+### 4_e: The below output provides the number of people who answered that they considered themselves Procrastinators and Others considered them as Procrastinators & in the Negative to both the questions.
+```{r 4e_Self_Procras_Others_Procras}
 Merged_ProctransHumDev %>%
   group_by(CnsdrSlfProc, OthCsndrProc) %>% 
   do(data.frame(nrow=nrow(.))) %>%
   arrange(desc(nrow)) %>%
   filter((CnsdrSlfProc == "yes" & OthCsndrProc == "yes") 
-         | (CnsdrSlfProc == "no" & OthCsndrProc == "no"))
+         | (CnsdrSlfProc == "no" & OthCsndrProc == "no")) %>%
+  as.data.frame()
+```
 
+##### 2253 participants responded that they considered themselves Procrastinators and Others considered them as Procrastinators & 458 answered in the Negative to both the questions.
+
+
+### 5_b: We have provided a Barchart of the Top 15 Nations by the average Decisional Procrastination Scores. 
+
+```{r 5b_Top_15_DP}
 DP_Top15 <- aggregate(DPMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) %>%
   arrange(desc(DPMean)) %>%
   head(n=15)
@@ -388,11 +345,17 @@ ggplot(data = merge(Merged_ProctransHumDev, within(DP_Top15, rm("DPMean", "HDI")
   geom_bar(aes(x=reorder(CntryResdnc,DPMean,mean), DPMean, fill = HumDev_Categ),
            stat = "summary", fun.y = "mean", show.legend = T) + 
   xlab("Country") + ylab("DPMean") + 
-  ggtitle("Top 15 Countries of DP Procrastination Mean Scale") + 
+  ggtitle("Top 15 Countries of Decisional Procrastination Mean Scale") + 
   theme(axis.text.x = element_text(hjust = 1)) +
   theme(plot.title = element_text(hjust = 0.5)) +
-  coord_flip()
+  coord_flip() + 
+  scale_fill_manual(values=c("red", "blue", "green", "yellow"))
+```
 
+##### The Bar Chart has been filled with different colors for each HDI Category (V.High, High, Med, and Low). As can be seen in the chart, all the top 15 countries with the highest DP score come from coutries that had Very High or High HDI Scores.
+
+### 5_c: We have provided a Barchart of the Top 15 Nations by the average Generalized Procrastination Scores. 
+```{r  5c_Top_15_GP}
 
 GP_Top15 <- aggregate(GPMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) %>%
   arrange(desc(GPMean)) %>%
@@ -402,16 +365,28 @@ ggplot(data = merge(Merged_ProctransHumDev, within(GP_Top15, rm("GPMean", "HDI")
   geom_bar(aes(x=reorder(CntryResdnc,GPMean,mean), GPMean, fill = HumDev_Categ),
            stat = "summary", fun.y = "mean", show.legend = T) + 
   xlab("Country") + ylab("GPMean") + 
-  ggtitle("Top 15 Countries of GP Procrastination Mean Scale") + 
+  ggtitle("Top 15 Countries of Generalized Procrastination Mean Scale") + 
   theme(axis.text.x = element_text(hjust = 1)) +
   theme(plot.title = element_text(hjust = 0.5)) + ylim(0,5) +
-  coord_flip()
+  coord_flip()+ 
+  scale_fill_manual(values=c("red", "blue", "green", "yellow"))
+```
 
+##### The Bar Chart has been filled with different colors for each HDI Category (V.High, High, Med, and Low). As can be seen in the chart, none of the top 15 countries with the highest GP score come from coutries that had Low HDI Scores.
+
+### 5_c: 8 countries show up on both the above 2 plots. They are listed below for easy reference.
+
+```{r 5c_Common_Cntrs}
 GP_DP_Common_Cntry <- as.data.frame(intersect(DP_Top15$CntryResdnc, GP_Top15$CntryResdnc))
 dim(as.data.frame(GP_DP_Common_Cntry))
 names(GP_DP_Common_Cntry) <- c("CommonCntry")
-GP_DP_Common_Cntry
 
+GP_DP_Common_Cntry
+```
+
+### 5_d: The below plot provide us relationship between Age and Annual Income and is grouped by Gender. 
+
+```{r 5d_Age_vs_AnnualIncome}
 plot(Merged_ProctransHumDev$Age, Merged_ProctransHumDev$AnnualIncome, 
      xlab="Age", ylab="Annual Income", 
      main="Age vs Annual Income", pch=2, cex.main=1.5, 
@@ -419,33 +394,61 @@ plot(Merged_ProctransHumDev$Age, Merged_ProctransHumDev$AnnualIncome,
 
 legend("topleft", pch=c(2,2), col=c("red", "blue"), 
        c("Male", "Female"), bty="o",  box.col="darkgreen", cex=.8)
+```
 
+### 5_d: The below plot provide us relationship between Age and Annual Income and is grouped by Gender.
+####Additionally it provides Confidence Interval for the linear regression by Gender. 
+
+```{r 5d_Age_vs_AnnualIncome_with_CI_lines}
 ggplot(Merged_ProctransHumDev, aes(x=Age,y=AnnualIncome,color=Gender)) + 
   geom_point()+ geom_smooth(method = lm) + 
   xlab("Age") + ylab("Annual Income") + 
   ggtitle("Age vs Annual Income plot for all countries") +
   theme(plot.title = element_text(hjust = 0.5))
+```
 
+### 5_d: The below plot provide us relationship between Age and Annual Income and is grouped by Gender. However, it this plot only inclues the 8 countries that were common in the Top 15 DP and Top 15 GP list. 
 
+```{r 5d_Age_vs_AnnualIncome_for_8_Top_Cntries_in_GP_DP}
 ggplot(data = merge(Merged_ProctransHumDev, GP_DP_Common_Cntry, x.by = "CntryResdnc", y.by = "CommonCntry")) +
   aes(x=Age,y=AnnualIncome,color=Gender) + 
   geom_point()+ geom_smooth(method = lm) + 
   xlab("Age") + ylab("Annual Income") + 
   ggtitle("Age vs Annual Income plot for the 8 countries \ncommon between Top 15 DP and GP countries") +
   theme(plot.title = element_text(hjust = 0.5))
+```
 
+##### Yes, there is a discernible relationship and trend between Age and Income by Gender: Male and Female. The older the Age the higher the Income for both Male and Female. Male Income was significantly higer then Female at every Age; however the younger the Age the closer the relationship in Income between Male and Female. Over their lifespan the Income gap seems to widen between Male and Female.
+
+### 5_e: The below plot provide us relationship between Life Satisfaction and HDI and is grouped by Gender. 
+
+```{r 5e_LifeSatisfaction_HDI}
 plot(Merged_ProctransHumDev$SWLSMean, Merged_ProctransHumDev$HDI, 
      xlab="SWLSMean", ylab="HDI", ylim = c(0,1),
      main="SWLSMean vs HDI", pch=2, cex.main=1.5, 
      frame.plot=FALSE, col=ifelse(Merged_ProctransHumDev$Gender=="Male", "red", "blue"))
 
+legend("topleft", pch=c(2,2), col=c("red", "blue"), 
+       c("Male", "Female"), bty="o",  box.col="darkgreen", cex=.8)
+```
+
+### 5_e: The below plot provide us relationship between Life Satisfaction and HDI and is grouped by Gender.
+####Additionally it provides Confidence Interval for the linear regression by Gender. 
+
+```{r 5e_LifeSatisfaction_HDI_w_CI_Lines}
 ggplot(Merged_ProctransHumDev, aes(x=SWLSMean,y=HDI,color=Gender)) + 
   geom_point()+ geom_smooth(method = lm) + 
   xlab("HDI Category") + ylab("SWLSMean") + 
   ggtitle("Scatterplot of Mean Life Satisfaction by \nHuman Development Index Category by Gender") + 
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   theme(plot.title = element_text(hjust = 0.5))
+```
 
+#####No, there does not seem to be a correlation or visible trend between SWLS Score and the HDI Score as displayed by the scatterplot output between Gender: Male and Female.
+
+### 5_e: We have provided a Barchart of the Mean Life Satisfaction scores by HDI Cagegory. 
+
+```{r 5e_LifeSatisfaction_by_HDICategory}
 ggplot(Merged_ProctransHumDev) +
   geom_bar(aes(x=reorder(HumDev_Categ,-SWLSMean,mean), SWLSMean, fill = HumDev_Categ),
            stat = "summary", fun.y = "mean", show.legend = T) + 
@@ -454,7 +457,13 @@ ggplot(Merged_ProctransHumDev) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
   theme(plot.title = element_text(hjust = 0.5))
 
+```
 
+#####Yes, there is a discernible relationship and trend between Life Satisfaction Scale (SWLS) and Human Development Index (HDI). The greater the HDI the higher the SWLS Mean Score. Medium and High HDI resulted in approx the same SWLS Mean Score.
+
+### 5_e (Diff. View): We have provided a Barchart of the Top 15 Nations by the average Life Satisfaction Scores. 
+
+```{r 5e_LifeSatisfaction_by_HDICategory_Diff_View}
 LS_Top15 <- aggregate(SWLSMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) %>%
   arrange(desc(SWLSMean)) %>%
   head(n=15)
@@ -463,31 +472,34 @@ ggplot(data = merge(Merged_ProctransHumDev, within(LS_Top15, rm("SWLSMean", "HDI
   geom_bar(aes(x=reorder(CntryResdnc,SWLSMean,mean), SWLSMean, fill = HumDev_Categ),
            stat = "summary", fun.y = "mean", show.legend = T) + 
   xlab("Country") + ylab("SWLSMean") + 
-  ggtitle("Top 15 Countries of LS Procrastination Mean Scale") + 
+  ggtitle("Top 15 Countries of Life Satisfaction Procrastination Mean Scale") + 
   theme(axis.text.x = element_text(hjust = 1)) +
   theme(plot.title = element_text(hjust = 0.5)) + ylim(0,5) +
-  coord_flip()
+  coord_flip()+ 
+  scale_fill_manual(values=c("red", "blue", "green", "yellow"))
 ```
 
-#Write the Human Development Data to CSV
-```{r}
+##### The Bar Chart has been filled with different colors for each HDI Category (V.High, High, Med, and Low). As can be seen in the chart, none of the top 15 countries with the highest LS score come from coutries that had Low HDI Scores.
+
+### 6_a: Write the Human Development Data to CSV
+```{r 6a_Write_HDI}
 HumDevDataFile <- paste(DataDir, "HumanDevelopment.csv", sep = "/")
 write.table(Total_HumDev,HumDevDataFile,row.names=F, col.names = T, sep = ",")
 ```
 
-#Write the Cleaned Input Data with HDI to CSV
-```{r}
+### 6_b: Write the Cleaned Input Data with HDI to CSV
+```{r 6b_Write_Merged_Data}
 CleanInputData_w_HDI_File <- paste(DataDir, "CleanedInput_w_HDI.csv", sep = "/")
 write.table(Merged_ProctransHumDev,CleanInputData_w_HDI_File,row.names=F, col.names = T, sep = ",")
 ```
 
-#Write the Human Development Data to CSV
+### 6_c: Write the Top 15 DP Data to CSV
 ```{r}
 Top_15_DP <- paste(DataDir, "Top_15_DP_Cntry.csv", sep = "/")
 write.table(DP_Top15, Top_15_DP,row.names=F, col.names = T, sep = ",")
 ```
 
-#Write the Cleaned Input Data with HDI to CSV
+### 6_d: Write the Top 15 GP Data to CSV
 ```{r}
 Top_15_GP <- paste(DataDir, "Top_15_GP_Cntry.csv", sep = "/")
 write.table(GP_Top15, Top_15_GP,row.names=F, col.names = T, sep = ",")
