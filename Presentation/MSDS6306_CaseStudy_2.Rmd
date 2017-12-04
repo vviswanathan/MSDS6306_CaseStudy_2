@@ -244,7 +244,7 @@ Total_HumDev <- rbind(VHighHumDev, HighHumDev, MedHumDev, LowHumDev)
 Total_HumDev <- within(Total_HumDev, rm("Rank"))
 ```
 
-### 3 Clenup: Remove Unused Environment Variables
+### 3 Cleanup: Remove Unused Environment Variables
 ```{r 3a_Remove_Unwanted_Env_Var}
 rm(VHighHumDev_1Head, VHighHumDev_Clean, HighHumDev_1Head, HighHumDev_Clean,
    MedHumDev_1Head, MedHumDev_Clean, LowHumDev_1Head, LowHumDev_Clean,
@@ -262,7 +262,7 @@ Merged_ProctransHumDev <- Merged_ProctransHumDev[Merged_ProctransHumDev$Age >= 1
 unique(format(Merged_ProctransHumDev$Age, digits = 10))
 ```
 
-### 4_b: The below table provides the descriptive statistics for Age, Income, HDI, and the 4 Mean columns and create a histogram of any 2.
+### 4_b: The below table provides the descriptive statistics for Age, Income, HDI, and the 4 Mean columns and creates a Histogram of any 2.
 ```{r 4b_Descriptive_Stats}
 Merged_ProctransHumDev_DescripStats <- Merged_ProctransHumDev[c("Age", "AnnualIncome", "HDI",
                                                                 "DPMean", "AIPMean",
@@ -318,7 +318,7 @@ Cnt_By_CntryResdnc %>%
   filter(nrow >= 10)
 ```
 
-#####In order to restrict the output, we have listed only the countries that have at least 10 participants. The Full List can be obtained from the Cnt_By_CntryResdnc data frame.
+##### In order to restrict the output, we have listed only the countries that have at least 10 participants. The Full List can be obtained from the Cnt_By_CntryResdnc data frame.
 
 ### 4_e: The below output provides the number of people who answered that they considered themselves Procrastinators and Others considered them as Procrastinators & in the Negative to both the questions.
 ```{r 4e_Self_Procras_Others_Procras}
@@ -334,7 +334,7 @@ Merged_ProctransHumDev %>%
 ##### 2253 participants responded that they considered themselves Procrastinators and Others considered them as Procrastinators & 458 answered in the Negative to both the questions.
 
 
-### 5_b: We have provided a Barchart of the Top 15 Nations by the average Decisional Procrastination Scores. 
+### 5_b: Barchart of the Top 15 Nations by the Average Decisional Procrastination (DP) Scores. 
 
 ```{r 5b_Top_15_DP}
 DP_Top15 <- aggregate(DPMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) %>%
@@ -354,7 +354,7 @@ ggplot(data = merge(Merged_ProctransHumDev, within(DP_Top15, rm("DPMean", "HDI")
 
 ##### The Bar Chart has been filled with different colors for each HDI Category (V.High, High, Med, and Low). As can be seen in the chart, all the top 15 countries with the highest DP score come from coutries that had Very High or High HDI Scores.
 
-### 5_c: We have provided a Barchart of the Top 15 Nations by the average Generalized Procrastination Scores. 
+### 5_c: Barchart of the Top 15 Nations by the Average Generalized Procrastination (GP) Scores. 
 ```{r  5c_Top_15_GP}
 
 GP_Top15 <- aggregate(GPMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) %>%
@@ -372,9 +372,9 @@ ggplot(data = merge(Merged_ProctransHumDev, within(GP_Top15, rm("GPMean", "HDI")
   scale_fill_manual(values=c("red", "blue", "green", "yellow"))
 ```
 
-##### The Bar Chart has been filled with different colors for each HDI Category (V.High, High, Med, and Low). As can be seen in the chart, none of the top 15 countries with the highest GP score come from coutries that had Low HDI Scores.
+##### The Bar Chart has been filled with different colors for each HDI Category (V.High, High, Med, and Low). As can be seen in the chart, none of the top 15 countries with the highest GP score come from countries that had Low HDI Scores.
 
-### 5_c: 8 countries show up on both the above 2 plots. They are listed below for easy reference.
+### 5_c: 8 countries show up on both the above 2 plots. They are listed below:
 
 ```{r 5c_Common_Cntrs}
 GP_DP_Common_Cntry <- as.data.frame(intersect(DP_Top15$CntryResdnc, GP_Top15$CntryResdnc))
@@ -384,7 +384,7 @@ names(GP_DP_Common_Cntry) <- c("CommonCntry")
 GP_DP_Common_Cntry
 ```
 
-### 5_d: The below plot provide us relationship between Age and Annual Income and is grouped by Gender. 
+### 5_d: The below plot provides us relationship between Age and Annual Income and is grouped by Gender. 
 
 ```{r 5d_Age_vs_AnnualIncome}
 plot(Merged_ProctransHumDev$Age, Merged_ProctransHumDev$AnnualIncome, 
@@ -396,8 +396,8 @@ legend("topleft", pch=c(2,2), col=c("red", "blue"),
        c("Male", "Female"), bty="o",  box.col="darkgreen", cex=.8)
 ```
 
-### 5_d: The below plot provide us relationship between Age and Annual Income and is grouped by Gender.
-####Additionally it provides Confidence Interval for the linear regression by Gender. 
+### 5_d: The below plot provides us relationship between Age and Annual Income and is grouped by Gender.
+#### Additionally it provides Confidence Interval for the linear regression by Gender. 
 
 ```{r 5d_Age_vs_AnnualIncome_with_CI_lines}
 ggplot(Merged_ProctransHumDev, aes(x=Age,y=AnnualIncome,color=Gender)) + 
@@ -407,7 +407,7 @@ ggplot(Merged_ProctransHumDev, aes(x=Age,y=AnnualIncome,color=Gender)) +
   theme(plot.title = element_text(hjust = 0.5))
 ```
 
-### 5_d: The below plot provide us relationship between Age and Annual Income and is grouped by Gender. However, it this plot only inclues the 8 countries that were common in the Top 15 DP and Top 15 GP list. 
+### 5_d: The below plot provides us relationship between Age and Annual Income and is grouped by Gender. However, this plot only inclues the 8 countries that were common in the Top 15 DP and Top 15 GP list. 
 
 ```{r 5d_Age_vs_AnnualIncome_for_8_Top_Cntries_in_GP_DP}
 ggplot(data = merge(Merged_ProctransHumDev, GP_DP_Common_Cntry, x.by = "CntryResdnc", y.by = "CommonCntry")) +
@@ -432,8 +432,8 @@ legend("topleft", pch=c(2,2), col=c("red", "blue"),
        c("Male", "Female"), bty="o",  box.col="darkgreen", cex=.8)
 ```
 
-### 5_e: The below plot provide us relationship between Life Satisfaction and HDI and is grouped by Gender.
-####Additionally it provides Confidence Interval for the linear regression by Gender. 
+### 5_e: The below plot provides us relationship between Life Satisfaction and HDI and is grouped by Gender.
+#### Additionally it provides Confidence Interval for the linear regression by Gender. 
 
 ```{r 5e_LifeSatisfaction_HDI_w_CI_Lines}
 ggplot(Merged_ProctransHumDev, aes(x=SWLSMean,y=HDI,color=Gender)) + 
@@ -444,9 +444,9 @@ ggplot(Merged_ProctransHumDev, aes(x=SWLSMean,y=HDI,color=Gender)) +
   theme(plot.title = element_text(hjust = 0.5))
 ```
 
-#####No, there does not seem to be a correlation or visible trend between SWLS Score and the HDI Score as displayed by the scatterplot output between Gender: Male and Female.
+##### No, there does not seem to be a correlation or visible trend between SWLS Score and the HDI Score as displayed by the scatterplot output between Gender: Male and Female.
 
-### 5_e: We have provided a Barchart of the Mean Life Satisfaction scores by HDI Cagegory. 
+### 5_e: Barchart of the Mean Life Satisfaction scores by HDI Cagegory. 
 
 ```{r 5e_LifeSatisfaction_by_HDICategory}
 ggplot(Merged_ProctransHumDev) +
@@ -459,7 +459,7 @@ ggplot(Merged_ProctransHumDev) +
 
 ```
 
-#####Yes, there is a discernible relationship and trend between Life Satisfaction Scale (SWLS) and Human Development Index (HDI). The greater the HDI the higher the SWLS Mean Score. Medium and High HDI resulted in approx the same SWLS Mean Score.
+##### Yes, there is a discernible relationship and trend between Life Satisfaction Scale (SWLS) and Human Development Index (HDI). The greater the HDI the higher the SWLS Mean Score. Medium and High HDI resulted in approx the same SWLS Mean Score.
 
 ### 5_e (Diff. View): We have provided a Barchart of the Top 15 Nations by the average Life Satisfaction Scores. 
 
