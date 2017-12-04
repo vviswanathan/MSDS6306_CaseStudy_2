@@ -74,7 +74,7 @@ names(ProcrastinationData) <- c("Age", "Gender", "Kids", "Education", "WorkStatu
                                 "S4GtImThgsLf", "S5LvAgChgNth", "CnsdrSlfProc", "OthCsndrProc")
 
 ## 3. Cleaning the data
-### The Procrastination Data csv had a lot of manipulation in it, and can be found in the Procrastination.csv CODEBOOK
+### *NOTE: The Procrastination Data csv had a lot of manipulation in it, and can be found in the Procrastination.csv CODEBOOK*
 
 ### After scraping the data from https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries the data needed a lot of manipulation to get it into a format from 8 table to one table displaying Country, and (2016 Estimates for 2015) HDI score. We only pulled data from the section titled "Complete List of Countries".
 
