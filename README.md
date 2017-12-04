@@ -1,4 +1,4 @@
-# "Understanding Top Procrastination Countries based on DP and GP Scores, and how it relates to Age, Income, Life Satisfaction, and Human Development"
+# Understanding Top Procrastination Countries based on DP and GP Scores, and how it relates to Age, Income, Life Satisfaction, and Human Development
 ---
 **Title:** *"Understanding Top Procrastination Countries based on DP and GP Scores, and how it relates to Age, Income, Life Satisfaction, and Human Development"*
 
@@ -147,18 +147,17 @@ Brunei, Panama, Qatar, Lithuania, Sri Lanka, Ecuador, Bulgaria, Austria, Sloveni
 **1b. The Top 15 Nations in Average GP Procrastination Scores:**   
 Qatar, Panama, Myanmar, Sri Lanka, Poland, Austria, Turkey, Ecuador, France, Malaysia, Slovenia, Uruguay, Iceland, Portugal, and Sweden 
 
-**1c: Countries that made both Top 15 List:**   
+**1c. Countries that made both Top 15 List:**   
 Qatar, Panama, Sri Lanka, Austria, Ecuador, Slovenia, Uruguay, Portugal 
 
-**2. The correlation between the counties on both top 15 lists between Age and Income:**   
-
-**Is there a relationship between Age and Income?** 
-
-**3. And the correlation/relationship between the countries on both top 15 and Life Satisfaction and Human Development (HDI):** 
-
-**Is there a discernible relationship between SWLS and HDI?** 
-Yes, there is a discernible relationship and trend between Life Satisfaction Scale (SWLS) and Human Development Index (HDI). The greater the HDI the higher the SWLS Mean Score. Medium and High HDI resulted in approx the same SWLS Mean Score. 
-
+**2. The correlation between the counties on both top 15 lists between Age and Income, and Is there a relationship between Age and Income and Gender?**  
+Yes, there is a discernible relationship and trend between Age and Income by Gender: Male and Female. The older the Age the higher the Income for both Male and Female. Male Income was significantly higer then Female at every Age; however the younger the Age the closer the relationship in Income between Male and Female. Over their lifespan the Income gap seems to widen between Male and Female.  
+  
+**3a. The correlation/relationship between the countries on both top 15 and Life Satisfaction (SWLS) and Human Development (HDI) between Male and Female:**  
+Yes, there is a significant relationship between SWLS and HDI
+**3b. Is there a discernible relationship between SWLS and HDI?**  
+Yes, there is a discernible relationship and trend between Life Satisfaction Scale (SWLS) and Human Development Index (HDI). The greater the HDI the higher the SWLS Mean Score. Medium and High HDI resulted in approx the same SWLS Mean Score.  
+  
 ## Sources
 * **Human Development Index:** Wikipedia: United Nations Development Programme's Human Development Report, "Human Development Report 2016 – "Human Development for Everyone"" (PDF). HDRO (Human Development Report Office) United Nations Development Programme. pp. 198–201. Retrieved 2 September 2017.  
 * **Procrastination Data:** Qualtrics  
