@@ -125,56 +125,57 @@ $(document).ready(function () {
 </div>
 
 
-<div id="install-packages-required" class="section level1">
-<h1>install packages required</h1>
-<pre class="r"><code>if (!require(tidyverse)) install.packages(&quot;tidyverse&quot;)</code></pre>
-<pre><code>## Loading required package: tidyverse</code></pre>
+<div id="load-libraries" class="section level1">
+<h1>Load Libraries</h1>
+<pre class="r"><code>library(repmis)</code></pre>
+<pre><code>## Warning: package 'repmis' was built under R version 3.4.2</code></pre>
+<pre class="r"><code>library(dplyr)</code></pre>
+<pre><code>## Warning: package 'dplyr' was built under R version 3.4.2</code></pre>
+<pre><code>## 
+## Attaching package: 'dplyr'</code></pre>
+<pre><code>## The following objects are masked from 'package:stats':
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>library(tidyverse)</code></pre>
 <pre><code>## Warning: package 'tidyverse' was built under R version 3.4.2</code></pre>
 <pre><code>## -- Attaching packages ---------------------------------- tidyverse 1.2.1 --</code></pre>
-<pre><code>## v ggplot2 2.2.1     v purrr   0.2.4
-## v tibble  1.3.4     v dplyr   0.7.4
+<pre><code>## v ggplot2 2.2.1     v readr   1.1.1
+## v tibble  1.3.4     v purrr   0.2.4
 ## v tidyr   0.7.2     v stringr 1.2.0
-## v readr   1.1.1     v forcats 0.2.0</code></pre>
+## v ggplot2 2.2.1     v forcats 0.2.0</code></pre>
 <pre><code>## Warning: package 'ggplot2' was built under R version 3.4.2</code></pre>
 <pre><code>## Warning: package 'tibble' was built under R version 3.4.2</code></pre>
 <pre><code>## Warning: package 'tidyr' was built under R version 3.4.2</code></pre>
 <pre><code>## Warning: package 'readr' was built under R version 3.4.2</code></pre>
 <pre><code>## Warning: package 'purrr' was built under R version 3.4.2</code></pre>
-<pre><code>## Warning: package 'dplyr' was built under R version 3.4.2</code></pre>
 <pre><code>## Warning: package 'stringr' was built under R version 3.4.2</code></pre>
 <pre><code>## Warning: package 'forcats' was built under R version 3.4.2</code></pre>
 <pre><code>## -- Conflicts ------------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>if (!require(repmis)) install.packages(&quot;repmis&quot;)</code></pre>
-<pre><code>## Loading required package: repmis</code></pre>
-<pre><code>## Warning: package 'repmis' was built under R version 3.4.2</code></pre>
-<pre class="r"><code>if (!require(dplyr)) install.packages(&quot;dplyr&quot;)
-if (!require(tidyr)) install.packages(&quot;tidyr&quot;)
-if (!require(ggplot2)) install.packages(&quot;ggplot2&quot;)
-if (!require(sqldf)) install.packages(&quot;sqldf&quot;)</code></pre>
-<pre><code>## Loading required package: sqldf</code></pre>
+<pre class="r"><code>library(tidyr)
+library(ggplot2)
+library(sqldf)</code></pre>
 <pre><code>## Warning: package 'sqldf' was built under R version 3.4.2</code></pre>
 <pre><code>## Loading required package: gsubfn</code></pre>
 <pre><code>## Warning: package 'gsubfn' was built under R version 3.4.2</code></pre>
 <pre><code>## Loading required package: proto</code></pre>
 <pre><code>## Warning: package 'proto' was built under R version 3.4.2</code></pre>
 <pre><code>## Loading required package: RSQLite</code></pre>
-<pre class="r"><code>if (!require(kimisc)) install.packages(&quot;kimisc&quot;)</code></pre>
-<pre><code>## Loading required package: kimisc</code></pre>
+<pre class="r"><code>library(kimisc)</code></pre>
 <pre><code>## Warning: package 'kimisc' was built under R version 3.4.2</code></pre>
-<pre class="r"><code>if (!require(XML)) install.packages(&quot;XML&quot;)</code></pre>
-<pre><code>## Loading required package: XML</code></pre>
-<pre class="r"><code>if (!require(RCurl)) install.packages(&quot;RCurl&quot;)</code></pre>
-<pre><code>## Loading required package: RCurl</code></pre>
+<pre class="r"><code>library(XML)
+library(RCurl)</code></pre>
 <pre><code>## Loading required package: bitops</code></pre>
 <pre><code>## 
 ## Attaching package: 'RCurl'</code></pre>
 <pre><code>## The following object is masked from 'package:tidyr':
 ## 
 ##     complete</code></pre>
-<pre class="r"><code>if (!require(rvest)) install.packages(&quot;rvest&quot;)</code></pre>
-<pre><code>## Loading required package: rvest</code></pre>
+<pre class="r"><code>library(rvest)</code></pre>
 <pre><code>## Warning: package 'rvest' was built under R version 3.4.2</code></pre>
 <pre><code>## Loading required package: xml2</code></pre>
 <pre><code>## Warning: package 'xml2' was built under R version 3.4.2</code></pre>
@@ -189,8 +190,7 @@ if (!require(sqldf)) install.packages(&quot;sqldf&quot;)</code></pre>
 <pre><code>## The following object is masked from 'package:readr':
 ## 
 ##     guess_encoding</code></pre>
-<pre class="r"><code>if (!require(plyr)) install.packages(&quot;plyr&quot;)</code></pre>
-<pre><code>## Loading required package: plyr</code></pre>
+<pre class="r"><code>library(plyr)</code></pre>
 <pre><code>## Warning: package 'plyr' was built under R version 3.4.2</code></pre>
 <pre><code>## -------------------------------------------------------------------------</code></pre>
 <pre><code>## You have loaded plyr after dplyr - this is likely to cause problems.
@@ -199,40 +199,24 @@ if (!require(sqldf)) install.packages(&quot;sqldf&quot;)</code></pre>
 <pre><code>## -------------------------------------------------------------------------</code></pre>
 <pre><code>## 
 ## Attaching package: 'plyr'</code></pre>
+<pre><code>## The following object is masked from 'package:purrr':
+## 
+##     compact</code></pre>
 <pre><code>## The following objects are masked from 'package:dplyr':
 ## 
 ##     arrange, count, desc, failwith, id, mutate, rename, summarise,
 ##     summarize</code></pre>
-<pre><code>## The following object is masked from 'package:purrr':
-## 
-##     compact</code></pre>
-<pre class="r"><code>if (!require(pastecs)) install.packages(&quot;pastecs&quot;)</code></pre>
-<pre><code>## Loading required package: pastecs</code></pre>
+<pre class="r"><code>library(pastecs)</code></pre>
 <pre><code>## Warning: package 'pastecs' was built under R version 3.4.3</code></pre>
 <pre><code>## Loading required package: boot</code></pre>
 <pre><code>## 
 ## Attaching package: 'pastecs'</code></pre>
-<pre><code>## The following objects are masked from 'package:dplyr':
-## 
-##     first, last</code></pre>
 <pre><code>## The following object is masked from 'package:tidyr':
 ## 
 ##     extract</code></pre>
-</div>
-<div id="load-libraries" class="section level1">
-<h1>Load Libraries</h1>
-<pre class="r"><code>library(repmis)
-library(dplyr)
-library(tidyverse)
-library(tidyr)
-library(ggplot2)
-library(sqldf)
-library(kimisc)
-library(XML)
-library(RCurl)
-library(rvest)
-library(plyr)
-library(pastecs)</code></pre>
+<pre><code>## The following objects are masked from 'package:dplyr':
+## 
+##     first, last</code></pre>
 </div>
 <div id="r---environment" class="section level1">
 <h1>R - environment</h1>
@@ -257,9 +241,9 @@ library(pastecs)</code></pre>
 ##  [1] pastecs_1.3-18  boot_1.3-19     plyr_1.8.4      rvest_0.3.2    
 ##  [5] xml2_1.1.1      RCurl_1.95-4.8  bitops_1.0-6    XML_3.98-1.9   
 ##  [9] kimisc_0.3      sqldf_0.4-11    RSQLite_2.0     gsubfn_0.6-6   
-## [13] proto_1.0.0     repmis_0.5      forcats_0.2.0   stringr_1.2.0  
-## [17] dplyr_0.7.4     purrr_0.2.4     readr_1.1.1     tidyr_0.7.2    
-## [21] tibble_1.3.4    ggplot2_2.2.1   tidyverse_1.2.1
+## [13] proto_1.0.0     forcats_0.2.0   stringr_1.2.0   purrr_0.2.4    
+## [17] readr_1.1.1     tidyr_0.7.2     tibble_1.3.4    ggplot2_2.2.1  
+## [21] tidyverse_1.2.1 dplyr_0.7.4     repmis_0.5     
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] Rcpp_0.12.13        lubridate_1.7.1     lattice_0.20-35    
