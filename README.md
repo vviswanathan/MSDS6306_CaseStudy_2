@@ -16,12 +16,12 @@ Megan, mdhodges@smu.edu
 
 **SessionInfo:**  
 ```
-Megan's System:*  
+Megan's System:  
 R version 3.4.1 (2017-06-30)  
 Platform: x86_64-apple-darwin13.4.0 (64-bit)  
 Running under: macOS High Sierra 10.13.1  
  
-Vivek's System:*  
+Vivek's System:  
 R version 3.4.1 (2017-06-30)   
 Platform: x86_64-w64-mingw32/x64 (64-bit)   
 Running under: Windows >= 8 x64 (build 9200)     
