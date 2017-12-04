@@ -55,7 +55,7 @@ PresenatationDir <- paste(BaseDir,"Presentation", sep = "/")
 ProcrastinationData <- read.csv(ProcrastinationDataFile, sep = ",", header = T, na.strings = "")  
 dim(ProcrastinationData)  
   
-### The column names in the ProcrastinationData are too long:
+### The Column Names in the ProcrastinationData are too long:
 *We shortened the Column names to 12 characters and removed any special characters:*  
   
 names(ProcrastinationData) <- c("Age", "Gender", "Kids", "Education", "WorkStatus", 
@@ -74,16 +74,16 @@ names(ProcrastinationData) <- c("Age", "Gender", "Kids", "Education", "WorkStatu
                                 "G20CmpTskRlx", "S1LfClsI2dl", "S2LfCndExlnt", "S3StsfdWtLf", 
                                 "S4GtImThgsLf", "S5LvAgChgNth", "CnsdrSlfProc", "OthCsndrProc")
 
-## 3. Cleaning the data
+## 3. Cleaning the Data
 ### *NOTE: The Procrastination Data csv had a lot of manipulation in it, and can be found in the Procrastination.csv CODEBOOK*
 
-### After scraping the data from https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries:
+### After Scraping the Data from https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries:
 *Need to put in a format from 8 table to 1 table displaying Country, and HDI score (2016 Estimates for 2015). We only pulled data from the section titled "Complete List of Countries".*
 
-Scrap Data from Wikipedia: List of Countries By Human Development Index
+Scrape Data from Wikipedia: List of Countries By Human Development Index
 HumDevUrl <- "https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries"
 
-### Manipulate each section of "Very High Humand Development", "High Human Development", "Medium Human Development", and "Low Human Development".
+### Manipulate each section of Very High Humand Development, High Human Development, Medium Human Development, and Low Human Development.
 *We placed each into a dataframe, removed unnecessary rows and columns. We renamed the columns to make sense for our project: "Rank", "Country", and "HDI", and lastly removed any unused enviornment variables.*
 
 Very High Human Development
@@ -186,8 +186,8 @@ LowHumDev[,"HDI"] <- as.numeric(LowHumDev[,"HDI"])
 Remove Unused Environment Variables
 rm(LowHumDev_1Head, LowHumDev_Clean)
 
-### We combimed the four dataframes, into one dataframe.  
-*Combine the Four Data Frames*  
+### Combimed Four Dataframes, into One Dataframe.  
+*Combine the Four Dataframes*  
   
 Total_HumDev <- rbind(VHighHumDev, HighHumDev, MedHumDev, LowHumDev)  
 Total_HumDev <- within(Total_HumDev, rm("Rank"))  
@@ -196,7 +196,7 @@ Remove Unused Environment Variables
 rm(VHighHumDev, HighHumDev, MedHumDev, LowHumDev)  
   
 ## 4. Merging the data  
-### Merge this data frame to the Country of Residence column of Procrastination.csv  
+### Merge Dataframe to the Country of Residence Column of Procrastination.csv  
 *The data now has an HDI column and HDI categories*
   
 Merged_ProctransHumDev <- merge(ProcTrans, Total_HumDev, by.x=c("CntryResdnc"), by.y = c("Country"))  
@@ -208,12 +208,12 @@ options(digits=2)
 ProctransHumDev_DescripStats <- stat.desc(Merged_ProctransHumDev_DescripStats)
 ProctransHumDev_DescripStats"GPMean", "SWLSMean")]  
   
-## 5. Presenting the data graphically  
-### Histogram of the DP Mean:   
-hist(Merged_ProctransHumDev_DescripStats$DPMean) 
-Histogram of the GP Mean: 
-hist(Merged_ProctransHumDev_DescripStats$GPMean) 
-
+## 5. Presenting the Data Graphically  
+### Histogram of the DP Mean:  
+hist(Merged_ProctransHumDev_DescripStats$DPMean)  
+### Histogram of the GP Mean:  
+hist(Merged_ProctransHumDev_DescripStats$GPMean)  
+  
 ### Count of Gender, Work Status, and Current Occupation:  
 Cnt_By_Gender <- as.data.frame(table(Merged_ProctransHumDev$Gender))
 Cnt_By_Gender
@@ -226,9 +226,8 @@ Cnt_By_CntryResdnc <- Merged_ProctransHumDev %>%
   group_by(CntryResdnc) %>% 
   do(data.frame(nrow=nrow(.))) %>%
   arrange(desc(nrow))
-
 Cnt_By_CntryResdnc
-
+  
 ### List of Top 15 Countries on the DP Scale:  
 Merged_ProctransHumDev %>%
   group_by(CnsdrSlfProc, OthCsndrProc) %>% 
@@ -240,10 +239,9 @@ Merged_ProctransHumDev %>%
 DP_Top15 <- aggregate(DPMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) %>%
   arrange(desc(DPMean)) %>%
   head(n=15)
-
 DP_Top15
-
-### GGPlot of those the Top 15 Countries on the DP Scale:  
+  
+### Top 15 Countries on the DP Scale, GGPlot:  
 ggplot(data = merge(Merged_ProctransHumDev, within(DP_Top15, rm("DPMean", "HDI")), by = "CntryResdnc")) +
   geom_bar(aes(x=reorder(CntryResdnc,-DPMean,mean), DPMean, fill = HumDev_Categ),
            stat = "summary", fun.y = "mean", show.legend = T) + 
@@ -257,7 +255,7 @@ GP_Top15 <- aggregate(GPMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) %>
 arrange(desc(GPMean)) %>%
 head(n=15)
   
-### "Top 15 Countries on the GP Scale":  
+### Top 15 Countries on the GP Scale, GGPlot:  
 ggplot(data = merge(Merged_ProctransHumDev, within(GP_Top15, rm("GPMean", "HDI")), by = "CntryResdnc")) +
 geom_bar(aes(x=reorder(CntryResdnc,-GPMean,mean), GPMean, fill = HumDev_Categ),
            stat = "summary", fun.y = "mean", show.legend = T) + 
@@ -265,9 +263,9 @@ xlab("Country") + ylab("GPMean") +
 ggtitle("Top 15 Countries of GP Procrastination Mean Scale") + 
 theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
 theme(plot.title = element_text(hjust = 0.5)) + ylim(0,5)
-
+  
 ### Created List of those Countries on both list, and plotted:  
-
+  
 ### "Age versus Annual Income for All Countries":  
 GP_DP_Common_Cntry <- as.data.frame(intersect(DP_Top15$CntryResdnc, GP_Top15$CntryResdnc))
 dim(as.data.frame(GP_DP_Common_Cntry))
@@ -289,19 +287,19 @@ ggplot(Merged_ProctransHumDev, aes(x=Age,y=AnnualIncome,color=Gender)) +
   theme(plot.title = element_text(hjust = 0.5))
   
 ### "Age vs Annual Income Plot for the 8 Common Countries of DP and GP":  
- ggplot(data = merge(Merged_ProctransHumDev, GP_DP_Common_Cntry, x.by = "CntryResdnc", y.by = "CommonCntry")) +
+ggplot(data = merge(Merged_ProctransHumDev, GP_DP_Common_Cntry, x.by = "CntryResdnc", y.by = "CommonCntry")) +
   aes(x=Age,y=AnnualIncome,color=Gender) + 
   geom_point()+ geom_smooth(method = lm) + 
   xlab("Age") + ylab("Annual Income") + 
   ggtitle("Age vs Annual Income plot for the 8 countries \ncommon between Top 15 DP and GP countries") +
-  theme(plot.title = element_text(hjust = 0.5)) 
+  theme(plot.title = element_text(hjust = 0.5))
   
 ### "Mean Life Satisfaction by Humand Development Index (HDI) by Gender":  
   plot(Merged_ProctransHumDev$SWLSMean, Merged_ProctransHumDev$HDI, 
      xlab="SWLSMean", ylab="HDI", ylim = c(0,1),
      main="SWLSMean vs HDI", pch=2, cex.main=1.5, 
      frame.plot=FALSE, col=ifelse(Merged_ProctransHumDev$Gender=="Male", "red", "blue"))
-
+  
 ggplot(Merged_ProctransHumDev, aes(x=SWLSMean,y=HDI,color=Gender)) + 
   geom_point()+ geom_smooth(method = lm) + 
   xlab("HDI Category") + ylab("SWLSMean") + 
