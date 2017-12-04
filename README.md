@@ -87,7 +87,7 @@ The following datasets are taken from data collected by Qualtrics on Procrastina
 * Work Status: *No issues*
 * Annual Income: *If Annual Income was "Missing" or "NA", we changed to "-0.01", so as to keep the column type Numeric.*
 * Current Occupation: *There were too many observations, and so these were paired down into Industry and Title categories. If the answer was "please specify" or "0" it was replaced with "Missing".*
-* How long have you held this position? Years: *Number of years in this job: If answer was a log number, we changed to integar. There were 224 observations to clean up with that issue. Also there were 42 that answered with "999", which is impractical, and so these observations were changed to "NA".*
+* How long have you held this position? Years: Number of years in this job: *If answer was a log number, we changed to integar. There were 224 observations to clean up with that issue. Also there were 42 that answered with "999", which is impractical, and so these observations were changed to "NA".*
 * How long have you helpd this position? Months: Number of months in this job: *No issues.*
 * Community: Size of Community: *No issues*
 * Country of Residence: *Responses of "0" that were changed to "Missing". We also recatoegorized into industry and title.*
