@@ -1,12 +1,12 @@
 # Understanding Top Procrastination Countries based on DP and GP Scores, and how it relates to Age, Income, Life Satisfaction, and Human Development
 
----
-title: "MSDS6306_CaseStudy_2"
-author: "Megan Hodges and Vivek Viswanathan"
-date: "December 4, 2017"
-output: 
-  html_document:
-    keep_md: true
+---  
+title: "MSDS6306_CaseStudy_2"  
+author: "Megan Hodges and Vivek Viswanathan"  
+date: "December 4, 2017"  
+output:  
+  html_document:  
+    keep_md: true  
 ---
 
 ```{r setup, include=FALSE}
