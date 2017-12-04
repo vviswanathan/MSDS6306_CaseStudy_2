@@ -4,7 +4,7 @@ author: "Megan Hodges and Vivek Viswanathan"
 date: "December 4, 2017"
 output: 
   html_document:
-    keep_md: true
+#    keep_md: true
 ---
 
 ```{r setup, include=FALSE}
@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Load Required R Libraries
-```{r}
+```{r load_lib}
 library(repmis)
 library(dplyr)
 library(tidyverse)
@@ -28,22 +28,19 @@ library(pastecs)
 ```
 
 ## R - environment List of libraries used by the session
-```{r}
+```{r sess_info}
 sessionInfo()
 ```
 
-## Set Base Directory:
+## Set Base Directory, working directory, and file name to read
 
-```{r}
+```{r set_dir}
 # Executing from Vivek's System:
 BaseDir <- "C:/Vivek/Data_Science/MSDS6306-DoingDataScience/Case_Study_2/MSDS6306_CaseStudy_2/"
 
 # Executing from Megan's System:
 # BaseDir <- "/Users/megandiane/Desktop/DDS_Class/Case_Study_2/MSDS6306_CaseStudy_2"
-```
 
-## Set Other Working Directories and File Path
-```{r}
 DataDir <- paste(BaseDir,"Data", sep = "/")
 CodeDir <- paste(BaseDir,"Code", sep = "/")
 PresenatationDir <- paste(BaseDir,"Presentation", sep = "/")
@@ -51,13 +48,16 @@ PresenatationDir <- paste(BaseDir,"Presentation", sep = "/")
 ProcrastinationDataFile <- paste(DataDir, "Procrastination.csv", sep = "/")
 ```
 
-## Read the Data File
-```{r}
+## 2_a Read the Data File and provide dimensions
+```{r 2_a_read_file}
 ProcrastinationData <- read.csv(ProcrastinationDataFile, sep = ",", header = T, na.strings = "")
+dim(ProcrastinationData)
 ```
 
+#### The data file has 4264 rows and 61 columns
+
 # Assign Column Names
-```{r}
+```{r assign_col_names}
 names(ProcrastinationData) <- c("Age", "Gender", "Kids", "Education", "WorkStatus", 
                                 "AnnualIncome", "CurrOccption", "PostHeldYrs", "PostHeldMths", 
                                 "CmmuntySize", "CntryResdnc", "MaritlStatus", "SonsCnt", 
@@ -81,7 +81,7 @@ names(ProcrastinationData) <- c("Age", "Gender", "Kids", "Education", "WorkStatu
 #### https://github.com/vviswanathan/MSDS6306_CaseStudy_2/blob/master/Presentation/Procrastination_Column_Name_Mapping.csv
 
 ```{r}
-dim(ProcrastinationData)
+
 ```
 
 # To Clean up the data from Procrastination.csv we took the "Male" and "Female" that we found under the Column of "Sons" and

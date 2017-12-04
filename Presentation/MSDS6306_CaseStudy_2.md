@@ -316,7 +316,7 @@ sessionInfo()
 ## [55] knitr_1.17          bindr_0.1           haven_1.1.0
 ```
 
-## Set Base Directory:
+## Set Base Directory, working directory, and file name to read
 
 
 ```r
@@ -325,11 +325,7 @@ BaseDir <- "C:/Vivek/Data_Science/MSDS6306-DoingDataScience/Case_Study_2/MSDS630
 
 # Executing from Megan's System:
 # BaseDir <- "/Users/megandiane/Desktop/DDS_Class/Case_Study_2/MSDS6306_CaseStudy_2"
-```
 
-## Set Other Working Directories and File Path
-
-```r
 DataDir <- paste(BaseDir,"Data", sep = "/")
 CodeDir <- paste(BaseDir,"Code", sep = "/")
 PresenatationDir <- paste(BaseDir,"Presentation", sep = "/")
@@ -341,7 +337,14 @@ ProcrastinationDataFile <- paste(DataDir, "Procrastination.csv", sep = "/")
 
 ```r
 ProcrastinationData <- read.csv(ProcrastinationDataFile, sep = ",", header = T, na.strings = "")
+dim(ProcrastinationData)
 ```
+
+```
+## [1] 4264   61
+```
+
+#### The data file has 4264 rows and 61 columns
 
 # Assign Column Names
 
@@ -368,13 +371,6 @@ names(ProcrastinationData) <- c("Age", "Gender", "Kids", "Education", "WorkStatu
 #### https://github.com/vviswanathan/MSDS6306_CaseStudy_2/blob/master/Presentation/Procrastination_Column_Name_Mapping.csv
 
 
-```r
-dim(ProcrastinationData)
-```
-
-```
-## [1] 4264   61
-```
 
 # To Clean up the data from Procrastination.csv we took the "Male" and "Female" that we found under the Column of "Sons" and
 # replaced it with the correct response of 1 = Male and 2 = Female.
@@ -746,7 +742,7 @@ hist(Merged_ProctransHumDev_DescripStats$DPMean,
      main = "Distribution of Occurence of DPMean")
 ```
 
-![](MSDS6306_CaseStudy_2_files/figure-html/unnamed-chunk-34-1.png)<!-- -->
+![](MSDS6306_CaseStudy_2_files/figure-html/unnamed-chunk-28-1.png)<!-- -->
 
 ```r
 hist(Merged_ProctransHumDev_DescripStats$GPMean, 
@@ -754,7 +750,7 @@ hist(Merged_ProctransHumDev_DescripStats$GPMean,
      main = "Distribution of Occurence of GPMean")
 ```
 
-![](MSDS6306_CaseStudy_2_files/figure-html/unnamed-chunk-34-2.png)<!-- -->
+![](MSDS6306_CaseStudy_2_files/figure-html/unnamed-chunk-28-2.png)<!-- -->
 
 # Remove Unused Environment Variables
 
@@ -888,7 +884,7 @@ ggplot(data = merge(Merged_ProctransHumDev, within(DP_Top15, rm("DPMean", "HDI")
   coord_flip()
 ```
 
-![](MSDS6306_CaseStudy_2_files/figure-html/unnamed-chunk-35-1.png)<!-- -->
+![](MSDS6306_CaseStudy_2_files/figure-html/unnamed-chunk-29-1.png)<!-- -->
 
 ```r
 GP_Top15 <- aggregate(GPMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) %>%
@@ -905,7 +901,7 @@ ggplot(data = merge(Merged_ProctransHumDev, within(GP_Top15, rm("GPMean", "HDI")
   coord_flip()
 ```
 
-![](MSDS6306_CaseStudy_2_files/figure-html/unnamed-chunk-35-2.png)<!-- -->
+![](MSDS6306_CaseStudy_2_files/figure-html/unnamed-chunk-29-2.png)<!-- -->
 
 ```r
 GP_DP_Common_Cntry <- as.data.frame(intersect(DP_Top15$CntryResdnc, GP_Top15$CntryResdnc))
@@ -943,7 +939,7 @@ legend("topleft", pch=c(2,2), col=c("red", "blue"),
        c("Male", "Female"), bty="o",  box.col="darkgreen", cex=.8)
 ```
 
-![](MSDS6306_CaseStudy_2_files/figure-html/unnamed-chunk-35-3.png)<!-- -->
+![](MSDS6306_CaseStudy_2_files/figure-html/unnamed-chunk-29-3.png)<!-- -->
 
 ```r
 ggplot(Merged_ProctransHumDev, aes(x=Age,y=AnnualIncome,color=Gender)) + 
@@ -953,7 +949,7 @@ ggplot(Merged_ProctransHumDev, aes(x=Age,y=AnnualIncome,color=Gender)) +
   theme(plot.title = element_text(hjust = 0.5))
 ```
 
-![](MSDS6306_CaseStudy_2_files/figure-html/unnamed-chunk-35-4.png)<!-- -->
+![](MSDS6306_CaseStudy_2_files/figure-html/unnamed-chunk-29-4.png)<!-- -->
 
 ```r
 ggplot(data = merge(Merged_ProctransHumDev, GP_DP_Common_Cntry, x.by = "CntryResdnc", y.by = "CommonCntry")) +
@@ -964,7 +960,7 @@ ggplot(data = merge(Merged_ProctransHumDev, GP_DP_Common_Cntry, x.by = "CntryRes
   theme(plot.title = element_text(hjust = 0.5))
 ```
 
-![](MSDS6306_CaseStudy_2_files/figure-html/unnamed-chunk-35-5.png)<!-- -->
+![](MSDS6306_CaseStudy_2_files/figure-html/unnamed-chunk-29-5.png)<!-- -->
 
 ```r
 plot(Merged_ProctransHumDev$SWLSMean, Merged_ProctransHumDev$HDI, 
@@ -973,7 +969,7 @@ plot(Merged_ProctransHumDev$SWLSMean, Merged_ProctransHumDev$HDI,
      frame.plot=FALSE, col=ifelse(Merged_ProctransHumDev$Gender=="Male", "red", "blue"))
 ```
 
-![](MSDS6306_CaseStudy_2_files/figure-html/unnamed-chunk-35-6.png)<!-- -->
+![](MSDS6306_CaseStudy_2_files/figure-html/unnamed-chunk-29-6.png)<!-- -->
 
 ```r
 ggplot(Merged_ProctransHumDev, aes(x=SWLSMean,y=HDI,color=Gender)) + 
@@ -984,7 +980,7 @@ ggplot(Merged_ProctransHumDev, aes(x=SWLSMean,y=HDI,color=Gender)) +
   theme(plot.title = element_text(hjust = 0.5))
 ```
 
-![](MSDS6306_CaseStudy_2_files/figure-html/unnamed-chunk-35-7.png)<!-- -->
+![](MSDS6306_CaseStudy_2_files/figure-html/unnamed-chunk-29-7.png)<!-- -->
 
 ```r
 ggplot(Merged_ProctransHumDev) +
@@ -996,7 +992,7 @@ ggplot(Merged_ProctransHumDev) +
   theme(plot.title = element_text(hjust = 0.5))
 ```
 
-![](MSDS6306_CaseStudy_2_files/figure-html/unnamed-chunk-35-8.png)<!-- -->
+![](MSDS6306_CaseStudy_2_files/figure-html/unnamed-chunk-29-8.png)<!-- -->
 
 ```r
 LS_Top15 <- aggregate(SWLSMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) %>%
@@ -1013,7 +1009,7 @@ ggplot(data = merge(Merged_ProctransHumDev, within(LS_Top15, rm("SWLSMean", "HDI
   coord_flip()
 ```
 
-![](MSDS6306_CaseStudy_2_files/figure-html/unnamed-chunk-35-9.png)<!-- -->
+![](MSDS6306_CaseStudy_2_files/figure-html/unnamed-chunk-29-9.png)<!-- -->
 
 #Write the Human Development Data to CSV
 
