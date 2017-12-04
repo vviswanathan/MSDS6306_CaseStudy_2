@@ -90,7 +90,7 @@ The following datasets are taken from data collected by Qualtrics on Procrastina
 * How long have you held this position? Years: Number of years in this job: *If answer was a log number, we changed to integar. There were 224 observations to clean up with that issue. Also there were 42 that answered with "999", which is impractical, and so these observations were changed to "NA".*
 * How long have you helpd this position? Months: Number of months in this job: *No issues.*
 * Community: Size of Community: *No issues*
-* Country of Residence: *Responses of "0" that were changed to "Missing". We also recatoegorized into industry and title.*
+* Country of Residence: *Responses of "0" that were changed to "Missing".*
 * Marital Status: *No issues*
 * Number of Sons: *Represented with a number; however 274 showed up as Female, and 613 showed up as Male. This needed to be changed from Male to "1" and Female to "2".*
 * Number of Daughters: *No issues.*
