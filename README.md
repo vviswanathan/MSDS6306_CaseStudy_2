@@ -138,19 +138,19 @@ The following datasets are taken from data collected by Qualtrics on Procrastina
 * Country/Territory
 * HDI: This variable has two subset variables: 2016 estimates for 2015 and Change in rank from previous year
 
-# Conclusion
-To state again, the purpose/objective of this project came from an engagement between the client LinkedIn and Vivek Viswanathan and Megan Hodges LLC. LinkedIn was in need of understanding procrastination among people in certain countries, and how that relates to age, income, life satisfaction, and human development as they look to expand their "hiring assistance" efforts to more countries. They had contracted Vivek and Megan to deliver:
-
-**1a. The Top 15 Nations in Average DP Procrastination Scores:** 
+# Conclusion  
+To state again, the purpose/objective of this project came from an engagement between the client LinkedIn and Vivek Viswanathan and Megan Hodges LLC. LinkedIn was in need of understanding procrastination among people in certain countries, and how that relates to age, income, life satisfaction, and human development as they look to expand their "hiring assistance" efforts to more countries. They had contracted Vivek and Megan to deliver:  
+  
+**1a. The Top 15 Nations in Average DP Procrastination Scores:**  
 Brunei, Panama, Qatar, Lithuania, Sri Lanka, Ecuador, Bulgaria, Austria, Slovenia, Uruguay, Finland, Portugal, Dominican Republic, Kazakhstan, and Russia 
 
-**1b. The Top 15 Nations in Average GP Procrastination Scores:** 
+**1b. The Top 15 Nations in Average GP Procrastination Scores:**   
 Qatar, Panama, Myanmar, Sri Lanka, Poland, Austria, Turkey, Ecuador, France, Malaysia, Slovenia, Uruguay, Iceland, Portugal, and Sweden 
 
-**1c: Countries that made both Top 15 List:** 
+**1c: Countries that made both Top 15 List:**   
 Qatar, Panama, Sri Lanka, Austria, Ecuador, Slovenia, Uruguay, Portugal 
 
-**2. The correlation between the counties on both top 15 lists between Age and Income:** 
+**2. The correlation between the counties on both top 15 lists between Age and Income:**   
 Is there a relationship between Age and Income? 
 
 **3. And the correlation/relationship between the countries on both top 15 and Life Satisfaction and Human Development (HDI):** 
@@ -158,10 +158,10 @@ Is there a discernible relationship between SWLS and HDI?
 Yes, there is a discernible relationship and trend between Life Satisfaction (SWLS) and Human Development (HDI). The greater the HDI the more life satisfaction there is. Medium and High HDI resulted in approx the same SWLS. 
 
 ## Sources
-**Human Development Index:** Wikipedia: United Nations Development Programme's Human Development Report, "Human Development Report 2016 – "Human Development for Everyone"" (PDF). HDRO (Human Development Report Office) United Nations Development Programme. pp. 198–201. Retrieved 2 September 2017.
-**Procrastination Data:** Qualtrics
-**Decisional Procrastination:** Janis and Mann’s (1977) conflict model of decision making. Mann’s (1982, as cited in Ferrari et al., 1995). (Mann, Burnett, Radford, & Ford, 1997). https://pdfs.semanticscholar.org/f02f/76877ec329060cad0ff8c94b5fc3f4e3e1f9.pdf
-**Adult Inventory Procrastination:**  (Ferrari, 1991) (see Ferrari et al., 1995, for the complete list of items)
+**Human Development Index:** Wikipedia: United Nations Development Programme's Human Development Report, "Human Development Report 2016 – "Human Development for Everyone"" (PDF). HDRO (Human Development Report Office) United Nations Development Programme. pp. 198–201. Retrieved 2 September 2017.  
+**Procrastination Data:** Qualtrics  
+**Decisional Procrastination:** Janis and Mann’s (1977) conflict model of decision making. Mann’s (1982, as cited in Ferrari et al., 1995). (Mann, Burnett, Radford, & Ford, 1997). https://pdfs.semanticscholar.org/f02f/76877ec329060cad0ff8c94b5fc3f4e3e1f9.pdf  
+**Adult Inventory Procrastination:**  (Ferrari, 1991) (see Ferrari et al., 1995, for the complete list of items)  
 **General Procrastination Scale:** Lay, C. (1986). At last, my research article on procrastination. Journal of Research in
-Personality, 20, 474-495. 
-**Satisfaction with Life Scale:** Ed Diener, Robert A. Emmons, Randy J. Larsen and Sharon Griffin as noted in the 1985 article in the Journal of Personality Assessment. 5-point attribution: Kobau, R., Sniezek, J., Zack, M. M., Lucas, R. E., & Burns, A. (2010). Well‐being assessment: An evaluation of well‐being scales for public health and population estimates of well‐being among US adults. Applied Psychology: Health and Well-being, 2(3), 272-297. doi:http://dx.doi.org/10.1111/j.1758-0854.2010.01035.x
+Personality, 20, 474-495.  
+**Satisfaction with Life Scale:** Ed Diener, Robert A. Emmons, Randy J. Larsen and Sharon Griffin as noted in the 1985 article in the Journal of Personality Assessment. 5-point attribution: Kobau, R., Sniezek, J., Zack, M. M., Lucas, R. E., & Burns, A. (2010). Well‐being assessment: An evaluation of well‐being scales for public health and population estimates of well‐being among US adults. Applied Psychology: Health and Well-being, 2(3), 272-297. doi:http://dx.doi.org/10.1111/j.1758-0854.2010.01035.x  
