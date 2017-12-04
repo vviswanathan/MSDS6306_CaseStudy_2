@@ -1,4 +1,4 @@
-# README.md - MSDS6306_CaseStudy_2
+# README.md - "Understanding Top Procrastination Countries based on DP and GP Scores, and how it relates to Age, Income, Life Satisfaction, and Human Development"
 ---
 Title: "Understanding Top Procrastination Countries based on DP and GP Scores, and how it relates to Age, Income, Life Satisfaction, and Human Development"
 
@@ -128,13 +128,17 @@ The following datasets are taken from data collected by Qualtrics on Procrastina
 * HDI: This variable has two subset variables: 2016 estimates for 2015 and Change in rank from previous year
 
 # Conclusion
+To state again, the purpose/objective of this project came from an engagement between the client LinkedIn and Vivek Viswanathan and Megan Hodges LLC. LinkedIn was in need of understanding procrastination among people in certain countries, and how that relates to age, income, life satisfaction, and human development as they look to expand their "hiring assistance" efforts to more countries. They had contracted Vivek and Megan to deliver:
 
 1a. The Top 15 Nations in Average DP Procrastination Scores: 
 Brunei, Panama, Qatar, Lithuania, Sri Lanka, Ecuador, Bulgaria, Austria, Slovenia, Uruguay, Finland, Portugal, Dominican Republic, Kazakhstan, and Russia 
+
 1b. The Top 15 Nations in Average GP Procrastination Scores: 
 Qatar, Panama, Myanmar, Sri Lanka, Poland, Austria, Turkey, Ecuador, France, Malaysia, Slovenia, Uruguay, Iceland, Portugal, and Sweden 
+
 1c: Countries that made both Top 15 List: 
 Qatar, Panama, Sri Lanka, Austria, Ecuador, Slovenia, Uruguay, Portugal 
+
 2. The correlation between the counties on both top 15 lists between Age and Income: 
 Is there a relationship between Age and Income? 
 
