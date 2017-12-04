@@ -1,14 +1,13 @@
 # Understanding Top Procrastination Countries based on DP and GP Scores, and how it relates to Age, Income, Life Satisfaction, and Human Development
+
 ---
-**Title:** *"Understanding Top Procrastination Countries based on DP and GP Scores, and how it relates to Age, Income, Life Satisfaction, and Human Development"*
-
-**Author:** Vivek Viswanathan and Megan Hodges
-
-**Date:** Decemeber 4, 2017
-
-**Output:**
+title: "MSDS6306_CaseStudy_2"
+author: "Megan Hodges and Vivek Viswanathan"
+date: "December 4, 2017"
+output: 
   html_document:
-    keep_md: yes
+    keep_md: true
+---
     
 **Contact Information:**  
 Vivek, vviswanathan@mail.smu.edu  
