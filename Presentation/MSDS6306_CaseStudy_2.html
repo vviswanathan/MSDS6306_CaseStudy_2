@@ -266,28 +266,25 @@ library(RCurl)</code></pre>
 ## [52] yaml_2.1.14         colorspace_1.3-2    memoise_1.1.0      
 ## [55] knitr_1.17          bindr_0.1           haven_1.1.0</code></pre>
 </div>
-<div id="set-base-directory" class="section level1">
-<h1>Set Base Directory:</h1>
+<div id="set-base-directory" class="section level2">
+<h2>Set Base Directory:</h2>
 <pre class="r"><code># Executing from Vivek's System:
 BaseDir &lt;- &quot;C:/Vivek/Data_Science/MSDS6306-DoingDataScience/Case_Study_2/MSDS6306_CaseStudy_2/&quot;
 
 # Executing from Megan's System:
 # BaseDir &lt;- &quot;/Users/megandiane/Desktop/DDS_Class/Case_Study_2/MSDS6306_CaseStudy_2&quot;</code></pre>
 </div>
-<div id="set-other-working-directories-and-file-path" class="section level1">
-<h1>Set Other Working Directories and File Path</h1>
+<div id="set-other-working-directories-and-file-path" class="section level2">
+<h2>Set Other Working Directories and File Path</h2>
 <pre class="r"><code>DataDir &lt;- paste(BaseDir,&quot;Data&quot;, sep = &quot;/&quot;)
 CodeDir &lt;- paste(BaseDir,&quot;Code&quot;, sep = &quot;/&quot;)
 PresenatationDir &lt;- paste(BaseDir,&quot;Presentation&quot;, sep = &quot;/&quot;)
 
 ProcrastinationDataFile &lt;- paste(DataDir, &quot;Procrastination.csv&quot;, sep = &quot;/&quot;)</code></pre>
 </div>
-<div id="read-the-data-file" class="section level1">
-<h1>Read the Data File</h1>
-<pre class="r"><code>ProcrastinationData &lt;- read.csv(ProcrastinationDataFile, sep = &quot;,&quot;, header = T, na.strings = &quot;&quot;)
-
-dim(ProcrastinationData)</code></pre>
-<pre><code>## [1] 4264   61</code></pre>
+<div id="read-the-data-file" class="section level2">
+<h2>Read the Data File</h2>
+<pre class="r"><code>ProcrastinationData &lt;- read.csv(ProcrastinationDataFile, sep = &quot;,&quot;, header = T, na.strings = &quot;&quot;)</code></pre>
 </div>
 <div id="assign-column-names" class="section level1">
 <h1>Assign Column Names</h1>
@@ -306,6 +303,17 @@ dim(ProcrastinationData)</code></pre>
                                 &quot;G16LstMntGft&quot;, &quot;G17DlyEsntPr&quot;, &quot;G18DyTskCmpl&quot;, &quot;G19PshTskTmr&quot;, 
                                 &quot;G20CmpTskRlx&quot;, &quot;S1LfClsI2dl&quot;, &quot;S2LfCndExlnt&quot;, &quot;S3StsfdWtLf&quot;, 
                                 &quot;S4GtImThgsLf&quot;, &quot;S5LvAgChgNth&quot;, &quot;CnsdrSlfProc&quot;, &quot;OthCsndrProc&quot;)</code></pre>
+<div id="the-data-file-has-been-read-and-stored-in-a-temporary-data-frame-procrastinationdata.-the-column-names-have-been-standardized-to-be-12-characters-long-or-lesser." class="section level4">
+<h4>The data file has been read and stored in a temporary data frame (ProcrastinationData). The column names have been standardized to be 12 characters long or lesser.</h4>
+</div>
+<div id="the-column-name-mapping-between-the-source-csv-file-and-the-data-frame-can-be-found-at-the-below-path" class="section level4">
+<h4>The Column name mapping between the source csv file and the data frame can be found at the below path:</h4>
+</div>
+<div id="httpsgithub.comvviswanathanmsds6306_casestudy_2blobmasterpresentationprocrastination_column_name_mapping.csv" class="section level4">
+<h4><a href="https://github.com/vviswanathan/MSDS6306_CaseStudy_2/blob/master/Presentation/Procrastination_Column_Name_Mapping.csv" class="uri">https://github.com/vviswanathan/MSDS6306_CaseStudy_2/blob/master/Presentation/Procrastination_Column_Name_Mapping.csv</a></h4>
+<pre class="r"><code>dim(ProcrastinationData)</code></pre>
+<pre><code>## [1] 4264   61</code></pre>
+</div>
 </div>
 <div id="to-clean-up-the-data-from-procrastination.csv-we-took-the-male-and-female-that-we-found-under-the-column-of-sons-and" class="section level1">
 <h1>To Clean up the data from Procrastination.csv we took the “Male” and “Female” that we found under the Column of “Sons” and</h1>

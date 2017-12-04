@@ -75,6 +75,8 @@ names(ProcrastinationData) <- c("Age", "Gender", "Kids", "Education", "WorkStatu
 ```
 
 #### The data file has been read and stored in a temporary data frame (ProcrastinationData). The column names have been standardized to be 12 characters long or lesser.
+#### The Column name mapping between the source csv file and the data frame can be found at the below path:
+#### https://github.com/vviswanathan/MSDS6306_CaseStudy_2/blob/master/Presentation/Procrastination_Column_Name_Mapping.csv
 
 ```{r}
 dim(ProcrastinationData)
