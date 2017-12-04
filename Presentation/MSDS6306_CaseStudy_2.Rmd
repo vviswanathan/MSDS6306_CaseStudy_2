@@ -81,8 +81,8 @@ names(ProcrastinationData) <- c("Age", "Gender", "Kids", "Education", "WorkStatu
 #### https://github.com/vviswanathan/MSDS6306_CaseStudy_2/blob/master/Presentation/Procrastination_Column_Name_Mapping.csv
 
 ## 2_c_2_e To Clean up the data from Procrastination.csv: 
-####      a. we converted the "Male" and "Female" that we found under the Column of "SonsCnt" and replaced it with the correct response of 1 = Male and 2 = Female. 
-####      b. we rounded the PostHeldYrs to the nearest integer 
+####      a. Converted the "Male" and "Female" that we found under the Column of "SonsCnt" and replaced it with the correct response of 1 = Male and 2 = Female. 
+####      b. Rounded the PostHeldYrs to the nearest integer 
 ####      c. If the Annual Income was missing, we have converted it to -0.01 instead of 0. This will enable us to separate the true 0 from the missing values. 
 ####      d. Converted missing values in all the remaining Numeric fields to 0 
 ####      e. Converted missing values in all the Character fields to "Missing" 
