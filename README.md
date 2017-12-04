@@ -73,7 +73,7 @@ The following datasets are taken from data collected by Qualtrics on Procrastina
 
 ## Procrastination.csv
 
-**Type:** Comma-separated value file
+**Type:** Comma-separated value file  
 **Dimensions:** 4162 observations x 19 variables
 
 ### Variable Information, and how each variable was cleaned up:
