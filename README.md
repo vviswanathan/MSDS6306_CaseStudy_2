@@ -158,10 +158,10 @@ Is there a discernible relationship between SWLS and HDI?
 Yes, there is a discernible relationship and trend between Life Satisfaction (SWLS) and Human Development (HDI). The greater the HDI the more life satisfaction there is. Medium and High HDI resulted in approx the same SWLS. 
 
 ## Sources
-**Human Development Index:** Wikipedia: United Nations Development Programme's Human Development Report, "Human Development Report 2016 – "Human Development for Everyone"" (PDF). HDRO (Human Development Report Office) United Nations Development Programme. pp. 198–201. Retrieved 2 September 2017.  
-**Procrastination Data:** Qualtrics  
-**Decisional Procrastination:** Janis and Mann’s (1977) conflict model of decision making. Mann’s (1982, as cited in Ferrari et al., 1995). (Mann, Burnett, Radford, & Ford, 1997). https://pdfs.semanticscholar.org/f02f/76877ec329060cad0ff8c94b5fc3f4e3e1f9.pdf  
-**Adult Inventory Procrastination:**  (Ferrari, 1991) (see Ferrari et al., 1995, for the complete list of items)  
-**General Procrastination Scale:** Lay, C. (1986). At last, my research article on procrastination. Journal of Research in
+* **Human Development Index:** Wikipedia: United Nations Development Programme's Human Development Report, "Human Development Report 2016 – "Human Development for Everyone"" (PDF). HDRO (Human Development Report Office) United Nations Development Programme. pp. 198–201. Retrieved 2 September 2017.  
+* **Procrastination Data:** Qualtrics  
+* **Decisional Procrastination:** Janis and Mann’s (1977) conflict model of decision making. Mann’s (1982, as cited in Ferrari et al., 1995). (Mann, Burnett, Radford, & Ford, 1997). https://pdfs.semanticscholar.org/f02f/76877ec329060cad0ff8c94b5fc3f4e3e1f9.pdf  
+* **Adult Inventory Procrastination:**  (Ferrari, 1991) (see Ferrari et al., 1995, for the complete list of items)  
+* **General Procrastination Scale:** Lay, C. (1986). At last, my research article on procrastination. Journal of Research in
 Personality, 20, 474-495.  
-**Satisfaction with Life Scale:** Ed Diener, Robert A. Emmons, Randy J. Larsen and Sharon Griffin as noted in the 1985 article in the Journal of Personality Assessment. 5-point attribution: Kobau, R., Sniezek, J., Zack, M. M., Lucas, R. E., & Burns, A. (2010). Well‐being assessment: An evaluation of well‐being scales for public health and population estimates of well‐being among US adults. Applied Psychology: Health and Well-being, 2(3), 272-297. doi:http://dx.doi.org/10.1111/j.1758-0854.2010.01035.x  
+* **Satisfaction with Life Scale:** Ed Diener, Robert A. Emmons, Randy J. Larsen and Sharon Griffin as noted in the 1985 article in the Journal of Personality Assessment. 5-point attribution: Kobau, R., Sniezek, J., Zack, M. M., Lucas, R. E., & Burns, A. (2010). Well‐being assessment: An evaluation of well‐being scales for public health and population estimates of well‐being among US adults. Applied Psychology: Health and Well-being, 2(3), 272-297. doi:http://dx.doi.org/10.1111/j.1758-0854.2010.01035.x  
