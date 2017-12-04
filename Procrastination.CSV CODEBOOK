@@ -1,7 +1,7 @@
 
 # Codebook for Procrastination.csv data
 
-## We have the main Codebook that contains the below 7 steps; however we have created this separate Codebook for Procrastination.csv because there was a lot of data cleaning that needed to happen with this file.
+## We have the main Codebook that contains the below 6 steps; however we have created this separate Codebook for Procrastination.csv because there was a lot of data cleaning that needed to happen with this file.
 
 ### We have split the code, by comments, into 6 sections: 
 1. Help Functions/Constants 
@@ -11,7 +11,7 @@
 5. Presenting the data graphically 
 6. Writing Final data to CSV 
 
-## Procrastination.csv Steps to clean:
+## Steps to clean Procrastination.csv:
 
 ### We first made sure that all the colums were the proper datatypes, whether character or numeric.
 sapply(ProcTrans, class)
@@ -79,6 +79,7 @@ ProcTrans <- ProcrastinationData %>%
 sapply(ProcTrans, class)
 
 ### The data for the Column "Country of Residence" had an infinite amount of answers, and so we took the time to categorize by industry and title:
+
 ProcTrans[grep("(teacher)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Teacher"
 ProcTrans[grep("(accountant)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Accountant"
 ProcTrans[grep("(professor)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Professor"
@@ -112,17 +113,15 @@ ProcTrans[grep("(technician)", ProcTrans$CurrOccption, ignore.case = T), "CurrOc
 ProcTrans[grep("(CTO))", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "CTO"
 ProcTrans[grep("(technici)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Technician"
 
-### Merge this data frame to the Country of Residence column of Procrastination.csv so that your data now has an HDI column and HDI categories
+### Merge this data frame to the Country of Residence column of Procrastination.csv so that your data now has an HDI column and HDI categories:
 Merged_ProctransHumDev <- merge(ProcTrans, Total_HumDev, by.x=c("CntryResdnc"), by.y = c("Country"))
 
 ### Lastly, our client wanted us to only look at those observations that were dealing with people 18 years old and older, so we deleted all those younger:
-Remove all Participants who are under 18
 
 ### We also chose to remove all Age of Zero (0) because our client is looking for Procrastination as it relates to positions held, how long, and annual income, and all observations with Zero Age, also did not have jobs listed:
+
 Merged_ProctransHumDev <- Merged_ProctransHumDev[Merged_ProctransHumDev$Age >= 18.0, ]
-
 unique(format(Merged_ProctransHumDev$Age, digits = 10))
-
 Merged_ProctransHumDev_DescripStats <- Merged_ProctransHumDev[c("Age", "AnnualIncome", "HDI",
                                                                 "DPMean", "AIPMean",
                                                                 "GPMean", "SWLSMean")]
@@ -132,6 +131,7 @@ options(digits=2)
 ProctransHumDev_DescripStats <- stat.desc(Merged_ProctransHumDev_DescripStats)
 ProctransHumDev_DescripStats
 
+### Histogram of the DP Mean and the GP Mean with HDI:
 hist(Merged_ProctransHumDev_DescripStats$DPMean)
 hist(Merged_ProctransHumDev_DescripStats$GPMean)
 
