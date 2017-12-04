@@ -24,10 +24,9 @@ if (!require(RCurl)) install.packages("RCurl")
 if (!require(rvest)) install.packages("rvest")  
 if (!require(plyr)) install.packages("plyr")  
 if (!require(pastecs)) install.packages("pastecs")```  
-
-  
+ 
 ### Load Libraries 
-```library(repmis)  
+library(repmis)  
 library(dplyr)  
 library(tidyverse)  
 library(tidyr)  
@@ -38,8 +37,7 @@ library(XML)
 library(RCurl)  
 library(rvest)  
 library(plyr)  
-library(pastecs)```  
-
+library(pastecs)  
   
 ### Executing from Vivek's System:  
 ```BaseDir <- "C:/Vivek/Data_Science/MSDS6306-DoingDataScience/Case_Study_2/MSDS6306_CaseStudy_2/"```  
