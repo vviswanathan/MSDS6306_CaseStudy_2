@@ -224,6 +224,39 @@ Total_HumDev <- within(Total_HumDev, rm("Rank"))
 # Remove Unused Environment Variables
 rm(VHighHumDev, HighHumDev, MedHumDev, LowHumDev)
 
+ProcTrans[grep("(teacher)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Teacher"
+ProcTrans[grep("(accountant)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Accountant"
+ProcTrans[grep("(professor)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Professor"
+ProcTrans[grep("(engineer)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Engineer"
+ProcTrans[grep("(manager)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Manager"
+ProcTrans[grep("(retired)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Retired"
+ProcTrans[grep("(marketing)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Marketing"
+ProcTrans[grep("(attorney)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Attorney"
+ProcTrans[grep("(doctor)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Doctor"
+ProcTrans[grep("(student)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Student"
+ProcTrans[grep("(writer)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Writer"
+ProcTrans[grep("(developer)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Developer"
+ProcTrans[grep("(nurse)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Nurse"
+ProcTrans[grep("(consultant)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Consultant"
+ProcTrans[grep("(scientist)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Scientist"
+ProcTrans[grep("(admin)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Administrator"
+ProcTrans[grep("(Financial)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Finance"
+ProcTrans[grep("(director)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Director"
+ProcTrans[grep("(customer service)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Customer Service"
+ProcTrans[grep("(libra)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Librarian"
+ProcTrans[grep("(Business / Test Analyst)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "BA"
+ProcTrans[grep("(Business Systems Analyst)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "BA"
+ProcTrans[grep("(BUSINESS CONSULTA)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "BA"
+ProcTrans[grep("(busi)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Business Owner"
+ProcTrans[grep("(artist)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Artist"
+ProcTrans[grep("(web)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Website Designer"
+ProcTrans[grep("(prog)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Programmer"
+ProcTrans[grep("(vp)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Vice President"
+ProcTrans[grep("(train)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Trainer"
+ProcTrans[grep("(technician)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Technician"
+ProcTrans[grep("(CTO))", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "CTO"
+ProcTrans[grep("(technici)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Technician"
+
 #Merge this data frame to the Country of Residence column of Procrastination.csv so that your data now has an HDI column and HDI categories
 Merged_ProctransHumDev <- merge(ProcTrans, Total_HumDev, by.x=c("CntryResdnc"), by.y = c("Country"))
 
