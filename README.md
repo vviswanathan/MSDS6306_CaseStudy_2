@@ -112,12 +112,12 @@ The following datasets are taken from data collected by Qualtrics on Procrastina
 
 ## Human Development Index http://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries 
 
-**Type:** url
+**Type:** url  
 **Dimensions:** 188 observations x 5 variables
 
-### Variable Information of Complete list of Countries:
-* There are 8 tables that pulled data on Human Development by Country, there were 2 tables per Scale:
-Scales:  
+### Variable Information of "Complete list of Countries":
+* There are 8 tables (4 Scales: Very High, High, Medium, Low) that pulled data from Complete list of Countries (2 tables per Scale):  
+### Scales:  
 ### Very High Human Development:
 * Rank: This variable has two subset variables: 2016 estimates for 2015 and Change in rank from previous year
 * Country/Territory
