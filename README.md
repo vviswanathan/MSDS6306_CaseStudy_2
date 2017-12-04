@@ -77,8 +77,8 @@ The following datasets are taken from data collected by Qualtrics on Procrastina
 **Dimensions:** 4162 observations x 19 variables
 
 ### Variable Information, and how each variable was cleaned/manipulated:
-***** Rule of thumb: we made Numeric type columns missing values a "0", and Character type columns blank or "NA" values labeled "Missing".
-***** All columns are proper data types, whether character or numeric.
+##### Rule of thumb: we made Numeric type columns missing values a "0", and Character type columns blank or "NA" values labeled "Missing".
+##### All columns are proper data types, whether character or numeric.
 
 * Age: *No issues; however client only wanted to see those 18 and over, and so all under the age of 18 were removed.*
 * Gender: *No issues*
