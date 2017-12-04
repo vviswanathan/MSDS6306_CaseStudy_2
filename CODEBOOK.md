@@ -74,7 +74,7 @@ dim(ProcrastinationData)
                                 "G20CmpTskRlx", "S1LfClsI2dl", "S2LfCndExlnt", "S3StsfdWtLf", 
                                 "S4GtImThgsLf", "S5LvAgChgNth", "CnsdrSlfProc", "OthCsndrProc")
                                 ```
-
+                                
 ## 3. Cleaning the Data
 ##### *NOTE: The Procrastination Data csv had a lot of manipulation in it, and can be found in the Procrastination.csv CODEBOOK*
 
@@ -82,7 +82,8 @@ dim(ProcrastinationData)
 *Need to put in a format from 8 table to 1 table displaying Country, and HDI score (2016 Estimates for 2015). We only pulled data from the section titled "Complete List of Countries".*
 
 *Scrape Data from Wikipedia: List of Countries By Human Development Index*
-```HumDevUrl <- "https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries"```
+```HumDevUrl <- "https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries"
+```
 
 ### Manipulate each section of Very High Humand Development, High Human Development, Medium Human Development, and Low Human Development.
 *We placed each into a dataframe, removed unnecessary rows and columns. We renamed the columns to make sense for our project: "Rank", "Country", and "HDI", and lastly removed any unused enviornment variables.*
@@ -92,7 +93,6 @@ Very High Human Development
   read_html() %>%
   html_nodes(xpath='//*[@id="mw-content-text"]/div/div[5]/table') %>%
   html_table(fill = T)
-
 VHighHumDev <- data.frame(VHighHumDev[[1]])
 ```
 
