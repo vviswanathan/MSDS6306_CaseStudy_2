@@ -1,0 +1,62 @@
+Column Name in Source CSV File,Column Name in Data Frame
+Age,Age
+Gender,Gender
+Kids,Kids
+Edu,Education
+Work Status,WorkStatus
+Annual Income,AnnualIncome
+Current Occupation,CurrOccption
+How long have you held this position?: Years,PostHeldYrs
+How long have you held this position?: Months,PostHeldMths
+Community size,CmmuntySize
+Country of residence,CntryResdnc
+Marital Status,MaritlStatus
+Number of sons,SonsCnt
+Number of daughters,DaughtersCnt
+(DP 1) I waste a lot of time on trivial matters before getting to the final decisions,D1DsnTmeWst
+(DP 2) Even after I make a decision I delay acting upon it,D2DelayActn
+(DP 3) I don’t make decisions unless I really have to,D3HesitatDsn
+(DP 4) I delay making decisions until it’s too late,D4DelayDsn
+(DP 5) I put off making decisions until it’s too late,D5PutoffDsn
+(AIP 1) I pay my bills on time,A1BillsOnTm
+(AIP 2)I am prompt and on time for most appointments.,A2OnTm4Appt
+"(AIP 3)I lay out my clothes the night before I have an important appointment, so I won’t be late",A3Rdy4NxtDy
+(AIP 4) I find myself running later than I would like to be,A4RuningLate
+(AIP 5) I don’t get things done on time,A5ActvtDlyd
+"(AIP 6) If someone were teaching a course on how to get things done on time, I would attend",A6TmeMgmtTrg
+(AIP 7) My friends and family think I wait until the last minute.,A7FrndsOpn
+(AIP 8) I get important things done with time to spare,A8ImpTskOnTm
+(AIP 9) I am not very good at meeting deadlines,A9MissDedlns
+(AIP 10) I find myself running out of time.,A10RnOutOfTm
+(AIP 11) I schedule doctor’s appointments when I am supposed to without delay,A11DrAptOnTm
+(AIP 12) I am more punctual than most people I know,A12MorPnctul
+"(AIP 13) I do routine maintenance (e.g., changing the car oil) on things I own as often as I should",A13RtneMntnc
+(AIP 14)When I have to be somewhere at a certain time my friends expect me to run a bit late,A14SchdulLte
+(AIP 15)Putting things off till the last minute has cost me money in the past,A15DldActCst
+(GP 1)I often find myself performing tasks that I had intended to do days before,G1LteToTsk
+"(GP2) I often miss concerts, sporting events, or the like because I don’t get around to buying tickets on time",G2LteTktPrch
+"(GP 3) When planning a party, I make the necessary arrangements well in advance",G3PlnPrtyAhd
+"(GP 4) When it is time to get up in the morning, I most often get right out of bed",G4GetUpOnTme
+(GP 5) A letter may sit for days after I write it before mailing it possible,G5PstLtrOnTm
+(GP 6) I generally return phone calls promptly,G6RtrnCalls
+"(GP 7) Even jobs that require little else except sitting down and doing them, I find that they seldom get done for days",G7DlyEsyTsks
+(GP 8) I usually make decisions as soon as possible,G8PrmptDscsn
+(GP 9) I generally delay before starting on work I have to do,G9DlyTskStrt
+"(GP 10) When traveling, I usually have to rush in preparing to arrive at the airport or station at the appropriate time",G10TrvlRsh
+"(GP 11) When preparing to go out, I am seldom caught having to do something at the last minute",G11RdyOnTme
+"(GP 12) In preparation for some deadlines, I often waste time by doing other things",G12StayOnTsk
+"(GP 13) If a bill for a small amount comes, I pay it right away",G13SmlBlOnTm
+(GP 14) I usually return a “RSVP” request very shortly after receiving it,G14PrmptRSVP
+(GP 15) I often have a task finished sooner than necessary,G15TskCmpErl
+(GP 16) I always seem to end up shopping for birthday gifts at the last minute,G16LstMntGft
+(GP 17) I usually buy even an essential item at the last minute,G17DlyEsntPr
+(GP 18) I usually accomplish all the things I plan to do in a day,G18DyTskCmpl
+(GP 19) I am continually saying “I’ll do it tomorrow”,G19PshTskTmr
+(GP 20) I usually take care of all the tasks I have to do before I settle down and relax for the evening,G20CmpTskRlx
+(SWLS 1) In most ways my life is close to my ideal,S1LfClsI2dl
+(SWLS 2)The conditions of my life are excellent,S2LfCndExlnt
+(SWLS 3) I am satisfied with my life.,S3StsfdWtLf
+(SWLS 4) So far I have gotten the important things I want in life,S4GtImThgsLf
+"(SWLS 5) If I could live my life over, I would change almost nothing",S5LvAgChgNth
+Do you consider yourself a procrastinator?,CnsdrSlfProc
+Do others consider you a procrastinator?,OthCsndrProc
