@@ -50,7 +50,7 @@ DataDir <- paste(BaseDir,"Data", sep = "/")
 CodeDir <- paste(BaseDir,"Code", sep = "/")
 PresenatationDir <- paste(BaseDir,"Presentation", sep = "/")
 
-## 2. Downloading and loading the data
+## 2. Downloading and Loading the Data
 ### Read the CSV file, and see how many Rows and Columns there are: 
 ProcrastinationData <- read.csv(ProcrastinationDataFile, sep = ",", header = T, na.strings = "")
 
