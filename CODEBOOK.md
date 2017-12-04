@@ -57,7 +57,6 @@ dim(ProcrastinationData)
 ```
 ### The Column Names in the ProcrastinationData are too long:
 *We shortened the Column names to 12 characters and removed any special characters:*  
-  
 ```names(ProcrastinationData) <- c("Age", "Gender", "Kids", "Education", "WorkStatus", 
                                 "AnnualIncome", "CurrOccption", "PostHeldYrs", "PostHeldMths", 
                                 "CmmuntySize", "CntryResdnc", "MaritlStatus", "SonsCnt", 
@@ -73,7 +72,7 @@ dim(ProcrastinationData)
                                 "G16LstMntGft", "G17DlyEsntPr", "G18DyTskCmpl", "G19PshTskTmr", 
                                 "G20CmpTskRlx", "S1LfClsI2dl", "S2LfCndExlnt", "S3StsfdWtLf", 
                                 "S4GtImThgsLf", "S5LvAgChgNth", "CnsdrSlfProc", "OthCsndrProc")
-                                ```
+```
                                 
 ## 3. Cleaning the Data
 ##### *NOTE: The Procrastination Data csv had a lot of manipulation in it, and can be found in the Procrastination.csv CODEBOOK*
@@ -83,8 +82,7 @@ dim(ProcrastinationData)
 *Need to put in a format from 8 table to 1 table displaying Country, and HDI score (2016 Estimates for 2015). We only pulled data from the section titled "Complete List of Countries".*
 
 *Scrape Data from Wikipedia: List of Countries By Human Development Index*
-```HumDevUrl <- "https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries"
-```
+```HumDevUrl <- "https://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries"```
 
 ### Manipulate each section of Very High Humand Development, High Human Development, Medium Human Development, and Low Human Development.
 *We placed each into a dataframe, removed unnecessary rows and columns. We renamed the columns to make sense for our project: "Rank", "Country", and "HDI", and lastly removed any unused enviornment variables.*
@@ -98,7 +96,8 @@ VHighHumDev <- data.frame(VHighHumDev[[1]])
 ```
 
 Remove Unnecessary Rows
-```VHighHumDev_1Head <- VHighHumDev[-c(1,2,3,30,31), ]```
+```VHighHumDev_1Head <- VHighHumDev[-c(1,2,3,30,31), ]
+```
 
 Remove Unnecessary Columns
 ```VHighHumDev[2] <- list(NULL)
@@ -119,9 +118,8 @@ High Human Development
   read_html() %>%
   html_nodes(xpath='//*[@id="mw-content-text"]/div/div[6]/table') %>%
   html_table(fill = T)
-  ```
-
-```HighHumDev <- data.frame(HighHumDev[[1]])```
+HighHumDev <- data.frame(HighHumDev[[1]])
+```
 
 Remove Unnecessary Rows
 ```HighHumDev_1Head <- HighHumDev[-c(1,2,3,32,33), ]```
@@ -145,9 +143,8 @@ Medium Human Development
   read_html() %>%
   html_nodes(xpath='//*[@id="mw-content-text"]/div/div[7]/table') %>%
   html_table(fill = T)
-  ```
-
-```MedHumDev <- data.frame(MedHumDev[[1]])```
+MedHumDev <- data.frame(MedHumDev[[1]])
+```
 
 Remove Unnecessary Rows
 ```MedHumDev_1Head <- MedHumDev[-c(1,2,3,24,25), ]```
@@ -171,9 +168,8 @@ Low Human Development
   read_html() %>%
   html_nodes(xpath='//*[@id="mw-content-text"]/div/div[8]/table') %>%
   html_table(fill = T)
-  ```
-
-```LowHumDev <- data.frame(LowHumDev[[1]])```
+LowHumDev <- data.frame(LowHumDev[[1]])
+```
 
 Remove Unnecessary Rows
 ```LowHumDev_1Head <- LowHumDev[-c(1,2,3,25,26), ]```
