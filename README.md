@@ -129,6 +129,16 @@ The following datasets are taken from data collected by Qualtrics on Procrastina
 
 # Conclusion
 
+1a. The Top 15 Nations in Average DP Procrastination Scores:
+
+1b. The Top 15 Nations in Average GP Procrastination Scores:
+
+1c: Countries that made both Top 15 List:
+
+2. The correlation between the counties on both top 15 lists between Age and Income:
+
+3. And the correlation/relationship between the countries on both top 15 and Life Satisfaction and Human Development (HDI):
+
 ## Sources
 * Human Development Index: Wikipedia: United Nations Development Programme's Human Development Report, "Human Development Report 2016 – "Human Development for Everyone"" (PDF). HDRO (Human Development Report Office) United Nations Development Programme. pp. 198–201. Retrieved 2 September 2017.
 * Procrastination Data: Qualtrics
