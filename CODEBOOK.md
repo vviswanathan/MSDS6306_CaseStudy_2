@@ -23,10 +23,10 @@ if (!require(XML)) install.packages("XML")
 if (!require(RCurl)) install.packages("RCurl")  
 if (!require(rvest)) install.packages("rvest")  
 if (!require(plyr)) install.packages("plyr")  
-if (!require(pastecs)) install.packages("pastecs")```  
- 
+if (!require(pastecs)) install.packages("pastecs")  
+```
 ### Load Libraries 
-library(repmis)  
+```library(repmis)  
 library(dplyr)  
 library(tidyverse)  
 library(tidyr)  
@@ -38,23 +38,23 @@ library(RCurl)
 library(rvest)  
 library(plyr)  
 library(pastecs)  
-  
+``` 
 ### Executing from Vivek's System:  
-```BaseDir <- "C:/Vivek/Data_Science/MSDS6306-DoingDataScience/Case_Study_2/MSDS6306_CaseStudy_2/"```  
-  
+```BaseDir <- "C:/Vivek/Data_Science/MSDS6306-DoingDataScience/Case_Study_2/MSDS6306_CaseStudy_2/"  
+```  
 ### Executing from Megan's System:  
-```BaseDir <- "/Users/megandiane/Desktop/DDS_Class/Case_Study_2/MSDS6306_CaseStudy_2"```
-  
+```BaseDir <- "/Users/megandiane/Desktop/DDS_Class/Case_Study_2/MSDS6306_CaseStudy_2"
+```
 ### Set Other Working Directories and File Path  
 ```DataDir <- paste(BaseDir,"Data", sep = "/")  
 CodeDir <- paste(BaseDir,"Code", sep = "/")  
-PresenatationDir <- paste(BaseDir,"Presentation", sep = "/")``` 
-  
+PresenatationDir <- paste(BaseDir,"Presentation", sep = "/")
+```
 ## 2. Downloading and Loading the Data  
 ### Read the CSV file, and see how many Rows and Columns there are:  
-``ProcrastinationData <- read.csv(ProcrastinationDataFile, sep = ",", header = T, na.strings = "")```  
-```dim(ProcrastinationData)```  
-
+```ProcrastinationData <- read.csv(ProcrastinationDataFile, sep = ",", header = T, na.strings = "")
+dim(ProcrastinationData)
+```
 ### The Column Names in the ProcrastinationData are too long:
 *We shortened the Column names to 12 characters and removed any special characters:*  
   
@@ -72,7 +72,8 @@ PresenatationDir <- paste(BaseDir,"Presentation", sep = "/")```
                                 "G12StayOnTsk", "G13SmlBlOnTm", "G14PrmptRSVP", "G15TskCmpErl", 
                                 "G16LstMntGft", "G17DlyEsntPr", "G18DyTskCmpl", "G19PshTskTmr", 
                                 "G20CmpTskRlx", "S1LfClsI2dl", "S2LfCndExlnt", "S3StsfdWtLf", 
-                                "S4GtImThgsLf", "S5LvAgChgNth", "CnsdrSlfProc", "OthCsndrProc")```
+                                "S4GtImThgsLf", "S5LvAgChgNth", "CnsdrSlfProc", "OthCsndrProc")
+                                ```
 
 ## 3. Cleaning the Data
 ##### *NOTE: The Procrastination Data csv had a lot of manipulation in it, and can be found in the Procrastination.csv CODEBOOK*
