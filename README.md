@@ -15,16 +15,16 @@ Contact Information:
 SessionInfo:
 ---
 
-### Introduction
+# Introduction
 The purpose/objective of this project came from an engagement between the client LinkedIn and Vivek Viswanathan and Megan Hodges LLC. LinkedIn is in need of understanding procrastination among people in certain countries, and how that relates to age, income, life satisfaction, and human development as they look to expand their "hiring assistance" efforts to more countries. They have contracted Vivek and Megan to deliver meaningful data and graphs depicting:
 1. The Top 15 Nations in Average DP and GP Procrastination Scores
 2. The correlation between the counties on both top 15 lists and Age and Income
 3. And the correlation/relationship between the countries on both top 15 and Life Satisfaction and Human Development (HDI)
 
-### Datasets
+## Datasets
 The following datasets are taken from data collected by Qualtrics on Procrastination as well as data scraped from public domain on the Human Development Index.
 
-## This data folder contains the following:
+### This data folder contains the following:
 CleanedInput_w_HDI.csv	Revert "Data File."	
 HumanDevelopment.csv	Close to final code.	
 Procrastination.csv	Code for 3c and 4a		
@@ -42,7 +42,7 @@ Procrastination.csv	Code for 3c and 4a
 * Type: Comma-separated value file
 * Dimensions: 4162 observations x 19 variables
 
-# Variable Information: 
+### Variable Information: 
 
 *Age
 *Gender
@@ -64,7 +64,7 @@ Procrastination.csv	Code for 3c and 4a
 *Do you consider yourself a procrastinator?
 *Do others consider you a procrastinator?
 
-# Miscellaneous Infomation:
+### Miscellaneous Infomation:
 * Definition of Decisional Procrastination (DP): Decisional Procrastination distinguishes between adaptive and non-adaptive patterns of coping with challenge. One of the non-adaptive patterns is defensive avoidance, which arises when any alternative available is unsatisfactory or risky and the decision-maker does not hope to find a better solution. The individual then may try to escape from making a decision by procrastinating. Decisional Procrastination Scale (DPS) was developed within this framework of decision-making research. As implied by the name, this kind of procrastination means to put off making a decision within some specific time frame. The DP is composed of items such that respondents express an opinion on a 5-point scale (1 = strongly disagree; 5 = strongly agree).
 
 * Definition of Adult Inventory Procrastination (AIP): The AIP Scale measures the chronic tendency to postpone tasks in various situations. It examines procrastination motivated by fears (e.g., success or failure), avoidance of disclosure of skill inabilities, and performance insecurity. The AIP assesses avoidance procrastination; that is, putting off tasks to protect one’s self-esteem from possible failure. The AIP is composed of 15 Likert-scale items such that respondents express an opinion on a 5-point scale (1 = strongly disagree; 5 = strongly agree) to statements such as “I am not very good at meeting deadlines” and “I don’t get things done on time.” For seven items, scores are reversed so that high ratings indicate procrastination.
@@ -78,32 +78,32 @@ Procrastination.csv	Code for 3c and 4a
 * Type: url
 * Dimensions: 188 observations x 5 variables
 
-# Variable Information of Complete list of Countries:
+### Variable Information of Complete list of Countries:
 * There are 8 tables that pulled data on Human Development by Country, there were 2 tables per Scale:
 
-# Very High Human Development:
+### Very High Human Development:
 * Rank: This variable has two subset variables: 2016 estimates for 2015 and Change in rank from previous year
 * Country/Territory
 * HDI: This variable has two subset variables: 2016 estimates for 2015 and Change in rank from previous year
 
-# High Human Development:
+### High Human Development:
 * Rank: This variable has two subset variables: 2016 estimates for 2015 and Change in rank from previous year
 * Country/Territory
 * HDI: This variable has two subset variables: 2016 estimates for 2015 and Change in rank from previous year
 
-# Medium Human Development:
+### Medium Human Development:
 * Rank: This variable has two subset variables: 2016 estimates for 2015 and Change in rank from previous year
 * Country/Territory
 * HDI: This variable has two subset variables: 2016 estimates for 2015 and Change in rank from previous year
 
-# Low Human Development:
+### Low Human Development:
 * Rank: This variable has two subset variables: 2016 estimates for 2015 and Change in rank from previous year
 * Country/Territory
 * HDI: This variable has two subset variables: 2016 estimates for 2015 and Change in rank from previous year
 
-### Conclusion
+# Conclusion
 
-### Sources
+## Sources
 * Human Development Index: Wikipedia: United Nations Development Programme's Human Development Report, "Human Development Report 2016 – "Human Development for Everyone"" (PDF). HDRO (Human Development Report Office) United Nations Development Programme. pp. 198–201. Retrieved 2 September 2017.
 * Procrastination Data: Qualtrics
 * Decisional Procrastination: Janis and Mann’s (1977) conflict model of decision making. Mann’s (1982, as cited in Ferrari et al., 1995). (Mann, Burnett, Radford, & Ford, 1997). https://pdfs.semanticscholar.org/f02f/76877ec329060cad0ff8c94b5fc3f4e3e1f9.pdf
