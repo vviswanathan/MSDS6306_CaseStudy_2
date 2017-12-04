@@ -48,7 +48,7 @@ The purpose/objective of this project came from an engagement between the client
 2. The correlation between the counties on both top 15 lists and Age and Income  
 3. And the correlation/relationship between the countries on both top 15 and Life Satisfaction and Human Development (HDI)  
   
-# File Structure
+# GitHub File Structure
 **Code:** contains all the R code to produce the below conclusions.  
 **Data:** contains all Datasets utilized during project. Both in its raw and manipulated/clean format.  
 **Presentation:** contains the R markdown and MD file.  
