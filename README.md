@@ -48,9 +48,9 @@ The purpose/objective of this project came from an engagement between the client
 # File Structure
 Code: contains all the R code to run to produce the below conclusions. 
 Data: contains all Datasets utilized during project. Both in its raw and manipulated/clean format. 
-Presentation: 
-Codebook: 
-Procrastination.csv Codebook: 
+Presentation: contains the R markdown file 
+Codebook: contains the information on the code 
+Procrastination.csv Codebook: this pertains specifically to the code changes to the Procrastination data 
 README.md 
 
 ## Datasets
