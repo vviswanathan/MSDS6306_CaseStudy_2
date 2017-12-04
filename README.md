@@ -1,18 +1,19 @@
 # Codebook - MSDS6306_CaseStudy_2
 ---
-title: "Understanding Top Procrastination Countries based on DP and GP Scores, and how it relates to Age, Income, Life Satisfaction, and Human Development"
+Title: "Understanding Top Procrastination Countries based on DP and GP Scores, and how it relates to Age, Income, Life Satisfaction, and Human Development"
 
-author: Vivek Viswanathan and Megan Hodges
+Author: Vivek Viswanathan and Megan Hodges
 
-date: Decemeber 4, 2017
+Date: Decemeber 4, 2017
 
-output:
+Output:
   html_document:
     keep_md: yes
     
 Contact Information: 
 
 SessionInfo:
+
 ---
 
 # Introduction
