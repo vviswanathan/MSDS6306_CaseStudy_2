@@ -9,10 +9,13 @@ output:
     keep_md: true  
 ``` 
 **Contact Information:**  
+```
 Vivek, vviswanathan@mail.smu.edu  
 Megan, mdhodges@smu.edu
+```
 
 **SessionInfo:**  
+```
 *Megan's System:*  
 R version 3.4.1 (2017-06-30)  
 Platform: x86_64-apple-darwin13.4.0 (64-bit)  
@@ -22,9 +25,10 @@ Running under: macOS High Sierra 10.13.1
 R version 3.4.1 (2017-06-30)   
 Platform: x86_64-w64-mingw32/x64 (64-bit)   
 Running under: Windows >= 8 x64 (build 9200)     
+```
 
 **Packages Utilized:**
-
+```
 library(repmis)  
 library(dplyr)  
 library(tidyverse)  
@@ -37,9 +41,8 @@ library(RCurl)
 library(rvest)  
 library(plyr)  
 library(pastecs)   
-  
+```    
 ---  
-  
 # Introduction
 The purpose/objective of this project came from an engagement between the client LinkedIn and Vivek Viswanathan and Megan Hodges LLC. LinkedIn is in need of understanding procrastination among people in certain countries, and how that relates to age, income, life satisfaction, and human development as they look to expand their "hiring assistance" efforts to more countries. They have contracted Vivek and Megan to deliver meaningful data and graphs depicting:  
 1. The Top 15 Nations in Average DP and GP Procrastination Scores  
@@ -47,13 +50,14 @@ The purpose/objective of this project came from an engagement between the client
 3. And the correlation/relationship between the countries on both top 15 and Life Satisfaction and Human Development (HDI)  
   
 # GitHub File Structure
+```
 **Code:** contains all the R code to produce the below conclusions.  
 **Data:** contains all Datasets utilized during project. Both in its raw and manipulated/clean format.  
 **Presentation:** contains the R markdown and MD file.  
 **Codebook:** contains the information and commentary on the code.  
 **Procrastination.csv Codebook:** this pertains specifically to the code changes to the Procrastination data.  
 **README.md**  
-  
+```  
 ## Datasets  
 The following datasets are taken from data collected by Qualtrics on Procrastination as well as data scraped from public domain on the Human Development Index.  
 
@@ -70,10 +74,10 @@ The following datasets are taken from data collected by Qualtrics on Procrastina
 **4.** Top 15 GP Countries (Top_15_GP_Cntry.csv)
 
 ## Procrastination.csv
-
+```
 **Type:** Comma-separated value file  
 **Dimensions:** 4162 observations x 19 variables
-
+```
 ### Variable Information, and how each variable was cleaned/manipulated:
 ##### Rule of thumb: we made Numeric type columns missing values a "0", and Character type columns blank or "NA" values labeled "Missing".
 ##### All columns are proper data types, whether character or numeric.
@@ -109,10 +113,10 @@ The following datasets are taken from data collected by Qualtrics on Procrastina
 **4. Definition of Satisfaction with Life Scale (SWLS):** The SWLS is a short 5-item instrument designed to measure gloabl cognitive judgements of satisfaction with one's life. The SWLS usually requires only about one minute of a respondent's time. Expressed on a 5-point scale (1 = extremely dissatisfied; 5 = highly satisfied).
 
 ## Human Development Index http://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries 
-
+```
 **Type:** url  
 **Dimensions:** 188 observations x 5 variables
-
+```
 ### Variable Information of "Complete list of Countries":
 * There are 8 tables (4 Scales: Very High, High, Medium, Low) that pulled data from Complete list of Countries (2 tables per Scale):  
 ### Scales:  
@@ -158,6 +162,7 @@ No, there does not seem to be a correlation or visible trend between SWLS Score 
 Yes, there is a discernible relationship and trend between Life Satisfaction Scale (SWLS) and Human Development Index (HDI). The greater the HDI the higher the SWLS Mean Score. Medium and High HDI resulted in approx the same SWLS Mean Score.  
   
 ## Sources
+```
 * **Human Development Index:** Wikipedia: United Nations Development Programme's Human Development Report, "Human Development Report 2016 – "Human Development for Everyone"" (PDF). HDRO (Human Development Report Office) United Nations Development Programme. pp. 198–201. Retrieved 2 September 2017.  
 * **Procrastination Data:** Qualtrics  
 * **Decisional Procrastination:** Janis and Mann’s (1977) conflict model of decision making. Mann’s (1982, as cited in Ferrari et al., 1995). (Mann, Burnett, Radford, & Ford, 1997). https://pdfs.semanticscholar.org/f02f/76877ec329060cad0ff8c94b5fc3f4e3e1f9.pdf  
@@ -165,3 +170,4 @@ Yes, there is a discernible relationship and trend between Life Satisfaction Sca
 * **General Procrastination Scale:** Lay, C. (1986). At last, my research article on procrastination. Journal of Research in
 Personality, 20, 474-495.  
 * **Satisfaction with Life Scale:** Ed Diener, Robert A. Emmons, Randy J. Larsen and Sharon Griffin as noted in the 1985 article in the Journal of Personality Assessment. 5-point attribution: Kobau, R., Sniezek, J., Zack, M. M., Lucas, R. E., & Burns, A. (2010). Well‐being assessment: An evaluation of well‐being scales for public health and population estimates of well‐being among US adults. Applied Psychology: Health and Well-being, 2(3), 272-297. doi:http://dx.doi.org/10.1111/j.1758-0854.2010.01035.x  
+```
