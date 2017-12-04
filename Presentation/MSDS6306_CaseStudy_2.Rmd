@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Load Libraries
+## Load Required R Libraries
 ```{r}
 library(repmis)
 library(dplyr)
@@ -25,12 +25,12 @@ library(plyr)
 library(pastecs)
 ```
 
-# R - environment
+## R - environment List of libraries used by the session
 ```{r}
 sessionInfo()
 ```
 
-# Set Base Directory:
+## Set Base Directory:
 
 ```{r}
 # Executing from Vivek's System:
@@ -40,7 +40,7 @@ BaseDir <- "C:/Vivek/Data_Science/MSDS6306-DoingDataScience/Case_Study_2/MSDS630
 # BaseDir <- "/Users/megandiane/Desktop/DDS_Class/Case_Study_2/MSDS6306_CaseStudy_2"
 ```
 
-# Set Other Working Directories and File Path
+## Set Other Working Directories and File Path
 ```{r}
 DataDir <- paste(BaseDir,"Data", sep = "/")
 CodeDir <- paste(BaseDir,"Code", sep = "/")
@@ -49,11 +49,9 @@ PresenatationDir <- paste(BaseDir,"Presentation", sep = "/")
 ProcrastinationDataFile <- paste(DataDir, "Procrastination.csv", sep = "/")
 ```
 
-# Read the Data File
+## Read the Data File
 ```{r}
 ProcrastinationData <- read.csv(ProcrastinationDataFile, sep = ",", header = T, na.strings = "")
-
-dim(ProcrastinationData)
 ```
 
 # Assign Column Names
@@ -74,6 +72,12 @@ names(ProcrastinationData) <- c("Age", "Gender", "Kids", "Education", "WorkStatu
                                 "G20CmpTskRlx", "S1LfClsI2dl", "S2LfCndExlnt", "S3StsfdWtLf", 
                                 "S4GtImThgsLf", "S5LvAgChgNth", "CnsdrSlfProc", "OthCsndrProc")
 
+```
+
+#### The data file has been read and stored in a temporary data frame (ProcrastinationData). The column names have been standardized to be 12 characters long or lesser.
+
+```{r}
+dim(ProcrastinationData)
 ```
 
 # To Clean up the data from Procrastination.csv we took the "Male" and "Female" that we found under the Column of "Sons" and
