@@ -307,6 +307,13 @@ plot(Merged_ProctransHumDev$Age, Merged_ProctransHumDev$AnnualIncome,
 legend("topleft", pch=c(2,2), col=c("red", "blue"), 
        c("Male", "Female"), bty="o",  box.col="darkgreen", cex=.8)
 
+ggplot(Merged_ProctransHumDev, aes(x=Age,y=AnnualIncome,color=Gender)) + 
+  geom_point()+ geom_smooth(method = lm) + 
+  xlab("Age") + ylab("Annual Income") + 
+  ggtitle("Age vs Annual Income plot for all countries") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+
 ggplot(data = merge(Merged_ProctransHumDev, GP_DP_Common_Cntry, x.by = "CntryResdnc", y.by = "CommonCntry")) +
   aes(x=Age,y=AnnualIncome,color=Gender) + 
   geom_point()+ geom_smooth(method = lm) + 
@@ -314,23 +321,26 @@ ggplot(data = merge(Merged_ProctransHumDev, GP_DP_Common_Cntry, x.by = "CntryRes
   ggtitle("Age vs Annual Income plot for the 8 countries \ncommon between Top 15 DP and GP countries") +
   theme(plot.title = element_text(hjust = 0.5))
 
-ggplot(Merged_ProctransHumDev, aes(x=Age,y=AnnualIncome,color=Gender)) + 
-  geom_point()+ geom_smooth(method = lm)
-
 plot(Merged_ProctransHumDev$SWLSMean, Merged_ProctransHumDev$HDI, 
      xlab="SWLSMean", ylab="HDI", ylim = c(0,1),
      main="SWLSMean vs HDI", pch=2, cex.main=1.5, 
      frame.plot=FALSE, col=ifelse(Merged_ProctransHumDev$Gender=="Male", "red", "blue"))
 
 ggplot(Merged_ProctransHumDev, aes(x=SWLSMean,y=HDI,color=Gender)) + 
-  geom_point()+ geom_smooth(method = lm)
+  geom_point()+ geom_smooth(method = lm) + 
+  xlab("HDI Category") + ylab("SWLSMean") + 
+  ggtitle("Scatterplot of Mean Life Satisfaction by \nHuman Development Index Category by Gender") + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  theme(plot.title = element_text(hjust = 0.5))
 
 ggplot(Merged_ProctransHumDev) +
   geom_bar(aes(x=reorder(HumDev_Categ,-SWLSMean,mean), SWLSMean, fill = HumDev_Categ),
            stat = "summary", fun.y = "mean", show.legend = T) + 
   xlab("HDI Category") + ylab("SWLSMean") + 
-  ggtitle("Bar Chart of Mean Life Satisfaction by Human Development Index Category") + 
-  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+  ggtitle("Bar Chart of Mean Life Satisfaction by \nHuman Development Index Category") + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  theme(plot.title = element_text(hjust = 0.5))
+
 
 LS_Top15 <- aggregate(SWLSMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) %>%
   arrange(desc(SWLSMean)) %>%
@@ -360,4 +370,9 @@ write.table(DP_Top15, Top_15_DP,row.names=F, col.names = T, sep = ",")
 Top_15_GP <- paste(DataDir, "Top_15_GP_Cntry.csv", sep = "/")
 write.table(GP_Top15, Top_15_GP,row.names=F, col.names = T, sep = ",")
 
-rm(Total_HumDev, Merged_ProctransHumDev, DP_Top15, GP_Top15)
+# Remove Unused Environment Variables
+rm(Total_HumDev, Merged_ProctransHumDev, DP_Top15, GP_Top15, LS_Top15, GP_DP_Common_Cntry, 
+   Cnt_By_CntryResdnc, Cnt_By_Curr_Occupation, Cnt_By_Gender, Cnt_By_WorkStatus, ProcTrans,
+   ProcrastinationData)
+
+rm(BaseDir, CodeDir, DataDir, HumDevUrl, PresenatationDir, ProcrastinationDataFile)
