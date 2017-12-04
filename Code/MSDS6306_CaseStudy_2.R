@@ -111,6 +111,39 @@ ProcTrans <- ProcrastinationData %>%
                                                  'S4GtImThgsLf', 'S5LvAgChgNth')], na.rm=TRUE))
 
 
+ProcTrans[grep("(teacher)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Teacher"
+ProcTrans[grep("(accountant)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Accountant"
+ProcTrans[grep("(professor)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Professor"
+ProcTrans[grep("(engineer)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Engineer"
+ProcTrans[grep("(manager)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Manager"
+ProcTrans[grep("(retired)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Retired"
+ProcTrans[grep("(marketing)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Marketing"
+ProcTrans[grep("(attorney)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Attorney"
+ProcTrans[grep("(doctor)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Doctor"
+ProcTrans[grep("(student)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Student"
+ProcTrans[grep("(writer)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Writer"
+ProcTrans[grep("(developer)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Developer"
+ProcTrans[grep("(nurse)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Nurse"
+ProcTrans[grep("(consultant)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Consultant"
+ProcTrans[grep("(scientist)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Scientist"
+ProcTrans[grep("(admin)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Administrator"
+ProcTrans[grep("(Financial)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Finance"
+ProcTrans[grep("(director)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Director"
+ProcTrans[grep("(customer service)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Customer Service"
+ProcTrans[grep("(libra)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Librarian"
+ProcTrans[grep("(Business / Test Analyst)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "BA"
+ProcTrans[grep("(Business Systems Analyst)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "BA"
+ProcTrans[grep("(BUSINESS CONSULTA)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "BA"
+ProcTrans[grep("(busi)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Business Owner"
+ProcTrans[grep("(artist)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Artist"
+ProcTrans[grep("(web)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Website Designer"
+ProcTrans[grep("(prog)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Programmer"
+ProcTrans[grep("(vp)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Vice President"
+ProcTrans[grep("(train)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Trainer"
+ProcTrans[grep("(technician)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Technician"
+ProcTrans[grep("(CTO))", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "CTO"
+ProcTrans[grep("(technici)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Technician"
+
 sapply(ProcTrans, class)
 
 #Scrap Data from Wikipedia: List of Countries By Human Development Index
@@ -224,39 +257,6 @@ Total_HumDev <- within(Total_HumDev, rm("Rank"))
 # Remove Unused Environment Variables
 rm(VHighHumDev, HighHumDev, MedHumDev, LowHumDev)
 
-ProcTrans[grep("(teacher)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Teacher"
-ProcTrans[grep("(accountant)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Accountant"
-ProcTrans[grep("(professor)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Professor"
-ProcTrans[grep("(engineer)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Engineer"
-ProcTrans[grep("(manager)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Manager"
-ProcTrans[grep("(retired)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Retired"
-ProcTrans[grep("(marketing)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Marketing"
-ProcTrans[grep("(attorney)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Attorney"
-ProcTrans[grep("(doctor)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Doctor"
-ProcTrans[grep("(student)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Student"
-ProcTrans[grep("(writer)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Writer"
-ProcTrans[grep("(developer)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Developer"
-ProcTrans[grep("(nurse)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Nurse"
-ProcTrans[grep("(consultant)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Consultant"
-ProcTrans[grep("(scientist)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Scientist"
-ProcTrans[grep("(admin)+", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Administrator"
-ProcTrans[grep("(Financial)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Finance"
-ProcTrans[grep("(director)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Director"
-ProcTrans[grep("(customer service)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Customer Service"
-ProcTrans[grep("(libra)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Librarian"
-ProcTrans[grep("(Business / Test Analyst)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "BA"
-ProcTrans[grep("(Business Systems Analyst)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "BA"
-ProcTrans[grep("(BUSINESS CONSULTA)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "BA"
-ProcTrans[grep("(busi)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Business Owner"
-ProcTrans[grep("(artist)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Artist"
-ProcTrans[grep("(web)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Website Designer"
-ProcTrans[grep("(prog)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Programmer"
-ProcTrans[grep("(vp)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Vice President"
-ProcTrans[grep("(train)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Trainer"
-ProcTrans[grep("(technician)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Technician"
-ProcTrans[grep("(CTO))", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "CTO"
-ProcTrans[grep("(technici)", ProcTrans$CurrOccption, ignore.case = T), "CurrOccption"] <- "Technician"
-
 #Merge this data frame to the Country of Residence column of Procrastination.csv so that your data now has an HDI column and HDI categories
 Merged_ProctransHumDev <- merge(ProcTrans, Total_HumDev, by.x=c("CntryResdnc"), by.y = c("Country"))
 
@@ -275,8 +275,12 @@ options(digits=2)
 ProctransHumDev_DescripStats <- stat.desc(Merged_ProctransHumDev_DescripStats)
 ProctransHumDev_DescripStats
 
-hist(Merged_ProctransHumDev_DescripStats$DPMean)
-hist(Merged_ProctransHumDev_DescripStats$GPMean)
+hist(Merged_ProctransHumDev_DescripStats$DPMean, 
+     xlab = "DPMean", ylab = "Occurence", 
+     main = "Distribution of Occurence of DPMean")
+hist(Merged_ProctransHumDev_DescripStats$GPMean, 
+     xlab = "DPMean", ylab = "Occurence", 
+     main = "Distribution of Occurence of GPMean")
 
 # Remove Unused Environment Variables
 rm(Merged_ProctransHumDev_DescripStats, ProctransHumDev_DescripStats)
@@ -286,7 +290,9 @@ Cnt_By_Gender
 Cnt_By_WorkStatus <- as.data.frame(table(Merged_ProctransHumDev$WorkStatus))
 Cnt_By_WorkStatus
 Cnt_By_Curr_Occupation <- as.data.frame(table(Merged_ProctransHumDev$CurrOccption))
-Cnt_By_Curr_Occupation
+Cnt_By_Curr_Occupation %>%
+  arrange(desc(Freq)) %>%
+  head(30)
 
 Cnt_By_CntryResdnc <- Merged_ProctransHumDev %>%
   group_by(CntryResdnc) %>% 
@@ -307,12 +313,13 @@ DP_Top15 <- aggregate(DPMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) %>
   head(n=15)
 
 ggplot(data = merge(Merged_ProctransHumDev, within(DP_Top15, rm("DPMean", "HDI")), by = "CntryResdnc")) +
-  geom_bar(aes(x=reorder(CntryResdnc,-DPMean,mean), DPMean, fill = HumDev_Categ),
+  geom_bar(aes(x=reorder(CntryResdnc,DPMean,mean), DPMean, fill = HumDev_Categ),
            stat = "summary", fun.y = "mean", show.legend = T) + 
   xlab("Country") + ylab("DPMean") + 
   ggtitle("Top 15 Countries of DP Procrastination Mean Scale") + 
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(axis.text.x = element_text(hjust = 1)) +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  coord_flip()
 
 
 GP_Top15 <- aggregate(GPMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) %>%
@@ -320,12 +327,13 @@ GP_Top15 <- aggregate(GPMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) %>
   head(n=15)
 
 ggplot(data = merge(Merged_ProctransHumDev, within(GP_Top15, rm("GPMean", "HDI")), by = "CntryResdnc")) +
-  geom_bar(aes(x=reorder(CntryResdnc,-GPMean,mean), GPMean, fill = HumDev_Categ),
+  geom_bar(aes(x=reorder(CntryResdnc,GPMean,mean), GPMean, fill = HumDev_Categ),
            stat = "summary", fun.y = "mean", show.legend = T) + 
   xlab("Country") + ylab("GPMean") + 
   ggtitle("Top 15 Countries of GP Procrastination Mean Scale") + 
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  theme(plot.title = element_text(hjust = 0.5)) + ylim(0,5)
+  theme(axis.text.x = element_text(hjust = 1)) +
+  theme(plot.title = element_text(hjust = 0.5)) + ylim(0,5) +
+  coord_flip()
 
 GP_DP_Common_Cntry <- as.data.frame(intersect(DP_Top15$CntryResdnc, GP_Top15$CntryResdnc))
 dim(as.data.frame(GP_DP_Common_Cntry))
@@ -380,12 +388,13 @@ LS_Top15 <- aggregate(SWLSMean ~ CntryResdnc+HDI, Merged_ProctransHumDev, mean) 
   head(n=15)
 
 ggplot(data = merge(Merged_ProctransHumDev, within(LS_Top15, rm("SWLSMean", "HDI")), by = "CntryResdnc")) +
-  geom_bar(aes(x=reorder(CntryResdnc,-SWLSMean,mean), SWLSMean, fill = HumDev_Categ),
+  geom_bar(aes(x=reorder(CntryResdnc,SWLSMean,mean), SWLSMean, fill = HumDev_Categ),
            stat = "summary", fun.y = "mean", show.legend = T) + 
   xlab("Country") + ylab("SWLSMean") + 
   ggtitle("Top 15 Countries of LS Procrastination Mean Scale") + 
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-  theme(plot.title = element_text(hjust = 0.5)) + ylim(0,5)
+  theme(plot.title = element_text(hjust = 0.5)) + ylim(0,5) +
+  coord_flip()
 
 #Write the Human Development Data to CSV
 HumDevDataFile <- paste(DataDir, "HumanDevelopment.csv", sep = "/")
