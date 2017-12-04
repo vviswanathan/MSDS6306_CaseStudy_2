@@ -8,6 +8,10 @@ output:
   html_document:
     keep_md: true
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
     
 **Contact Information:**  
 Vivek, vviswanathan@mail.smu.edu  
