@@ -1,12 +1,17 @@
 # Codebook - MSDS6306_CaseStudy_2
 ---
 title: "Understanding Top Procrastination Countries based on DP and GP Scores, and how it relates to Age, Income, Life Satisfaction, and Human Development"
+
 author: Vivek Viswanathan and Megan Hodges
+
 date: Decemeber 4, 2017
+
 output:
   html_document:
     keep_md: yes
+    
 Contact Information: 
+
 SessionInfo:
 ---
 
@@ -19,7 +24,7 @@ The purpose/objective of this project came from an engagement between the client
 ### Datasets
 The following datasets are taken from data collected by Qualtrics on Procrastination as well as data scraped from public domain on the Human Development Index.
 
-This data folder contains the following:
+## This data folder contains the following:
 CleanedInput_w_HDI.csv	Revert "Data File."	
 HumanDevelopment.csv	Close to final code.	
 Procrastination.csv	Code for 3c and 4a		
@@ -32,12 +37,12 @@ Procrastination.csv	Code for 3c and 4a
 
 4. Top 15 GP Countries (Top_15_GP_Cntry.csv)
 
-### Procrastination.csv
+## Procrastination.csv
 
-*Type: Comma-separated value file
-*Dimensions: 4162 observations x 19 variables
+* Type: Comma-separated value file
+* Dimensions: 4162 observations x 19 variables
 
-Variable Information: 
+# Variable Information: 
 
 *Age
 *Gender
@@ -59,8 +64,7 @@ Variable Information:
 *Do you consider yourself a procrastinator?
 *Do others consider you a procrastinator?
 
-Miscellaneous Infomations:
-
+# Miscellaneous Infomation:
 * Definition of Decisional Procrastination (DP): Decisional Procrastination distinguishes between adaptive and non-adaptive patterns of coping with challenge. One of the non-adaptive patterns is defensive avoidance, which arises when any alternative available is unsatisfactory or risky and the decision-maker does not hope to find a better solution. The individual then may try to escape from making a decision by procrastinating. Decisional Procrastination Scale (DPS) was developed within this framework of decision-making research. As implied by the name, this kind of procrastination means to put off making a decision within some specific time frame. The DP is composed of items such that respondents express an opinion on a 5-point scale (1 = strongly disagree; 5 = strongly agree).
 
 * Definition of Adult Inventory Procrastination (AIP): The AIP Scale measures the chronic tendency to postpone tasks in various situations. It examines procrastination motivated by fears (e.g., success or failure), avoidance of disclosure of skill inabilities, and performance insecurity. The AIP assesses avoidance procrastination; that is, putting off tasks to protect one’s self-esteem from possible failure. The AIP is composed of 15 Likert-scale items such that respondents express an opinion on a 5-point scale (1 = strongly disagree; 5 = strongly agree) to statements such as “I am not very good at meeting deadlines” and “I don’t get things done on time.” For seven items, scores are reversed so that high ratings indicate procrastination.
@@ -69,30 +73,30 @@ Miscellaneous Infomations:
 
 * Definition of Satisfaction with Life Scale (SWLS): The SWLS is a short 5-item instrument designed to measure gloabl cognitive judgements of satisfaction with one's life. The SWLS usually requires only about one minute of a respondent's time. Expressed on a 5-point scale (1 = extremely dissatisfied; 5 = highly satisfied).
 
-### Human Development Index http://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries 
+## Human Development Index http://en.wikipedia.org/wiki/List_of_countries_by_Human_Development_Index#Complete_list_of_countries 
 
 * Type: url
 * Dimensions: 188 observations x 5 variables
 
-Variable Information of Complete list of Countries:
+# Variable Information of Complete list of Countries:
 * There are 8 tables that pulled data on Human Development by Country, there were 2 tables per Scale:
 
-Very High Human Development:
+# Very High Human Development:
 * Rank: This variable has two subset variables: 2016 estimates for 2015 and Change in rank from previous year
 * Country/Territory
 * HDI: This variable has two subset variables: 2016 estimates for 2015 and Change in rank from previous year
 
-High Human Development:
+# High Human Development:
 * Rank: This variable has two subset variables: 2016 estimates for 2015 and Change in rank from previous year
 * Country/Territory
 * HDI: This variable has two subset variables: 2016 estimates for 2015 and Change in rank from previous year
 
-Medium Human Development:
+# Medium Human Development:
 * Rank: This variable has two subset variables: 2016 estimates for 2015 and Change in rank from previous year
 * Country/Territory
 * HDI: This variable has two subset variables: 2016 estimates for 2015 and Change in rank from previous year
 
-Low Human Development:
+# Low Human Development:
 * Rank: This variable has two subset variables: 2016 estimates for 2015 and Change in rank from previous year
 * Country/Territory
 * HDI: This variable has two subset variables: 2016 estimates for 2015 and Change in rank from previous year
